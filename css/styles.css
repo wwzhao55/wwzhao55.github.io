@@ -7,7 +7,7 @@ p { display: block; }
 ul { list-style: none; }
 a { color: #a6a6a6; text-decoration: none; transition: All 0.5s ease; -webkit-transition: All 0.5s ease; -moz-transition: All 0.5s ease; -o-transition: All 0.5s ease; }
 a:hover { color: #000; }
-.blank { height: 5px; overflow: hidden; /*width: 100%;*/ margin: auto; clear: both }
+.blank { height: 5px; overflow: hidden; width: 100%; margin: auto; clear: both }
 /* nav */
 header { width: 100%; height: 43px; background: -webkit-gradient(linear, 78% 100%, 78% 41%, from(#EFEEEC), to(#fff)); box-shadow: #D0C9C0 2px 2px 3px }
 header nav { margin: 0 auto; width: 980px; text-align: center }
@@ -15,7 +15,11 @@ header nav ul li { line-height: 43px; display: block }
 header nav ul li a { color: #484848; float: left; padding: 0 20px; margin-right: 2px; }
 header nav ul li a:hover, #nav_current { color: #fff; background: #F16E50; transform: skew(-20deg); -webkit-transform: skew(-20deg); -moz-transform: skew(-20deg); -o-transform: skew(-20deg); }
 /* mainContent */
-.mainContent { background: #E8E5DD; width: 100%; margin: 20px 100px; overflow: hidden;}
+.mainContent { background: #E8E5DD; /*width: 100%;*/ margin: 20px 100px; overflow: hidden;}
+h1.title-top{
+	padding-left: 130px;
+    color: #0e0e0e;
+}
 aside { 
 	width: 20%;
     float: left;
