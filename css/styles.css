@@ -19,6 +19,7 @@ header nav ul li a:hover, #nav_current { color: #fff; background: #F16E50; trans
 h1.title-top{
 	padding-left: 130px;
     color: #0e0e0e;
+    line-height: 43px;
 }
 aside { 
 	width: 20%;
@@ -40,7 +41,12 @@ aside {
 aside section { display: block; overflow: hidden }
 aside section h2 { background: #f16e50; color: #FFF; padding-left: 30px; height: 30px; line-height: 30px; font-size: 14px; }
 .newpic ul, .taglist ul { padding: 20px 30px; overflow: hidden }
-.newpic ul li { display: inline; width: 48px; height: 48px; }
+.newpic ul li {
+    display: inline;
+    width: 120px;
+    height: 30px;
+    line-height: 30px;
+}
 .newpic ul li img { width: 48px; height: 48px; border: 0; display: block; float: left; border: 1px solid transparent; }
 .newpic ul li img:hover { opacity: 0.5 }
 .taglist ul li a { padding: 2px 5px; display: inline-block; float: left; margin-right: 5px; color: #454545; }
@@ -51,8 +57,11 @@ aside section h2 { background: #f16e50; color: #FFF; padding-left: 30px; height:
     float: left;
 }
 .blogitem article { border-bottom: #F4F3EF 40px solid; }
-.title { background: url(../images/titlebg.png) no-repeat 5% 80%; font-size: 20px; line-height: 28px; display: inline-block; padding: 38px 60px 8px 80px; border-bottom: 1px solid #e2e2e2;}
+.title { background: url(../images/titlebg.png) no-repeat 3% 80%; font-size: 20px; line-height: 28px; /*display: inline-block;*/ padding: 38px 60px 8px 80px; border-bottom: 1px solid #e2e2e2;}
 .title a { color: #454545; }
+.title span{
+	float: right;
+}
 .title a:hover { padding: 20px }
 .text { font-size: 14px; padding: 20px 40px; }
 .text p { line-height: 24px; margin-bottom: 10px }
