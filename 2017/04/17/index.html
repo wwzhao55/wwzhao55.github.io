@@ -35,50 +35,7 @@
     
      <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
       
-        <span id="mobilenavhtml">
-            <div class="overlay js-overlay" style="background: #4d4d4d"></div>
-            <div class="btnctn js-mobile-btnctn">
-                <div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
-            </div>
-            <div class="intrude-less">
-              <header id="header" class="inner">
-                <div class="profilepic">
-                  <img src="/img/avatar.png" class="js-avatar">
-                </div>
-                <hgroup>
-                  <h1 class="header-author js-header-author">wwzhao</h1>
-                </hgroup>
-                
-                <p class="header-subtitle"><i class="icon icon-quo-left"></i>永远不要跟别人比幸运，我从来没想过我比别人幸运，我也许比他们更有毅力，在最困难的时候，他们熬不住了，我可以多熬一秒钟、两秒钟。<i class="icon icon-quo-right"></i></p>
-
-                <nav class="header-nav">
-                  <div class="social">
-                    
-                      <a class="github" target="_blank" href="https://github.com/wwzhao55/" title="github"><i class="icon-github"></i></a>
-                        
-                      <!-- <a class="zhihu" target="_blank" href="https://www.zhihu.com/people/tian-zhisheng/activities" title="zhihu"><i class="icon-zhihu"></i></a>
-                        
-                      <a class="jianshu" target="_blank" href="http://www.jianshu.com/u/419f65c24433" title="jianshu"><i class="icon-jianshu"></i></a>
-                        
-                      <a class="segmentfault" target="_blank" href="https://segmentfault.com/u/yuanblog" title="segmentfault"><i class="icon-segmentfault"></i></a> -->
-                        
-                  </div>
-                </nav>
-
-                <nav class="header-menu js-header-menu">
-                  <ul style="width: 50%">
-                  
-                  
-                    <li style="width: 50%"><a href="/">主页</a></li>
-                      
-                    <li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
-                      
-                  </ul>
-                </nav>
-              </header>       
-            </div>
-            <div class="mobile-mask" style="display:none" q-show="isShow"></div>
-        </span>
+        <span id="mobilenavhtml"></span>
         <!-- 详细文章内容 -->
         <div id="wrapper" class="body-wrap">
             <div class="menu-l">
@@ -88,18 +45,112 @@
                 <div id="js-content" class="content-ll">
                     <article id="post-MyBatis-foreach" class="article article-type-post " itemscope itemprop="blogPost">
                         <div class="article-inner">
-                          
                             <header class="article-header">
-                              
-                        
                                   <h1 class="article-title" itemprop="name">
                                     例子
                                   </h1>
                             </header>
-                        </div>
+                            <div class="article-entry" itemprop="articleBody">
+                              <p>文档内容</p>
+                            </div>
+                            <div class="article-info article-info-index">
+                                <div class="article-tag tagcloud">
+                                    <i class="icon-price-tags icon"></i>
+                                    <ul class="article-tag-list">
+                                        <li class="article-tag-list-item">
+                                          <a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Mybatis</a>
+                                        </li>
+                                       
+                                        <li class="article-tag-list-item">
+                                          <a href="javascript:void(0)" class="js-tag article-tag-list-link color3">foreach</a>
+                                        </li>     
+                                    </ul>
+                                </div>       
+                                <div class="share-btn share-icons tooltip-left">
+                                  <div class="tooltip tooltip-east">
+                                    <span class="tooltip-item">
+                                      <a href="javascript:;" class="share-sns share-outer">
+                                        <i class="icon icon-share"></i>
+                                      </a>
+                                    </span>
+                                    <span class="tooltip-content">
+                                      <div class="share-wrap">
+                                        <div class="share-icons">
+                                          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+                                            <i class="icon icon-weibo"></i>
+                                          </a>
+                                          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+                                            <i class="icon icon-weixin"></i>
+                                          </a>
+                                          <a class="qq share-sns" href="javascript:;" data-type="qq">
+                                            <i class="icon icon-qq"></i>
+                                          </a>
+                                          <a class="douban share-sns" href="javascript:;" data-type="douban">
+                                            <i class="icon icon-douban"></i>
+                                          </a>
+                                          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+                                            <i class="icon icon-qzone"></i>
+                                          </a>
+                                          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+                                            <i class="icon icon-facebook"></i>
+                                          </a>
+                                          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+                                            <i class="icon icon-twitter"></i>
+                                          </a>
+                                          <a class="google share-sns" href="javascript:;" data-type="google">
+                                            <i class="icon icon-google"></i>
+                                          </a>
+                                        </div>
+                                      </div>
+                                    </span>
+                                  </div>
+                                </div>
+
+                                <div class="page-modal wx-share js-wx-box">
+                                    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+                                    <p>扫一扫，分享到微信</p>
+                                    <div class="wx-qrcode">
+                                      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACL0lEQVR42u3awW7rMAwEwP7/T+cBvRZ2dynnoZHGp6CJbY0OLEXy6yu+Xt/Xz89Xv/z5m+TvV7957MLAwPhYxuv2umLcvzJfVvLeiIqBgXEAYz3Iri80fy8GBgbGfZC9uitZyv1dGBgYGO8LuPnT8uQPAwMDY3aIzQ+3bWXsPqw/fBbHwMD4QMZKY+Ddn/9TfwMDA+MPM16jq00N2wBarwcDA2NrRpvSrY9N5K3Q/ECLgYGxN2MW+NpxijzhGzZNMTAwDmDkhbC2ndCW/mfFOwwMjL0Zz2ZZ7VLa0Y18KzEwMHZi5K95qtmZJJT1vwEMDIwDGO04RVIOy5ebP+Hy7RgYGEcy2pQxCZTtiFjezsTAwDiBkYTR/Ej5bLIYpY8YGBhbM/Kv85Rxlvy1bc5fQjkGBsZGjPWi2CxEzlqnUTcDAwNja8YMkN/VHlyLzcLAwNiakQfQqEAfLyUvw9XfYmBgbMdI0rVkcflzWna0BRgYGFsz2kRtpTE5SzqL7cDAwDiA0R4a87BYH0TLwh8GBsZpjByWf5u/Zdh3xcDAOIDRNiZnqeHsOcMQjIGBsRHjVV7FAER8AJ4NXtQnZgwMjI9l5NfSAERZtku2rE4WMTAwPpwxC7Ir+7SeVl6OXGBgYGzNyItlychFW3qb1dAwMDAw2sJ9vgWzo+wv68HAwMBYGKe4v/ct52wMDIxNGfmYVz5I0Y6F1aNgGBgYxzDWGwNtg/Mp3sP9DQwMjL/I+AeIgBkG75CrxgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+                                    </div>
+                                </div>
+
+                                <div class="mask js-mask"></div>     
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>  
                     </article>
+
+                    <nav id="article-nav"><!-- 前一篇 后一篇 -->
+                        <a href="/2017/04/13/Hexo-yilia-changyan/" id="article-nav-newer" class="article-nav-link-wrap">
+                          <i class="icon-circle-left"></i>
+                          <div class="article-nav-title">Github pages + Hexo 博客 yilia 主题使用畅言评论系统</div>
+                        </a>
+                        <a href="/2017/04/05/String-new/" id="article-nav-older" class="article-nav-link-wrap">
+                          <div class="article-nav-title">关于String s = new String(&quot;xyz&quot;); 创建几个对象的问题</div>
+                          <i class="icon-circle-right"></i>
+                        </a>
+                    </nav>
                 </div>
             </div>
+            <div class="duoshuo"></div>
+            <section id="comments">
+                  <!--高速版，加载速度快，使用前需测试页面的兼容性-->
+                  <div id="SOHUCS" sid="MyBatis的foreach语句详解"  style="padding: 0px 30px 0px 46px;"></div>
+                  <script>
+                    (function(){
+                      var appid = 'cysWCg9Ij',
+                      conf = '7f51baf245f3217589bb3b4ba8d8c691';
+                      var doc = document,
+                      s = doc.createElement('script'),
+                      h = doc.getElementsByTagName('head')[0] || doc.head || doc.documentElement;
+                      s.type = 'text/javascript';
+                      s.charset = 'utf-8';
+                      s.src =  'http://assets.changyan.sohu.com/upload/changyan.js?conf='+ conf +'&appid=' + appid;
+                      h.insertBefore(s,h.firstChild);
+                      window.SCS_NO_IFRAME = true;
+                    })()
+                  </script>
+            </section>
         </div>
         <footer id="footer">
           <span id="footerhtml"></span>
