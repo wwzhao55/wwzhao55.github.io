@@ -29,7 +29,7 @@
   <div id="container" q-class="show:isCtnShow">
   <canvas id="anm-canvas" class="anm-canvas"></canvas>
     <div class="left-col" q-class="show:isShow">
-          <object style="border:0px" type="text/x-scriptlet" data="/nav.html" width=300 height=100%></object>
+          <span id="navhtml"></span>
     </div>
     
      <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
@@ -101,10 +101,14 @@
             </div>
         </div>
         <footer id="footer">
-          <include src='/footer.html'></include>
+          <span id="footerhtml"></span>
         </footer>
     </div>
-    <script>
+<script type="text/javascript">
+    $("#navhtml").load("/nav.html");
+    $("#footerhtml").load("/footer.html");
+</script>
+<script>
   var yiliaConfig = {
     mathjax: false,
     isHome: true,
