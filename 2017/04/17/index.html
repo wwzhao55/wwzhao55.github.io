@@ -28,14 +28,14 @@
 
 <body>
   <div id="container" q-class="show:isCtnShow">
-  <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
     <div class="left-col" q-class="show:isShow">
           <span id="navhtml"></span>
     </div>
     
      <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
       
-        <nav id="mobile-nav">
+        <span id="mobilenavhtml">
             <div class="overlay js-overlay" style="background: #4d4d4d"></div>
             <div class="btnctn js-mobile-btnctn">
                 <div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
@@ -78,8 +78,8 @@
               </header>       
             </div>
             <div class="mobile-mask" style="display:none" q-show="isShow"></div>
-        </nav>
-
+        </span>
+        <!-- 详细文章内容 -->
         <div id="wrapper" class="body-wrap">
             <div class="menu-l">
                 <div class="canvas-wrap">
@@ -108,6 +108,7 @@
 <script type="text/javascript">
     $("#navhtml").load("/nav.html");
     $("#footerhtml").load("/footer.html");
+    $("#mobilenavhtml").load("/mobile_nav.html");
 </script>
 <script>
   var yiliaConfig = {
