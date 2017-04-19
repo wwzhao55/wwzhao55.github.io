@@ -292,11 +292,10 @@
         $("#navhtml").load("/nav.html");
         $("#footerhtml").load("/footer.html");
         $("#mobilenavhtml").load("/mobile_nav.html");
-        $('.article-tag-list .article-tag-list-item').click(function(event){
-          event.preventDefault();
-        })
-        $('.article-tag-list .article-tag-list-item .article-tag-list-link').click(function(event){
-          event.preventDefault();
+        $('.article-tag-list').click(function(event){
+          //event.preventDefault();
+          //event.stopPropagation();
+          return false;
         })
     </script>
     <script>
@@ -309,7 +308,7 @@
     		isCategory: false,
     		open_in_new: false,
     		root: "/",
-    		innerArchive: false,
+    		innerArchive: true,
     		showTags: false
     	}
     </script>
