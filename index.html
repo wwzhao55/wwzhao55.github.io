@@ -42,7 +42,7 @@
                 </div>
                 <div id="js-content" class="content-ll">
                     <!-- 文章列表 -->
-                    <article id="post-Hexo-yilia-changyan" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+                    <article id="post-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
                       <div class="article-inner">
                         <header class="article-header">
                           <h1 itemprop="name">
@@ -179,46 +179,6 @@
                       </div>
                     </article>
           
-                    <article id="post-解决jdk1.8中发送邮件失败（handshake_failure）问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-                        <div class="article-inner">
-                            <header class="article-header">
-                              <h1 itemprop="name">
-                                <a class="article-title" href="/2017/03/28/解决jdk1.8中发送邮件失败（handshake_failure）问题/">解决jdk1.8中发送邮件失败（handshake_failure）问题</a>
-                              </h1>
-                              <a href="/2017/03/28/解决jdk1.8中发送邮件失败（handshake_failure）问题/" class="archive-article-date">
-                              	<time datetime="2017-03-28T11:00:47.293Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-28</time>
-                              </a>
-                            </header>
-                          
-                            <div class="article-entry" itemprop="articleBody">
-                            
-                              <p>暑假在家做一个类似知乎的问答型网站（代码可见：<a href="https://github.com/1041218129/wenda">Github/wenda</a>  喜欢的可以给个star或者自己fork然后修改，目前功能还未很完善），其中有一个<strong>站内邮件通知系统</strong>（这里简单的讲一个例子：如果用户登录的时候出现异常，那么就会通过邮件发送通知用户）。然而却碰到一个问题。问题错误信息如下：</p>
-                              <blockquote>
-                              <p>发送邮件失败Mail server connection failed;    nested exception is javax.mail.MessagingException:     Could not connect to SMTP host: smtp.qq.com, port: 465;<br>nested exception is:   javax.net.ssl.SSLHandshakeException: Received fatal alert: handshake_failure. Failed messages: javax.mail.  MessagingException: Could not connect to SMTP   host: smtp.qq.com,  port: 465;<br>nested exception is:  <strong>javax.net.ssl.SSLHandshakeException: Received fatal alert: handshake_failure</strong></p>
-                              </blockquote>
-                              <a class="article-more-a" href="/2017/03/28/解决jdk1.8中发送邮件失败（handshake_failure）问题/#more">more >></a>
-                            </div>
-                            <div class="article-info article-info-index">
-                              	<div class="article-tag tagcloud">
-                              		<i class="icon-price-tags icon"></i>
-                              		<ul class="article-tag-list">
-                                  		<li class="article-tag-list-item">
-                                  			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-                                  		</li>
-                                		 
-                                  		<li class="article-tag-list-item">
-                                  			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">邮件发送</a>
-                                  		</li>
-                              		</ul>
-                              	</div>
-                                <p class="article-more-link">
-                                  <a class="article-more-a" href="/2017/03/28/解决jdk1.8中发送邮件失败（handshake_failure）问题/">展开全文 >></a>
-                                </p>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </article>
-          
                     <article id="post-循环队列的相关条件和公式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
                         <div class="article-inner">
                           
@@ -315,10 +275,10 @@
                     <nav id="page-nav">
                       <span class="page-number current">1</span>
                       <a class="page-number" href="/page/2/">2</a>
-                      <!-- <a class="page-number" href="/page/3/">3</a>
-                      <span class="space">&hellip;</span>
-                      <a class="page-number" href="/page/6/">6</a>
-                      <a class="extend next" rel="next" href="/page/2/">Next &raquo;</a> -->
+                      <a class="page-number" href="/page/3/">3</a>
+                      <!-- <span class="space">&hellip;</span>
+                      <a class="page-number" href="/page/6/">6</a>-->
+                      <a class="extend next" rel="next" href="/page/2/">Next &raquo;</a> 
                     </nav>
                 </div>
             </div>
@@ -332,6 +292,9 @@
         $("#navhtml").load("/nav.html");
         $("#footerhtml").load("/footer.html");
         $("#mobilenavhtml").load("/mobile_nav.html");
+        $('.article-tag-list-item').click(function(event){
+          event.preventDefault();
+        })
     </script>
     <script>
     	var yiliaConfig = {
