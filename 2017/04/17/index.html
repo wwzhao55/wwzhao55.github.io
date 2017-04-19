@@ -183,10 +183,11 @@
     var url = window.location.href;
     var Code = utf16to8(url)
     var myQRCode = new QRCode({
-            width : 280,
-            height : 280,
-            text: Code
+            // width : 280,
+            // height : 280,
+            text: url
     });
+    console.log(myQRCode)
     $('#weixinshareimg').attr('src',myQRCode);
 </script>
 <script>
