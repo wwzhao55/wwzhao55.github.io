@@ -182,7 +182,7 @@
       }
     var url = window.location.href;
     var Code = utf16to8(url)
-    jQuery('#qrcodeid').qrcode({
+    var myQRCode =  jQuery('#qrcodeid').qrcode({
         width:140,
         height:140,
         render:"canvas", //设置渲染方式 table canvas
@@ -192,6 +192,7 @@
         foreground   : "#000000",//前景颜色 
         text:Code
     }); 
+    console.log(myQRCodeMY)
     $('#weixinshareimg').attr('src',myQRCode);
 </script>
 <script>
