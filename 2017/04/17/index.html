@@ -17,6 +17,7 @@
   <link rel="icon" href="/img/favicon.ico">
   <link rel="stylesheet" type="text/css" href="/./main.234bc0.css">
   <script src="/js/jquery.min.js"></script>
+  <script src="/js/qrcode.js"></script>
   <style type="text/css">
     
       #container.show {
@@ -110,7 +111,7 @@
                                     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
                                     <p>扫一扫，分享到微信</p>
                                     <div class="wx-qrcode">
-                                      <img src="https://wwzhao55.github.io/2017/04/17/" alt="微信分享二维码">
+                                      <img src="" alt="微信分享二维码" id='weixinshareimg'>
                                     </div>
                                 </div>
 
@@ -160,6 +161,33 @@
     $("#navhtml").load("/nav.html");
     $("#footerhtml").load("/footer.html");
     $("#mobilenavhtml").load("/mobile_nav.html");
+    function utf16to8(str) { //解决中文乱码
+        var out, i, len, c; 
+        out = ""; 
+        len = str.length; 
+        for(i = 0; i < len; i++) { 
+        c = str.charCodeAt(i); 
+        if ((c >= 0x0001) && (c <= 0x007F)) { 
+          out += str.charAt(i); 
+        } else if (c > 0x07FF) { 
+          out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F)); 
+          out += String.fromCharCode(0x80 | ((c >> 6) & 0x3F)); 
+          out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F)); 
+        } else { 
+          out += String.fromCharCode(0xC0 | ((c >> 6) & 0x1F)); 
+          out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F)); 
+        } 
+        } 
+        return out;
+      }
+    var url = window.location.href;
+    var Code = utf16to8(url)
+    var myQRCode = new QRCode({
+            width : 280,
+            height : 280,
+            text: Code
+    });
+    $('#weixinshareimg').attr('src',myQRCode);
 </script>
 <script>
   var yiliaConfig = {
