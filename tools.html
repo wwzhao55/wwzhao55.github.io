@@ -1,4 +1,4 @@
-<!-- <div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)"> -->
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)"> -->
     <div class="tools-nav header-menu"> 
       <ul style="width: 70%">
         <!-- <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li> -->
@@ -7,7 +7,7 @@
       </ul>
     </div>
     <div class="tools-wrap">
-      	<section class="tools-section tools-section-all" q-show="innerArchive">
+      	<section class="tools-section tools-section-all"  hidden><!-- q-show="innerArchive" -->
             <div class="search-wrap">
                 <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
                 <i class="icon-search icon" q-show="search|isEmptyStr"></i>
@@ -237,4 +237,4 @@
     	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
       	</section>
     </div>
-<!-- </div> -->
+<!-- </div>
