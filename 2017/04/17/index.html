@@ -112,6 +112,7 @@
                                     <p>扫一扫，分享到微信</p>
                                     <div class="wx-qrcode">
                                       <img src="" alt="微信分享二维码" id='weixinshareimg'>
+                                      <div id='qrcodeid'></div>
                                     </div>
                                 </div>
 
@@ -182,7 +183,7 @@
       }
     var url = window.location.href;
     var Code = utf16to8(url)
-    var myQRCode =  jQuery('#qrcodeid').qrcode({
+    jQuery('#qrcodeid').qrcode({
         width:140,
         height:140,
         render:"canvas", //设置渲染方式 table canvas
@@ -192,8 +193,8 @@
         foreground   : "#000000",//前景颜色 
         text:Code
     }); 
-    console.log(myQRCodeMY)
-    $('#weixinshareimg').attr('src',myQRCode);
+    // console.log(myQRCodeMY)
+    // $('#weixinshareimg').attr('src',myQRCode);
 </script>
 <script>
   var yiliaConfig = {
