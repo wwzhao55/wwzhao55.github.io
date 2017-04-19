@@ -292,7 +292,10 @@
         $("#navhtml").load("/nav.html");
         $("#footerhtml").load("/footer.html");
         $("#mobilenavhtml").load("/mobile_nav.html");
-        $('.article-tag-list-item').click(function(event){
+        $('.article-tag-list .article-tag-list-item').click(function(event){
+          event.preventDefault();
+        })
+        $('.article-tag-list .article-tag-list-item .article-tag-list-link').click(function(event){
           event.preventDefault();
         })
     </script>
@@ -306,7 +309,7 @@
     		isCategory: false,
     		open_in_new: false,
     		root: "/",
-    		innerArchive: true,
+    		innerArchive: false,
     		showTags: false
     	}
     </script>
