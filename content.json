@@ -3,17 +3,12 @@
         "title": "测试用例",
         "date": "2017-04-17T14:38:53.710Z",
         "path": "2017/04/17/test/",
-        "text": "前言Hexo的Yilia主题由于原来使用的是多说的留言板，近期多说公告要停止提供服务了，所以我就把多说换成搜狐的畅言了，下面写一个简单的小教程。 注册畅言进入畅言官网 , 点击右上角 “免费注册”，并填写注册信息。（注意域名需要备案信息） 登录并进入畅言后台注册完后，登录进入畅言官网，获取你的畅言 app id 和 app key。 使用畅言系统下面说下修改评论为畅言的方法，其实方法和多说是差不多的。 1、修改 themes\\yilia\\layout\\_partial\\article.ejs 模板，把如下代码 1234567&lt;% if (!index &amp;&amp; post.comments &amp;&amp; config.disqus_shortname)&#123; %&gt; &lt;section id=\"comments\"&gt; &lt;div id=\"disqus_thread\"&gt; 这里还有很多代码 &lt;/div&gt; &lt;/section&gt; &lt;% &#125; %&gt; 修改为： 1234567891011121314151617181920 &lt;% if (!index &amp;&amp; post.comments)&#123; %&gt; &lt;section id=&quot;comments&quot;&gt;&lt;!--高速版，加载速度快，使用前需测试页面的兼容性--&gt;&lt;div id=&quot;SOHUCS&quot; sid=&quot;&lt;%= page.title %&gt;&quot;&gt;&lt;/div&gt;&lt;script&gt; (function()&#123; var appid = &apos;你的APP ID&apos;, conf = &apos;你的APP KEY&apos;; var doc = document, s = doc.createElement(&apos;script&apos;), h = doc.getElementsByTagName(&apos;head&apos;)[0] || doc.head || doc.documentElement; s.type = &apos;text/javascript&apos;; s.charset = &apos;utf-8&apos;; s.src = &apos;http://assets.changyan.sohu.com/upload/changyan.js?conf=&apos;+ conf +&apos;&amp;appid=&apos; + appid; h.insertBefore(s,h.firstChild); window.SCS_NO_IFRAME = true; &#125;)()&lt;/script&gt; &lt;/section&gt; &lt;% &#125; %&gt; 上面的APP ID和APP KEY是在畅言设置中得到。 这里需要注意一点的是：sid=&quot;&lt;%= page.title %&gt;&quot;&gt; 这样的话畅言就可以直接根据对应的文章来识别，使得文章有对应的评论，不会都乱在一起。 2、在每篇文章开头的 front-matter 中添加一句comments: true，然后回到博客根目录执行命令 hexo d -g ，重新生成博客并部署博客，然后刷新，任选一篇文章进入下拉，会发现评论功能可以使用了。 修改 BUG但是，这是你会发现一个 Bug，表情按钮点击不了，原因是被左侧的 div 层覆盖了，回到我们刚才改过的代码，找到 &lt;div id=&quot;SOHUCS&quot; 开头的一串代码。并做如下更改 1&lt;div id=\"SOHUCS\" sid=\"&lt;%=title %&gt;\" style=\"padding: 0px 30px 0px 46px;\"&gt;&lt;/div&gt; 加上上面这一段样式代码，即可修复。 参考文章： 1、Hexo博客yilia主题更换畅言评论系统 2、在Hexo中使用畅言评论系统",
+        "text": "前言",
         "tags": [
             {
                 "name": "hexo",
                 "slug": "hexo",
                 "permalink": "http://yoursite.com/tags/hexo/"
-            },
-            {
-                "name": "yilia",
-                "slug": "yilia",
-                "permalink": "http://yoursite.com/tags/yilia/"
             }
         ]
     },
