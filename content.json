@@ -2,13 +2,13 @@
     {
         "title": "测试用例",
         "date": "2017-04-17T14:38:53.710Z",
-        "path": "2017/04/17/test/",
+        "path": "2017/04/17/简述BFC/",
         "text": "前言",
         "tags": [
             {
                 "name": "hexo",
                 "slug": "hexo",
-                "permalink": "http://yoursite.com/tags/hexo/"
+                "permalink": "http://yoursite.com/tags/BFC/"
             }
         ]
     },

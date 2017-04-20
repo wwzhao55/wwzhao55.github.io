@@ -47,26 +47,39 @@
                     <article id="post-MyBatis-foreach" class="article article-type-post " itemscope itemprop="blogPost">
                         <div class="article-inner">
                             <header class="article-header">
-                                  <h1 class="article-title" itemprop="name">
-                                    例子
-                                  </h1>
+                                <h1 class="article-title" itemprop="name">简述BFC（块级格式化上下文）</h1>
                             </header>
                             <div class="article-entry" itemprop="articleBody">
-                              <p>文档内容</p>
+                                <h3 id="前言">BFC</h3>
+                                <p>本人在上周参加实习生面试，一面的时候被问到了关于BFC的问题，提及BFC可能有些学习前端的人不太清楚，但是你每天码代码的时候肯定都会用到，只是没有意识到这个东西统称为BFC.下面我们来看下它的真面目。</p>
+                                <p>1.定义</p>
+                                <p>在解释BFC之前，先说一下文档流。我们常说的文档流其实分为定位流、浮动流和普通流三种。而普通流其实就是指BFC中的FC。B指Box,FC是formatting context的首字母缩写。</p>
+                                <ul>
+                                  <li>Box: CSS布局的基本单位</li>
+                                </ul>
+                                <p>Box 是 CSS 布局的对象和基本单位,由Box属性决定如何渲染，其中Box分类有以下几种：</p>
+                                <blockquote>
+                                  <ul>
+                                      <li>block-level box:display 属性设置为 block，list-item，table</li>
+                                      <li>inline-level box:display 属性设置为 inline,line-block</li>
+                                      <li>run-in box:</li>
+                                  </ul>
+                              </blockquote>
                             </div>
+
                             <div class="article-info article-info-index">
+
+                                <!-- 文档标签 -->
                                 <div class="article-tag tagcloud">
                                     <i class="icon-price-tags icon"></i>
                                     <ul class="article-tag-list">
                                         <li class="article-tag-list-item">
-                                          <a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Mybatis</a>
-                                        </li>
-                                       
-                                        <li class="article-tag-list-item">
-                                          <a href="javascript:void(0)" class="js-tag article-tag-list-link color3">foreach</a>
+                                          <a href="javascript:void(0)" class="js-tag article-tag-list-link color3">BFC</a>
                                         </li>     
                                     </ul>
-                                </div>       
+                                </div> 
+
+                                <!-- 各种分享 -->
                                 <div class="share-btn share-icons tooltip-left">
                                   <div class="tooltip tooltip-east">
                                     <span class="tooltip-item">
@@ -107,6 +120,7 @@
                                   </div>
                                 </div>
 
+                                <!-- 微信分享二维码 -->
                                 <div class="page-modal wx-share js-wx-box">
                                     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
                                     <p>扫一扫，分享到微信</p>
@@ -137,7 +151,7 @@
             <div class="duoshuo"></div>
             <section id="comments">
                   <!--高速版，加载速度快，使用前需测试页面的兼容性-->
-                  <div id="SOHUCS" sid=""  style="padding: 0px 30px 0px 46px;"></div>
+                  <div id="SOHUCS" sid="简述BFC（块级格式化上下文）"  style="padding: 0px 30px 0px 46px;"></div>
                   <script>
                     (function(){
                       var appid = 'cysXc9tTl',
