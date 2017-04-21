@@ -50,9 +50,9 @@
                                 <h1 class="article-title" itemprop="name">简述BFC（块级格式化上下文）</h1>
                             </header>
                             <div class="article-entry" itemprop="articleBody">
-                                <h3 id="前言">BFC</h3>
+                              <h3 id="前言">BFC</h3>
                                 <p>本人在上周参加实习生面试，一面的时候被问到了关于BFC的问题，提及BFC可能有些学习前端的人不太清楚，但是你每天码代码的时候肯定都会用到，只是没有意识到这个东西统称为BFC.下面我们来看下它的真面目。</p>
-                                <p>1.定义</p>
+                              <h2>1.定义</h2>
                                 <p>在解释BFC之前，先说一下文档流。我们常说的文档流其实分为定位流、浮动流和普通流三种。而普通流其实就是指BFC中的FC。B指Box,FC是formatting context的首字母缩写。</p>
                                 <ul>
                                   <li>Box: CSS布局的基本单位</li>
@@ -64,7 +64,53 @@
                                       <li>inline-level box:display 属性设置为 inline,line-block</li>
                                       <li>run-in box:</li>
                                   </ul>
-                              </blockquote>
+                                </blockquote>
+                              <h2>2.BFC的生成</h2>
+                                <blockquote>
+                                  <ul>
+                                      <li>float的属性值不设置为none;</li>
+                                      <li>overflow的属性值不为visible;</li>
+                                      <li>display的属性设置为inline-block，table-cell，table-caption;</li>
+                                      <li>position:absloute或fixed;</li>
+                                  </ul>
+                                </blockquote>
+                              <h2>3.布局规则</h2>
+                                <blockquote>
+                                    <ul>
+                                        <li>1.内部的Box会在垂直方向依次渲染。</li>
+                                        <li>2.Box垂直方向的距离由margin决定，但是在一个BFC中的相邻Box会发生重叠。</li>
+                                        <li>3.每个元素的margin box的左边与包含块 border box 的左边相接触。</li>
+                                        <li>4.BFC的区域与float隔离，是一个隔离的区域互不影响。</li>
+                                        <li>5.计算BFC的高度时，浮动的元素也参与计算。</li>
+                                    </ul>
+                                </blockquote>
+                              <h2>4.BFC在布局中的应用</h2>
+                                <ol>
+                                  <li>上面说了那么多，那么BFC究竟有什么用，毕竟再好的东西也要为我所用才行。</li>
+                                </ol>
+                                <p>解决margin重叠问题</p>
+                                    <ul>
+                                      <li>让两个想邻的元素不放在一个BFC中，即让一个元素生成一个BFC；</li>
+                                    </ul>
+                                <p>浮动相关问题</p>
+                                  <ul>
+                                    <li>使得父元素包含子元素，常见的方式是为父元素设置overflow：hidden或者浮动父元素。根本原因在于创建BFC的元素，子浮动元素也会参与其高度计算，即不会产生高度塌陷问题。</li>
+                                  </ul>
+                                <p>多栏布局的一种方式</p>
+                                <ul>
+                                  <li>上文提到的一条规则：与浮动元素相邻的已生成BFC的元素不能与浮动元素互相覆盖。利用该特性可以作为多栏布局的一种实现方式。</li>
+                                  <li>
+                                    这种布局的特点在于左右俩栏的宽度固定，中间栏可以根据浏览器宽度自适应。
+                                  </li>
+                                </ul>
+                                <p><img src="/articleimage/bfc_01.png"></p>
+                              <h3>5.总结</h3>
+                                <ul>
+                                  <li>BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。</li>
+                                  <li>一个BFC可以被显式的触发。如果想要创建一个新的BFC，只需要给它添加上面提到的任何一个CSS样式就可以了。</li>
+                                  <li>BFC只是一种编程模式，没有那么神秘，在写代码的过程中就会不经意的触发。</li>
+                                </ul>
+                              <p>注：本文是通过自己了解BFC后编写学习，为个人理解非权威，内容仅供参考！</p>
                             </div>
 
                             <div class="article-info article-info-index">
