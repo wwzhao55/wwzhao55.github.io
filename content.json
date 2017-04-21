@@ -9,6 +9,11 @@
                 "name": "BFC",
                 "slug": "BFC",
                 "permalink": "http://yoursite.com/tags/BFC/"
+            },
+            {
+                "name": "前端",
+                "slug": "前端",
+                "permalink": "http://yoursite.com/tags/前端/"
             }
         ]
     },
