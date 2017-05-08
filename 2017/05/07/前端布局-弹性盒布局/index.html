@@ -59,12 +59,12 @@
                                   <p>首先，弹性盒模型布局有两个相互垂直的坐标轴，一般固定主轴为 水平方向，垂直为交叉轴</p>
                                   <p>对于父元素<code>.fix-container</code>来说：</p>
                                   <pre>
-                                    .flex-container {
-                                       display: flex;
-                                       flex-direction: row;
-                                       flex-wrap: wrap;
-                                       align-content:flex-start;
-                                    }
+.flex-container {
+display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content:flex-start;
+}
                                   </pre>
                                   <ul>
                                       <li>display: flex;作为弹性和布局模型渲染div</li>
@@ -88,17 +88,17 @@
                           
                                   <p>对于子元素<code>.fix-item</code>来说：</p>
                                   <pre>
-                                    .flex-item{
-                                       flex-grow: 1;
-                                       flex-basis:auto;
-                                       flex-shrink:1;
-                                       justify-content:flex-start;
-                                       align-item:flex-start;
-                                       <!-- flex:1 1 auto; -->
-                                    }
-                                    .flex-item:last-child {
-                                      order: -1;
-                                    }
+.flex-item{
+  flex-grow: 1;
+  flex-basis:auto;
+  flex-shrink:1;
+  justify-content:flex-start;
+  align-item:flex-start;
+   <!-- flex:1 1 auto; -->
+}
+.flex-item:last-child {
+  order: -1;
+}
                                   </pre>
                                   <ul>
                                       <li>order:整数值，表示在html中出现在最前面</li>
@@ -129,7 +129,7 @@
                               <p><img src="/articleimage/flex.png" alt="flex视图分析"></p>
                               <h3>4.总结</h3>
                                 <p>作为 CSS3 规范的一部分，弹性盒布局模型可以在很多典型的场景中简化完成布局所需的 CSS 代码。该布局模型也提供了很多实用的特性来满足常见的布局要求，包括对容器中条目的排列、对齐、调整大小和分配空白空间等。弹性盒布局模型可以作为 Web 开发人员工具箱中的一个很好的工具。</p>
-                              <p class="bottom-tip">注：本文是通过自己了解BFC后编写学习，为个人理解非权威，内容仅供参考！</p>
+                              <p class="bottom-tip">注：本文仅是自己对css3弹性盒布局模型的理解，不代表权威，内容仅供参考！</p>
                               <div class="page-reward">
                                 <a href="javascript:;" class="page-reward-btn tooltip-top">
                                   <div class="tooltip tooltip-east">
