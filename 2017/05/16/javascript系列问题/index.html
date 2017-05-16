@@ -54,17 +54,17 @@
 
                               <h2>一、JS原型和原型链</h2>
                                 <p>上面说到，js都是对象，但是有区分，分为两大类，即：普通对象（Object）和函数对象（Function），就一般而言，通过new Function的都是函数对象，其他归类为普通对象。</p>
-                                <p><pre><span style="color: #0000ff;">function</span><span style="color: #000000;"> f1(){
+                                <p><pre><span style="color: #0000ff;">function</span><span style="color: #ccc;"> f1(){
     </span><span style="color: #008000;">//</span><span style="color: #008000;">todo</span>
-<span style="color: #000000;">}
-</span><span style="color: #0000ff;">var</span> f2 = <span style="color: #0000ff;">function</span><span style="color: #000000;">(){
+<span style="color: #ccc;">}
+</span><span style="color: #0000ff;">var</span> f2 = <span style="color: #0000ff;">function</span><span style="color: #ccc;">(){
     </span><span style="color: #008000;">//</span><span style="color: #008000;">todo</span>
-<span style="color: #000000;">};
-</span><span style="color: #0000ff;">var</span> f3 = <span style="color: #0000ff;">new</span> Function('x','console.log(x)'<span style="color: #000000;">);
+<span style="color: #ccc;">};
+</span><span style="color: #0000ff;">var</span> f3 = <span style="color: #0000ff;">new</span> Function('x','console.log(x)'<span style="color: #ccc;">);
 
-</span><span style="color: #0000ff;">var</span> o1 =<span style="color: #000000;"> {};
-</span><span style="color: #0000ff;">var</span> o2 = <span style="color: #0000ff;">new</span><span style="color: #000000;"> Object();
-</span><span style="color: #0000ff;">var</span> o3 = <span style="color: #0000ff;">new</span><span style="color: #000000;"> f1();
+</span><span style="color: #0000ff;">var</span> o1 =<span style="color: #ccc;"> {};
+</span><span style="color: #0000ff;">var</span> o2 = <span style="color: #0000ff;">new</span><span style="color: #ccc;"> Object();
+</span><span style="color: #0000ff;">var</span> o3 = <span style="color: #0000ff;">new</span><span style="color: #ccc;"> f1();
 
 console.log(
     </span><span style="color: #0000ff;">typeof</span> f1,<span style="color: #008000;">//</span><span style="color: #008000;">function</span>
@@ -73,7 +73,7 @@ console.log(
     <span style="color: #0000ff;">typeof</span> o1,<span style="color: #008000;">//</span><span style="color: #008000;">object</span>
     <span style="color: #0000ff;">typeof</span> o2,<span style="color: #008000;">//</span><span style="color: #008000;">object</span>
     <span style="color: #0000ff;">typeof</span> o3 <span style="color: #008000;">//</span><span style="color: #008000;">object</span>
-<span style="color: #000000;">);
+<span style="color: #ccc;">);
 </span>&gt;&gt; <span style="color: #0000ff;">function</span> <span style="color: #0000ff;">function</span> <span style="color: #0000ff;">function</span> object object object</pre></p>
                                 <h4>注解：f1属于函数的声明，f2实际上是一个匿名函数，匿名函数赋值给f2，属于函数表达式，f3不常见，但也是函数对象！</h4>
                                 <p>Function 是JS自带的对象，在函数创建的时候，JS自动通过new Function()方式来构建对象。Javascript中创建对象有两种方式：对象字面量和使用new表达式，分别为o1和o2的创建，重点我们来o3，用到了<code>new</code>操作符，其中 o3是f1的实例化对象，但是o3是普通对象,这就涉及到了原型和原型链。</p>
@@ -88,37 +88,37 @@ console.log(
                                 <p>从上面我们知道o3继承了f1中的部分属性，所以我们理解o3和f1为继承关系。判断一下o3和f1.</p>
                                 <p><pre>cat instanceof Animal; //true</pre></p>
                                 <p>结果证明：o3是f1的实例化对象，但是我们发现还有下面的现象：</p>
-                                <p><pre><span style="color: #008080;">1</span> <span style="color: #0000ff;">var</span> L =<span style="color: #000000;"> A.__proto__;
-</span><span style="color: #008080;">2</span> <span style="color: #0000ff;">var</span> R =<span style="color: #000000;"> B.prototype;
-</span><span style="color: #008080;">3</span> <span style="color: #0000ff;">if</span>(L ===<span style="color: #000000;"> R)
+                                <p><pre><span style="color: #008080;">1</span> <span style="color: #0000ff;">var</span> L =<span style="color: #ccc;"> A.__proto__;
+</span><span style="color: #008080;">2</span> <span style="color: #0000ff;">var</span> R =<span style="color: #ccc;"> B.prototype;
+</span><span style="color: #008080;">3</span> <span style="color: #0000ff;">if</span>(L ===<span style="color: #ccc;"> R)
 </span><span style="color: #008080;">4</span>   <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span>;</pre></p>
                                 <p>在javascript中, 通过new可以产生原对象的一个实例对象，而这个实例对象继承了原对象的属性和方法。因此，new存在的意义在于它实现了javascript中的继承，而不仅仅是实例化了一个对象！</p>
                               <h2>三、js作用域和作用域链</h2>
                                   <ul>
                                     <li>作用域：变量在声明他的函数体以及这个函数体嵌套的任意函数体内都是有定义的。</li>
                                   </ul>
-                                  <pre><span style="color: #008080;"> 1</span> <span style="color: #0000ff;">function</span><span style="color: #000000;"> scope(){
-</span><span style="color: #008080;"> 2</span>     <span style="color: #0000ff;">var</span> foo = "global"<span style="color: #000000;">;
-</span><span style="color: #008080;"> 3</span>     <span style="color: #0000ff;">if</span><span style="color: #000000;">(window.getComputedStyle){
-</span><span style="color: #008080;"> 4</span>         <span style="color: #0000ff;">var</span> a = "I'm if"<span style="color: #000000;">;
+                                  <pre><span style="color: #008080;"> 1</span> <span style="color: #0000ff;">function</span><span style="color: #ccc;"> scope(){
+</span><span style="color: #008080;"> 2</span>     <span style="color: #0000ff;">var</span> foo = "global"<span style="color: #ccc;">;
+</span><span style="color: #008080;"> 3</span>     <span style="color: #0000ff;">if</span><span style="color: #ccc;">(window.getComputedStyle){
+</span><span style="color: #008080;"> 4</span>         <span style="color: #0000ff;">var</span> a = "I'm if"<span style="color: #ccc;">;
 </span><span style="color: #008080;"> 5</span>         console.log("if:"+foo); <span style="color: #008000;">//</span><span style="color: #008000;">if:global</span>
-<span style="color: #008080;"> 6</span> <span style="color: #000000;">    }
-</span><span style="color: #008080;"> 7</span>     <span style="color: #0000ff;">while</span>(1<span style="color: #000000;">){
-</span><span style="color: #008080;"> 8</span>         <span style="color: #0000ff;">var</span> b = "I'm while"<span style="color: #000000;">;
+<span style="color: #008080;"> 6</span> <span style="color: #ccc;">    }
+</span><span style="color: #008080;"> 7</span>     <span style="color: #0000ff;">while</span>(1<span style="color: #ccc;">){
+</span><span style="color: #008080;"> 8</span>         <span style="color: #0000ff;">var</span> b = "I'm while"<span style="color: #ccc;">;
 </span><span style="color: #008080;"> 9</span>         console.log("while:"+foo);<span style="color: #008000;">//</span><span style="color: #008000;">while:global</span>
-<span style="color: #008080;">10</span>         <span style="color: #0000ff;">break</span><span style="color: #000000;">;
-</span><span style="color: #008080;">11</span> <span style="color: #000000;">    }
-</span><span style="color: #008080;">12</span>     !<span style="color: #0000ff;">function</span><span style="color: #000000;"> (){
-</span><span style="color: #008080;">13</span>         <span style="color: #0000ff;">var</span> c = "I'm function"<span style="color: #000000;">;
+<span style="color: #008080;">10</span>         <span style="color: #0000ff;">break</span><span style="color: #ccc;">;
+</span><span style="color: #008080;">11</span> <span style="color: #ccc;">    }
+</span><span style="color: #008080;">12</span>     !<span style="color: #0000ff;">function</span><span style="color: #ccc;"> (){
+</span><span style="color: #008080;">13</span>         <span style="color: #0000ff;">var</span> c = "I'm function"<span style="color: #ccc;">;
 </span><span style="color: #008080;">14</span>         console.log("function:"+foo);<span style="color: #008000;">//</span><span style="color: #008000;">function:global</span>
-<span style="color: #008080;">15</span> <span style="color: #000000;">    }();
-</span><span style="color: #008080;">16</span> <span style="color: #000000;">    console.log(
+<span style="color: #008080;">15</span> <span style="color: #ccc;">    }();
+</span><span style="color: #008080;">16</span> <span style="color: #ccc;">    console.log(
 </span><span style="color: #008080;">17</span>          foo,<span style="color: #008000;">//</span><span style="color: #008000;">global</span>
 <span style="color: #008080;">18</span>          a, <span style="color: #008000;">//</span><span style="color: #008000;"> I'm if</span>
 <span style="color: #008080;">19</span>          b, <span style="color: #008000;">//</span><span style="color: #008000;"> I'm while</span>
 <span style="color: #008080;">20</span>          c  <span style="color: #008000;">//</span><span style="color: #008000;"> c is not defined</span>
-<span style="color: #008080;">21</span> <span style="color: #000000;">    );
-</span><span style="color: #008080;">22</span> <span style="color: #000000;">}
+<span style="color: #008080;">21</span> <span style="color: #ccc;">    );
+</span><span style="color: #008080;">22</span> <span style="color: #ccc;">}
 </span><span style="color: #008080;">23</span> scope();<span style="color: #008080;">24</span> console.log(foo);<span style="color: #008000;">//</span><span style="color: #008000;"> undefined</span></pre>
                                 <ol>
                                   <li>scope函数中定义的foo变量，除过自身可以访问以外，还可以在if语句、while语句和内嵌的匿名函数中访问。 因此，foo的作用域就是scope函数体。</li>
@@ -128,19 +128,19 @@ console.log(
                                 <ul>
                                   <li>作用域链：一个函数体内潜逃了多层函数体，并在不同的函数体内它定义了同一变量，当其中一个好拿书访问这个变量是，便会形成一条作用域链</li>
                                 </ul>
-                                  <p><pre><span style="color: #008080;"> 1</span> foo = "window"<span style="color: #000000;">;
-</span><span style="color: #008080;"> 2</span> <span style="color: #0000ff;">function</span><span style="color: #000000;"> first(){
-</span><span style="color: #008080;"> 3</span>     <span style="color: #0000ff;">var</span> foo = "first"<span style="color: #000000;">;
-</span><span style="color: #008080;"> 4</span>     <span style="color: #0000ff;">function</span><span style="color: #000000;"> second(){
-</span><span style="color: #008080;"> 5</span>        <span style="color: #0000ff;">var</span> foo = "second"<span style="color: #000000;">;
-</span><span style="color: #008080;"> 6</span> <span style="color: #000000;">       console.log(foo);
-</span><span style="color: #008080;"> 7</span> <span style="color: #000000;">    }
-</span><span style="color: #008080;"> 8</span>     <span style="color: #0000ff;">function</span><span style="color: #000000;"> third(){
-</span><span style="color: #008080;"> 9</span> <span style="color: #000000;">       console.log(foo);
-</span><span style="color: #008080;">10</span> <span style="color: #000000;">    }
+                                  <p><pre><span style="color: #008080;"> 1</span> foo = "window"<span style="color: #ccc;">;
+</span><span style="color: #008080;"> 2</span> <span style="color: #0000ff;">function</span><span style="color: #ccc;"> first(){
+</span><span style="color: #008080;"> 3</span>     <span style="color: #0000ff;">var</span> foo = "first"<span style="color: #ccc;">;
+</span><span style="color: #008080;"> 4</span>     <span style="color: #0000ff;">function</span><span style="color: #ccc;"> second(){
+</span><span style="color: #008080;"> 5</span>        <span style="color: #0000ff;">var</span> foo = "second"<span style="color: #ccc;">;
+</span><span style="color: #008080;"> 6</span> <span style="color: #ccc;">       console.log(foo);
+</span><span style="color: #008080;"> 7</span> <span style="color: #ccc;">    }
+</span><span style="color: #008080;"> 8</span>     <span style="color: #0000ff;">function</span><span style="color: #ccc;"> third(){
+</span><span style="color: #008080;"> 9</span> <span style="color: #ccc;">       console.log(foo);
+</span><span style="color: #008080;">10</span> <span style="color: #ccc;">    }
 </span><span style="color: #008080;">11</span>     second(); <span style="color: #008000;">//</span><span style="color: #008000;">second</span>
 <span style="color: #008080;">12</span>     third();  <span style="color: #008000;">//</span><span style="color: #008000;">first</span>
-<span style="color: #008080;">13</span> <span style="color: #000000;">}
+<span style="color: #008080;">13</span> <span style="color: #ccc;">}
 </span><span style="color: #008080;">14</span> first();</pre></p>
                                 
                                 <p>当执行second时，JS引擎会将second的作用域放置链表的头部，其次是first的作用域，最后是window对象，于是会形成如下作用域链：
@@ -321,7 +321,7 @@ second->first->window,  此时，JS引擎沿着该作用域链查找变量foo, �
         typeNumber : -1,  //计算模式 
         correctLevel  : 0,//纠错等级 
         background   : "#ffffff",//背景颜色 
-        foreground   : "#000000",//前景颜色 
+        foreground   : "#ccc",//前景颜色 
         text:Code
     }); 
 </script>
