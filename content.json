@@ -1,5 +1,23 @@
 [
     {
+        "title": "javascript系列问题",
+        "date": "2017-05-16T10:38:53.710Z",
+        "path": "2017/05/16/avascript系列问题/",
+        "text": "avascript系列问题之new、原型、作用域",
+        "tags": [
+            {
+                "name": "javascript",
+                "slug": "Javascript",
+                "permalink": "http://yoursite.com/tags/javascript/"
+            },
+            {
+                "name": "new",
+                "slug": "new",
+                "permalink": "http://yoursite.com/tags/new/"
+            }
+        ]
+    },
+    {
         "title": "前端布局(一）弹性盒布局论",
         "date": "2017-05-07T10:38:53.710Z",
         "path": "2017/05/07/前端布局-弹性盒布局/",

@@ -50,7 +50,7 @@
                                 <h1 class="article-title" itemprop="name">javascript系列问题</h1>
                             </header>
                             <div class="article-entry" itemprop="articleBody">
-                              <h3 id="前言">javascript是学习前端人员的重要语言之一，所有有必要对js理解的很透彻.在javascript中，万物皆对象，但是对象任然有区分。</h3>
+                              <p id="前言">javascript是学习前端人员的重要语言之一，所有有必要对js理解的很透彻.在javascript中，万物皆对象，但是对象任然有区分。</p>
 
                               <h2>一、JS原型和原型链</h2>
                                 <p>上面说到，js都是对象，但是有区分，分为两大类，即：普通对象（Object）和函数对象（Function），就一般而言，通过new Function的都是函数对象，其他归类为普通对象。</p>
@@ -77,12 +77,12 @@ console.log(
 </span>&gt;&gt; <span style="color: #0000ff;">function</span> <span style="color: #0000ff;">function</span> <span style="color: #0000ff;">function</span> object object object</pre></p>
                                 <h4>注解：f1属于函数的声明，f2实际上是一个匿名函数，匿名函数赋值给f2，属于函数表达式，f3不常见，但也是函数对象！</h4>
                                 <p>Function 是JS自带的对象，在函数创建的时候，JS自动通过new Function()方式来构建对象。Javascript中创建对象有两种方式：对象字面量和使用new表达式，分别为o1和o2的创建，重点我们来o3，用到了<code>new</code>操作符，其中 o3是f1的实例化对象，但是o3是普通对象,这就涉及到了原型和原型链。</p>
-                                <p>在JS中，每当创建一个函数对象f1 时，该对象中都会内置一些属性，其中包括prototype和_proto_,  prototype即原型对象，它记录着f1的一些属性和方法。var o3 = new f1() ,在这样的一个过程中，f1和o3会分别形成两条独立的原型链:  o3原型链：obj->f1.prototype->Object.prototype->null,f1原型链： f1->Function.prototype->Object.prototype->null,其实prototype的主要作用就是继承。 通俗一点讲，prototype中定义的属性和方法都是留给自己的“后代”用的，因此，子类完全可以访问prototype中的属性和方法。</p>
+                                <p>在JS中，每当创建一个函数对象f1 时，该对象中都会内置一些属性，其中包括prototype和_proto_,  prototype即原型对象，它记录着f1的一些属性和方法。var o3 = new f1() ,在这样的一个过程中，f1和o3会分别形成两条独立的原型链:  o3原型链：<code>obj->f1.prototype->Object.prototype->null</code>,f1原型链： <code>f1->Function.prototype->Object.prototype->null</code>,其实prototype的主要作用就是继承。 通俗一点讲，prototype中定义的属性和方法都是留给自己的“后代”用的，因此，子类完全可以访问prototype中的属性和方法。</p>
                                 <p>它在普通对象和函数对象中都存在， 它的作用就是保存父类的prototype对象，JS在通过new 表达式创建一个对象的时候，通常会把父类的prototype赋值给新对象的__proto__属性，这样，就形成了一代代传承...</p>
                                 <p>o3对象拥有这样一个原型链以后，当o3.foo执行时，o3会先查找自身是否有该属性，但不会查找自己的prototype,当找不到foo时，o3就沿着原型链依次去查找...看下图：</p>
-                                <p><img src="/articleimage/javascript.png" alt="js原型链关系图"></p>
+                                <p><img src="/articleimage/javascript.jpg" alt="js原型链关系图"></p>
 
-                              <h2>new操作符</h2>
+                              <h2>二、new操作符</h2>
                                 <p>new 运算符是用来实例化一个类，从而在内存中分配一个实例对象.</p>
                                 <p><pre>var o3 = new f1();</pre></p>
                                 <p>从上面我们知道o3继承了f1中的部分属性，所以我们理解o3和f1为继承关系。判断一下o3和f1.</p>
@@ -93,9 +93,59 @@ console.log(
 </span><span style="color: #008080;">3</span> <span style="color: #0000ff;">if</span>(L ===<span style="color: #000000;"> R)
 </span><span style="color: #008080;">4</span>   <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span>;</pre></p>
                                 <p>在javascript中, 通过new可以产生原对象的一个实例对象，而这个实例对象继承了原对象的属性和方法。因此，new存在的意义在于它实现了javascript中的继承，而不仅仅是实例化了一个对象！</p>
-                              <h2>js作用域和作用域链</h2>
+                              <h2>三、js作用域和作用域链</h2>
+                                  <ul>
+                                    <li>作用域：变量在声明他的函数体以及这个函数体嵌套的任意函数体内都是有定义的。</li>
+                                  </ul>
+                                  <pre><span style="color: #008080;"> 1</span> <span style="color: #0000ff;">function</span><span style="color: #000000;"> scope(){
+</span><span style="color: #008080;"> 2</span>     <span style="color: #0000ff;">var</span> foo = "global"<span style="color: #000000;">;
+</span><span style="color: #008080;"> 3</span>     <span style="color: #0000ff;">if</span><span style="color: #000000;">(window.getComputedStyle){
+</span><span style="color: #008080;"> 4</span>         <span style="color: #0000ff;">var</span> a = "I'm if"<span style="color: #000000;">;
+</span><span style="color: #008080;"> 5</span>         console.log("if:"+foo); <span style="color: #008000;">//</span><span style="color: #008000;">if:global</span>
+<span style="color: #008080;"> 6</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;"> 7</span>     <span style="color: #0000ff;">while</span>(1<span style="color: #000000;">){
+</span><span style="color: #008080;"> 8</span>         <span style="color: #0000ff;">var</span> b = "I'm while"<span style="color: #000000;">;
+</span><span style="color: #008080;"> 9</span>         console.log("while:"+foo);<span style="color: #008000;">//</span><span style="color: #008000;">while:global</span>
+<span style="color: #008080;">10</span>         <span style="color: #0000ff;">break</span><span style="color: #000000;">;
+</span><span style="color: #008080;">11</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">12</span>     !<span style="color: #0000ff;">function</span><span style="color: #000000;"> (){
+</span><span style="color: #008080;">13</span>         <span style="color: #0000ff;">var</span> c = "I'm function"<span style="color: #000000;">;
+</span><span style="color: #008080;">14</span>         console.log("function:"+foo);<span style="color: #008000;">//</span><span style="color: #008000;">function:global</span>
+<span style="color: #008080;">15</span> <span style="color: #000000;">    }();
+</span><span style="color: #008080;">16</span> <span style="color: #000000;">    console.log(
+</span><span style="color: #008080;">17</span>          foo,<span style="color: #008000;">//</span><span style="color: #008000;">global</span>
+<span style="color: #008080;">18</span>          a, <span style="color: #008000;">//</span><span style="color: #008000;"> I'm if</span>
+<span style="color: #008080;">19</span>          b, <span style="color: #008000;">//</span><span style="color: #008000;"> I'm while</span>
+<span style="color: #008080;">20</span>          c  <span style="color: #008000;">//</span><span style="color: #008000;"> c is not defined</span>
+<span style="color: #008080;">21</span> <span style="color: #000000;">    );
+</span><span style="color: #008080;">22</span> <span style="color: #000000;">}
+</span><span style="color: #008080;">23</span> scope();<span style="color: #008080;">24</span> console.log(foo);<span style="color: #008000;">//</span><span style="color: #008000;"> undefined</span></pre>
+                                <ol>
+                                  <li>scope函数中定义的foo变量，除过自身可以访问以外，还可以在if语句、while语句和内嵌的匿名函数中访问。 因此，foo的作用域就是scope函数体。</li>
+                                  <li>在javascript中，if、while、for 等代码块不能形成独立的作用域。因此，javascript中没有块级作用域，只有函数作用域。</li>
+                                </ol>
+                                <p>注：如果函数scope中foo变量前没有var，此时第24行输出为"global",foo就成为全局变量，为window对象。</p>
+                                <ul>
+                                  <li>作用域链：一个函数体内潜逃了多层函数体，并在不同的函数体内它定义了同一变量，当其中一个好拿书访问这个变量是，便会形成一条作用域链</li>
+                                </ul>
+                                  <p><pre><span style="color: #008080;"> 1</span> foo = "window"<span style="color: #000000;">;
+</span><span style="color: #008080;"> 2</span> <span style="color: #0000ff;">function</span><span style="color: #000000;"> first(){
+</span><span style="color: #008080;"> 3</span>     <span style="color: #0000ff;">var</span> foo = "first"<span style="color: #000000;">;
+</span><span style="color: #008080;"> 4</span>     <span style="color: #0000ff;">function</span><span style="color: #000000;"> second(){
+</span><span style="color: #008080;"> 5</span>        <span style="color: #0000ff;">var</span> foo = "second"<span style="color: #000000;">;
+</span><span style="color: #008080;"> 6</span> <span style="color: #000000;">       console.log(foo);
+</span><span style="color: #008080;"> 7</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;"> 8</span>     <span style="color: #0000ff;">function</span><span style="color: #000000;"> third(){
+</span><span style="color: #008080;"> 9</span> <span style="color: #000000;">       console.log(foo);
+</span><span style="color: #008080;">10</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">11</span>     second(); <span style="color: #008000;">//</span><span style="color: #008000;">second</span>
+<span style="color: #008080;">12</span>     third();  <span style="color: #008000;">//</span><span style="color: #008000;">first</span>
+<span style="color: #008080;">13</span> <span style="color: #000000;">}
+</span><span style="color: #008080;">14</span> first();</pre></p>
+                                
+                                <p>当执行second时，JS引擎会将second的作用域放置链表的头部，其次是first的作用域，最后是window对象，于是会形成如下作用域链：
 
-                              <h2>his关键字</h2>
+second->first->window,  此时，JS引擎沿着该作用域链查找变量foo, 查到的是"second",同级函数体之间不互相影响。</p>
 
                               <h3>4.总结</h3>
                               <p class="bottom-tip">注：本文仅是自己对css3弹性盒布局模型的理解，不代表权威，内容仅供参考！</p>
