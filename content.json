@@ -1,5 +1,23 @@
 [
     {
+        "title": "前端面试算法",
+        "date": "2017-05-22T20:18:53.710Z",
+        "path": "2017/06/前端面试算法/",
+        "text": "前端面试算法汇总",
+        "tags": [
+            {
+                "name": "前端",
+                "slug": "前端",
+                "permalink": "http://yoursite.com/tags/前端/"
+            },
+            {
+                "name": "算法",
+                "slug": "算法",
+                "permalink": "http://yoursite.com/tags/算法/"
+            }
+        ]
+    },
+    {
         "title": "搜素自动补全下拉列表",
         "date": "2017-05-22T20:18:53.710Z",
         "path": "2017/05/22/搜素自动补全下拉列表/",
@@ -7,7 +25,7 @@
         "tags": [
             {
                 "name": "搜索框",
-                "slug": "Javascript",
+                "slug": "搜索框",
                 "permalink": "http://yoursite.com/tags/搜索框/"
             },
             {
