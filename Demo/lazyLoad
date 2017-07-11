@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>图片懒加载</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+    <style>
+    	* {
+            margin: 0;
+            padding: 0;
+        }
+
+        #div1 {
+            width: 520px;
+            margin: 30px auto;
+            border: 1px solid red;
+            overflow: hidden;
+        }
+
+        li {
+            width: 500px;
+            height: 500px;
+            float: left;
+            list-style: none;
+            margin: 5px;
+            border: 1px dashed green;
+        }
+        img{
+        	width:100%
+        }
+    </style>
+</head>
+<body>
+	<!-- 图片滚动加载 -->
+	<div id="div1">
+        <ul>
+            <li data-src="http://4493bz.1985t.com/uploads/allimg/140710/1-140G0161612.jpg"></li>
+            <li data-src="http://4493bz.1985t.com/uploads/allimg/140628/1-14062Q33R6.jpg"></li>
+            <li data-src="http://4493bz.1985t.com/uploads/allimg/140628/1-14062Q33242.jpg"></li>
+            <li data-src="http://img.bizhi.sogou.com/images/2014/12/10/997251.jpg"></li>
+            <li data-src="http://dl.bizhi.sogou.com/images/2014/12/02/986640.jpg"></li>
+            <li data-src="http://imgstore.cdn.sogou.com/app/a/100540002/1170473_s_90_2_219x160.jpg"></li>
+            <li data-src="http://imgstore.cdn.sogou.com/app/a/100540002/1170475_s_90_2_219x160.jpg"></li>
+            <li data-src="http://imgstore.cdn.sogou.com/app/a/100540002/1170477_s_90_2_219x160.jpg"></li>
+            <li data-src="http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"></li>
+            <li data-src="http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"></li>
+            <li data-src="http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"></li>
+            <li data-src="http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"></li>
+            <li data-src="http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"></li>
+            <li data-src="http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"></li>
+            <li data-src="http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"></li>
+            <li data-src="http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"></li>
+            <li data-src="http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"></li>
+            <li data-src="http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"></li>
+            <li data-src="http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"></li>
+            <li data-src="http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"></li>
+            <li data-src="http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"></li>
+            <li data-src="http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"></li>
+            <li data-src="http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"></li>
+            <li data-src="http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"></li>
+            <li data-src="http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"></li>
+            <li data-src="http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"></li>
+            <li data-src="http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg"></li>
+        </ul>
+    </div>
+    <!-- 图片的动态加载就是通过读取li元素，然后获得li元素的data-src属性的值赋予动态创建的图片的src，从而实现了图片的创建。 -->
+    <div id="div2">
+        <ul>
+            <li><img class="m-lazyload" data-src="imgUrl">
+                <li><img class="m-lazyload" data-src="http://4493bz.1985t.com/uploads/allimg/140710/1-140G0161612.jpg"></li>
+                <li><img class="m-lazyload" data-src="http://4493bz.1985t.com/uploads/allimg/140628/1-14062Q33R6.jpg"></li>
+                <li><img class="m-lazyload" data-src="http://4493bz.1985t.com/uploads/allimg/140628/1-14062Q33242.jpg"></li>
+                <li><img class="m-lazyload" data-src="http://img.bizhi.sogou.com/images/2014/12/10/997251.jpg"></li>
+                <li><img class="m-lazyload" data-src="http://dl.bizhi.sogou.com/images/2014/12/02/986640.jpg"></li>
+                <li><img class="m-lazyload" data-src="http://imgstore.cdn.sogou.com/app/a/100540002/1170473_s_90_2_219x160.jpg"></li>
+                <li><img class="m-lazyload" data-src="http://imgstore.cdn.sogou.com/app/a/100540002/1170475_s_90_2_219x160.jpg"></li>
+                <li><img class="m-lazyload" data-src="http://imgstore.cdn.sogou.com/app/a/100540002/1170477_s_90_2_219x160.jpg"></li>
+                <li><img class="m-lazyload" data-src="http://imgstore.cdn.sogou.com/app/a/100540002/1170479_s_90_2_219x160.jpg">
+                </li>
+        </ul>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+	//当页面加载完成以后要主动运行一下window.onscroll
+	window.onload = function () {
+        window.onscroll();
+    };
+    function setImg(index){
+    	console.log(index)
+        var oDiv=document.getElementById("div1")
+        var oUl=oDiv.children[0];
+        var aLi=oUl.children;
+        if (aLi[index].dataset) {
+            var src=aLi[index].dataset.src;
+        } else{
+            var src=aLi[index].getAttribute('data-src');
+        }
+        var oImg=document.createElement('img');
+        oImg.src=src;
+        if (aLi[index].children.length==0) {
+            aLi[index].appendChild(oImg); 
+        }
+    }
+    //获得对象距离页面顶端的距离  
+	function getH(obj) {  
+	    var h = 0;  
+	    while (obj) {  
+	        h += obj.offsetTop;  
+	        obj = obj.offsetParent;  
+	    }  
+	    return h;  
+	}  
+	//当网页的滚动条滚动时要时时判断当前目标图片的位置！
+	window.onscroll = function () {
+        var oDiv = document.getElementById('div1');
+        var oUl = oDiv.children[0];
+        var aLi = oUl.children;
+
+        for (var i = 0, l = aLi.length; i < l; i++) {
+            var oLi = aLi[i];
+            //检查oLi是否在可视区域
+            var t = document.documentElement.clientHeight + (document.documentElement.scrollTop || document.body.scrollTop);
+            var h = getH(oLi);
+            if (h < t) {
+                setTimeout("setImg(" + i + ")", 500);
+            }
+        }
+    };
+ 	// 页可见区域宽： document.body.clientWidth;
+	// 网页可见区域高： document.body.clientHeight;
+	// 网页可见区域宽： document.body.offsetWidth (包括边线的宽);
+	// 网页可见区域高： document.body.offsetHeight (包括边线的宽);
+	// 网页正文全文宽： document.body.scrollWidth;
+	// 网页正文全文高： document.body.scrollHeight;
+	// 网页被卷去的高： document.body.scrollTop;
+	// 网页被卷去的左： document.body.scrollLeft;
+	// 网页正文部分上： window.screenTop;
+	// 网页正文部分左： window.screenLeft;
+	// 屏幕分辨率的高： window.screen.height;
+	// 屏幕分辨率的宽： window.screen.width;
+	// 屏幕可用工作区高度： window.screen.availHeight;
+</script>
+<script type="text/javascript">
+    var imgList = [],  // 页面所有img元素集合
+    delay,   // setTimeout 对象
+    offset,  //偏移量，用于指定图片距离可视区域多少距离，进行加载
+    time,  // 延迟载入时间
+    _selector; // 选择器 默认为 .m-lazyload
+ 
+    function _isShow(el) {
+        var coords = el.getBoundingClientRect();
+        return ( (coords.top >= 0 && coords.left >= 0 && coords.top) <= (window.innerHeight || document.documentElement.clientHeight) + parseInt(offset));
+    }
+ 
+    function _loadImage() {
+        for (var i = imgList.length; i--;) {
+          var el = imgList[i];
+          if (_isShow(el)) {
+            el.src = el.getAttribute('data-src');
+            el.className = el.className.replace(new RegExp("(\\s|^)" + _selector.substring(1, _selector.length) + "(\\s|$)"), " ");el
+            imgList.splice(i, 1);
+          }
+        }
+    }
+    function _delay() {
+        clearTimeout(delay);
+        delay = setTimeout(function () {
+          _loadImage();
+        }, time);
+    }
+    function ImageLazyload(selector, options) {
+        var defaults = options || {};
+        offset = defaults.offset || 0;
+        time = defaults.time || 250;
+        _selector = selector || '.m-lazyload';
+        this.getNode();
+        _delay();//避免首次加载未触发touch事件,主动触发一次加载函数
+        if (defaults.iScroll) {
+          defaults.iScroll.on('scroll', _delay);
+          defaults.iScroll.on('scrollEnd', _delay);
+        } else {
+          window.addEventListener('scroll', _delay, false);
+        }
+    }
+    ImageLazyload.prototype.getNode = function () {
+        imgList = [];
+        var nodes = document.querySelectorAll(_selector);
+        for (var i = 0, l = nodes.length; i < l; i++) {
+          imgList.push(nodes[i]);
+        }
+    };
+</script>
