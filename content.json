@@ -11,8 +11,8 @@
                 "permalink": "http://yoursite.com/tags/搜索框/"
             },
             {
-                "name": "new",
-                "slug": "new",
+                "name": "自动补全加载",
+                "slug": "自动补全加载",
                 "permalink": "http://yoursite.com/tags/自动补全加载/"
             }
         ]
