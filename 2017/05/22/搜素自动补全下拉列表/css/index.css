@@ -1,32 +1,39 @@
-div#searchBox {
+body {
+    background: #fff;
+    color: #666;
+    font: 90%/180% Arial, Helvetica, sans-serif;
+}
+
+div {
     margin: 150px auto;
      width:230px;
 }
 
-#searchBox input,#searchBox li {
+input,li {
     height: 30px;
     line-height: 30px;
     outline: none;
 }
 
-#searchBox li{
+
+li{
     cursor: pointer;
 }
 
 
-#searchBox input[type=search] {
+input[type=search] {
     -webkit-appearance: textfield;
     -webkit-box-sizing: content-box;
     font-family: inherit;
     font-size: 100%;
 }
-#searchBox input::-webkit-search-decoration,
-#searchBox input::-webkit-search-cancel-button {
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button {
     display: none;
 }
 
 
-#searchBox input[type=search] {
+input[type=search] {
     background: #ededed url(../img/search-icon.png) no-repeat 10px center;
     border: solid 1px #ccc;
     padding: 4px 4px 4px 32px;
@@ -40,7 +47,7 @@ div#searchBox {
     -moz-transition: all .8s;
     transition: all .8s;
 }
-#searchBox input[type=search]:focus {
+input[type=search]:focus {
     width: 180px;
     background-color: #fff;
     border-color: #66CC75;
@@ -59,7 +66,7 @@ div#searchBox {
 /*}*/
 
 
-#searchBox ul {
+ul {
     position:relative;
     left:10px;
     list-style: none;
@@ -70,7 +77,7 @@ div#searchBox {
 
 }
 
-#searchBox li:nth-child(data-list-index){
+li:nth-child(data-list-index){
     background-color: rgb(168,213,252);
 }
 .hide{
@@ -78,6 +85,6 @@ div#searchBox {
 }
 
 
-#searchBox li[class~="hover"] {
+li[class~="hover"] {
     background-color: rgb(168,213,252);
 }

@@ -1,5 +1,5 @@
 /**
- * Created by zww on 2017/05/18.
+ * Created by zyy on 2017/05/18.
  */
 var EventUtil = {
     addHandler: function (element, type, handler) {
