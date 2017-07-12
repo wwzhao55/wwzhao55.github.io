@@ -1,5 +1,23 @@
 [
     {
+        "title": "Javascript 严格模式详解",
+        "date": "2017-06-18T20:18:53.710Z",
+        "path": "2017/06/18/Javascript严格模式",
+        "text": "Javascript 严格模式详解",
+        "tags": [
+            {
+                "name": "前端",
+                "slug": "前端",
+                "permalink": "http://yoursite.com/tags/前端/"
+            },
+            {
+                "name": "javascript",
+                "slug": "javascript",
+                "permalink": "http://yoursite.com/tags/javascript/"
+            }
+        ]
+    },
+    {
         "title": "跨域获取数据",
         "date": "2017-06-12T20:18:53.710Z",
         "path": "2017/06/12/跨域获取数据",
