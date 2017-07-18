@@ -56,7 +56,7 @@
                                 <h2>理解同源策略限制</h2>
                                 <p>同源策略阻止从一个域上加载的脚本获取或操作另一个域上的文档属性。也就是说，受到请求的 URL 的域必须与当前 Web页面的域相同。这意味着浏览器隔离来自不同源的内容，以防止它们之间的操作。且XmlHttpRequest只允许请求当前源（域名、协议、端口）的资源，为了实现跨域请求，可以通过script标签实现跨域请求，然后在服务端输出JSON数据并执行回调函数，从而解决了跨域的数据请求就此，引出了JSONP!举个栗子来看看：</p>
                                 <h2>html 代码</h2>
-<pre title="AJAX 跨域请求 - JSONP获取JSON数据" class="html" style="display: none;" name="code" codeable_id="" codeable_type="BlogComment" source_url="http://justcoding.iteye.com/blog/1366102#" pre_index="0">&lt;meta content="text/html; charset=utf-8" http-equiv="Content-Type" /&gt;
+<pre title="AJAX 跨域请求 - JSONP获取JSON数据" class="html" name="code" codeable_id="" codeable_type="BlogComment" source_url="http://justcoding.iteye.com/blog/1366102#" pre_index="0">&lt;meta content="text/html; charset=utf-8" http-equiv="Content-Type" /&gt;
 &lt;script type="text/javascript"&gt;
   function jsonpCallback(result) {
     //alert(result);
@@ -70,7 +70,7 @@
   document.getElementsByTagName("head")[0].appendChild(JSONP);
 &lt;/script&gt;</pre>
                                 <h2>js 代码 方法一</h2>
-<pre title="AJAX 跨域请求 - JSONP获取JSON数据" class="js" style="display: none;" name="code" codeable_id="" codeable_type="BlogComment" source_url="http://justcoding.iteye.com/blog/1366102#" pre_index="3">&lt;script type="text/javascript" src="jquery.js"&gt;&lt;/script&gt;
+<pre title="AJAX 跨域请求 - JSONP获取JSON数据" class="js"  name="code" codeable_id="" codeable_type="BlogComment" source_url="http://justcoding.iteye.com/blog/1366102#" pre_index="3">&lt;script type="text/javascript" src="jquery.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript"&gt;
   $.getJSON("http://crossdomain.com/services.php?callback=?",
   function(result) {
@@ -81,7 +81,7 @@
 &lt;/script&gt;
 </pre>
                               <h2>js 代码 方法二</h2>
-<pre title="AJAX 跨域请求 - JSONP获取JSON数据" class="js" style="display: none;" name="code" codeable_id="" codeable_type="BlogComment" source_url="http://justcoding.iteye.com/blog/1366102#" pre_index="4">&lt;script type="text/javascript" src="jquery.js"&gt;&lt;/script&gt;
+<pre title="AJAX 跨域请求 - JSONP获取JSON数据" class="js" name="code" codeable_id="" codeable_type="BlogComment" source_url="http://justcoding.iteye.com/blog/1366102#" pre_index="4">&lt;script type="text/javascript" src="jquery.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript"&gt;
   $.ajax({
     url:"http://crossdomain.com/services.php",
