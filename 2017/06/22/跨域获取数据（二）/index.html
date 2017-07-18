@@ -97,7 +97,7 @@
   });
 &lt;/script&gt;</pre>
                                     <h2>js 代码 方法三</h2>
-<pre title="AJAX 跨域请求 - JSONP获取JSON数据" class="js" style="display: none;" name="code" codeable_id="" codeable_type="BlogComment" source_url="http://justcoding.iteye.com/blog/1366102#" pre_index="5">&lt;script type="text/javascript" src="jquery.js"&gt;&lt;/script&gt;
+<pre title="AJAX 跨域请求 - JSONP获取JSON数据" class="js" name="code" codeable_id="" codeable_type="BlogComment" source_url="http://justcoding.iteye.com/blog/1366102#" pre_index="5">&lt;script type="text/javascript" src="jquery.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript"&gt;
   $.get('http://crossdomain.com/services.php?callback=?', {name: encodeURIComponent('tester')}, function (json) { for(var i in json) alert(i+":"+json[i]); }, 'jsonp');
 &lt;/script&gt;
