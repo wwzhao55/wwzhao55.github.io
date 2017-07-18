@@ -50,9 +50,61 @@
                                 <h1 class="article-title" itemprop="name">跨域获取数据（二）</h1>
                             </header>
                             <div class="article-entry" itemprop="articleBody">
-                                <h1 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h1><p>前文提到用window.name+iframe的方式来跨域获取数据，本文为大家介绍下如何利用JSONP--解决ajax跨域问题跨域获取数据。</p>
+                                <p>前文提到用window.name+iframe的方式来跨域获取数据，本文为大家介绍下如何利用JSONP--解决ajax跨域问题跨域获取数据。</p>
                                 <p>JSONP--解决ajax跨域问题</p>
-                                <p>提及JSONP，联想到和我们经常用到的JSON有没有关系？简单的说，JSON是一种数据交换格式，Javsacript中的一个对象，描述信息的格式，而JSONP是一种跨域数据交换协议，返回的是脚本代码，描述信息传递双方约定的方法。</p>
+                                <p>提及JSONP，联想到和我们经常用到的JSON有没有关系？简单的说，JSON是一种数据交换格式，Javsacript中的一个对象，描述信息的格式，而JSONP是一种跨域数据交换协议，返回的是脚本代码，描述信息传递双方约定的方法,JSONP是JSON with Padding的略称.</p>
+                                <h2>理解同源策略限制</h2>
+                                <p>同源策略阻止从一个域上加载的脚本获取或操作另一个域上的文档属性。也就是说，受到请求的 URL 的域必须与当前 Web页面的域相同。这意味着浏览器隔离来自不同源的内容，以防止它们之间的操作。且XmlHttpRequest只允许请求当前源（域名、协议、端口）的资源，为了实现跨域请求，可以通过script标签实现跨域请求，然后在服务端输出JSON数据并执行回调函数，从而解决了跨域的数据请求就此，引出了JSONP!举个栗子来看看：</p>
+                                <h2>html 代码</h2>
+<pre title="AJAX 跨域请求 - JSONP获取JSON数据" class="html" style="display: none;" name="code" codeable_id="" codeable_type="BlogComment" source_url="http://justcoding.iteye.com/blog/1366102#" pre_index="0">&lt;meta content="text/html; charset=utf-8" http-equiv="Content-Type" /&gt;
+&lt;script type="text/javascript"&gt;
+  function jsonpCallback(result) {
+    //alert(result);
+    for(var i in result) {
+      alert(i+":"+result[i]);//循环输出a:1,b:2,etc.
+    }
+  }
+  var JSONP=document.createElement("script");
+  JSONP.type="text/javascript";
+  JSONP.src="http://crossdomain.com/services.php?callback=jsonpCallback";
+  document.getElementsByTagName("head")[0].appendChild(JSONP);
+&lt;/script&gt;</pre>
+                                <h2>js 代码 方法一</h2>
+<pre title="AJAX 跨域请求 - JSONP获取JSON数据" class="js" style="display: none;" name="code" codeable_id="" codeable_type="BlogComment" source_url="http://justcoding.iteye.com/blog/1366102#" pre_index="3">&lt;script type="text/javascript" src="jquery.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+  $.getJSON("http://crossdomain.com/services.php?callback=?",
+  function(result) {
+    for(var i in result) {
+      alert(i+":"+result[i]);//循环输出a:1,b:2,etc.
+    }
+  });
+&lt;/script&gt;
+</pre>
+                              <h2>js 代码 方法二</h2>
+<pre title="AJAX 跨域请求 - JSONP获取JSON数据" class="js" style="display: none;" name="code" codeable_id="" codeable_type="BlogComment" source_url="http://justcoding.iteye.com/blog/1366102#" pre_index="4">&lt;script type="text/javascript" src="jquery.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+  $.ajax({
+    url:"http://crossdomain.com/services.php",
+    dataType:'jsonp',
+    data:'',
+    jsonp:'callback',
+    success:function(result) {
+      for(var i in result) {
+        alert(i+":"+result[i]);//循环输出a:1,b:2,etc.
+      }
+    },
+    timeout:3000
+  });
+&lt;/script&gt;</pre>
+                                    <h2>js 代码 方法三</h2>
+<pre title="AJAX 跨域请求 - JSONP获取JSON数据" class="js" style="display: none;" name="code" codeable_id="" codeable_type="BlogComment" source_url="http://justcoding.iteye.com/blog/1366102#" pre_index="5">&lt;script type="text/javascript" src="jquery.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+  $.get('http://crossdomain.com/services.php?callback=?', {name: encodeURIComponent('tester')}, function (json) { for(var i in json) alert(i+":"+json[i]); }, 'jsonp');
+&lt;/script&gt;
+</pre>
+                                    <h2>最后，看下JSONP的原理</h2>
+                                    <p>首先在客户端注册一个callback, 然后把callback的名字传给服务器。此时，服务器先生成 json 数据。然后以 javascript 语法的方式，生成一个function , function 名字就是传递上来的参数 jsonp.最后将 json 数据直接以入参的方式，放置到 function 中，这样就生成了一段 js 语法的文档，返回给客户端。客户端浏览器，解析script标签，并执行返回的 javascript 文档，此时数据作为参数，传入到了客户端预先定义好的 callback 函数里.（动态执行回调函数）</p>
+                                    <h2>总而言之，JSON是目地，JSONP是方法！</h2>
                                 <div class="page-reward">
                                     <a href="javascript:;" class="page-reward-btn tooltip-top">
                                       <div class="tooltip tooltip-east">
@@ -82,7 +134,7 @@
                                       </span>
                                     </div>
                                     </a>
-                                </div>
+                                </div> 
                             </div>
 
                             <div class="article-info article-info-index">
