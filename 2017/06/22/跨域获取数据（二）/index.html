@@ -5,15 +5,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>跨域获取数据（一）</title>
+  <title>跨域获取数据（二）</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="跨域获取数据（一）|wwzhao的博客">
-  <meta property="og:url" content="http://yoursite.com/2017/06/12/跨域获取数据（一）/index.html">
-  <meta property="og:site_name" content="跨域获取数据（一）|wwzhao的博客">
+  <meta property="og:title" content="跨域获取数据（二）|wwzhao的博客">
+  <meta property="og:url" content="http://yoursite.com/2017/06/22/跨域获取数据（二）/index.html">
+  <meta property="og:site_name" content="跨域获取数据（二）|wwzhao的博客">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="跨域获取数据（一）|wwzhao的博客">
-  <link rel="alternative" href="/atom.xml" title="跨域获取数据（一）|wwzhao的博客" type="application/atom+xml">
+  <meta name="twitter:title" content="跨域获取数据（二）|wwzhao的博客">
+  <link rel="alternative" href="/atom.xml" title="跨域获取数据（二）|wwzhao的博客" type="application/atom+xml">
   <link rel="icon" href="/img/favicon.ico">
   <link rel="stylesheet" type="text/css" href="/./main.234bc0.css">
   <script src="/js/jquery.min.js"></script>
@@ -47,59 +47,43 @@
                     <article id="post-MyBatis-foreach" class="article article-type-post " itemscope itemprop="blogPost">
                         <div class="article-inner">
                             <header class="article-header">
-                                <h1 class="article-title" itemprop="name">跨域获取数据（一）</h1>
+                                <h1 class="article-title" itemprop="name">跨域获取数据（二）</h1>
                             </header>
                             <div class="article-entry" itemprop="articleBody">
-        <h1 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h1><p>前文提到用jsonp的方式来跨域获取数据，本文为大家介绍下如何利用window.name+iframe跨域获取数据。</p>
-<p>　　首先我们要简单了解下window.name和iframe的相关知识。iframe是html的一个标签，可以在网页中创建内联框架，有个src属性（指向文件地址，html、php等）可以选择内联框架的内容。window.name（一般在js代码里出现）的值不是一个普通的全局变量，而是当前窗口的名字，这里要注意的是每个iframe都有包裹它的window，而这个window是top window的子窗口，而它自然也有window.name的属性，<strong>window.name属性的神奇之处在于name 值在不同的页面（甚至不同域名）加载后依旧存在（如果没修改则值不会变化），并且可以支持非常长的 name 值（2MB）。</strong></p>
-<p>跨域解决方案似乎可以呼之欲出了，假设index.html页面请求远端服务器的数据，我们在该页面下新建一个iframe标签，该iframe的src属性指向服务器文件地址（利用iframe标签的跨域能力)，服务器文件里设置好window.name的值（也就是该iframe的contentWindow的name值），然后在index.html里读取该iframe的window.name值，一切似乎水到渠成，代码如下：<br>  </p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"> </span></div><div class="line">    iframe = <span class="built_in">document</span>.createElement(<span class="string">'iframe'</span>),</div><div class="line">    iframe.src = <span class="string">'http://localhost:8080/data.php'</span>;</div><div class="line">    <span class="built_in">document</span>.body.appendChild(iframe);</div><div class="line">    iframe.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{</div><div class="line">      <span class="built_in">console</span>.log(iframe.contentWindow.name)</div><div class="line">    };</div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></tbody></table></figure><p></p>
-<p>　但是不幸的是，报错了..</p>
-<p>提示啥协议、主机、端口三者要一致，这不是赤裸裸地告诉你跨域了么！为什么会这样，因为规定如果index.html页面和和该页面里的iframe框架的src如果不同源，则也无法操作框架里的任何东西，所以就取不到iframe框架的name值了，告诉你我们不是一家的，你也休想得到我这里的数据。既然要同源，那就换个src去指，前面说了无论怎样加载window.name值都不会变化.</p>
-<p>如下图所示：<br><a href="http://images.zyy1217.com/BCi9J" class="fancybox fancybox.image" rel="group"><img src="http://images.zyy1217.com/BCi9J" alt="Untitled Image"></a><br><a href="http://images.zyy1217.com/WDQh1" class="fancybox fancybox.image" rel="group"><img src="http://images.zyy1217.com/WDQh1" alt="Untitled Image"></a></p>
-<p>域a.com的页面request.html（即<a href="http://a.com/request.html）" target="_blank" rel="external">http://a.com/request.html）</a> 里面嵌套了一个iframe指向域b.com的response.html，而response.html里又嵌套了域a.com的proxy.html。</p>
-<p>于是我们在index.html相同目录下，新建了个proxy.html的空页面，修改代码如下：<br></p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"> </span></div><div class="line">    iframe = <span class="built_in">document</span>.createElement(<span class="string">'iframe'</span>);</div><div class="line">    iframe.style.display = <span class="string">'none'</span>;</div><div class="line">    <span class="keyword">var</span> state = <span class="number">0</span>;</div><div class="line">    </div><div class="line">    iframe.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{</div><div class="line">      <span class="keyword">if</span>(state === <span class="number">1</span>) {</div><div class="line">          <span class="keyword">var</span> data = <span class="built_in">JSON</span>.parse(iframe.contentWindow.name);</div><div class="line">          <span class="built_in">console</span>.log(data);</div><div class="line">          iframe.contentWindow.document.write(<span class="string">''</span>);</div><div class="line">          iframe.contentWindow.close();</div><div class="line">        <span class="built_in">document</span>.body.removeChild(iframe);</div><div class="line">      } <span class="keyword">else</span> <span class="keyword">if</span>(state === <span class="number">0</span>) {</div><div class="line">          state = <span class="number">1</span>;</div><div class="line">          iframe.contentWindow.location = <span class="string">'http://a.com/proxy.html'</span>;</div><div class="line">      }</div><div class="line">    };</div><div class="line"></div><div class="line">    iframe.src = <span class="string">'http://b.com/response.html'</span>;</div><div class="line">    <span class="built_in">document</span>.body.appendChild(iframe);</div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></tbody></table></figure><p></p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>　　能使用这种方式跨域，有几个条件必不可少。</p>
-<ol>
-<li>iframe标签的跨域能力</li>
-<li>window.name属性值在文档刷新后依旧存在的能力</li>
-</ol>
-<p>再简单了解下window和contentWindow的一些知识。浏览器就会为原始文档创建一个 window 对象，再为每个框架（iframe）创建额外的 window 对象。这些额外的对象是原始窗口的子窗口，可能被原始窗口中发生的事件所影响。例如，关闭原始窗口将导致关闭全部子窗口。contentWindow属性是指指定的frame或者iframe所在的window对象。</p>
-<h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><p>　　很多人或许只关注使用方法，而对原理不怎么感冒。此法相对于jsonp复杂，使用方法也更复杂些。</p>
-<p>　　服务端一般输出一段js代码，例如下面这样：<br> </p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">  &lt;?php</div><div class="line">  echo '&lt;script&gt; window.name = "{\"name\":\"hanzichi\", \"age\":10}"; &lt;/script&gt;'</div><div class="line">?&gt;</div></pre></td></tr></tbody></table></figure><p></p>
-<p>window.name的值是字符串形式，也是需要传递给客户端的数据（当然如果有需要服务端也可以先处理传过来的数据，这里仅为只有数据回传），有需要自己再去解析（如字符串-&gt;json数据）。</p>
-<p>index.html页面，我把方法封装成了函数：</p>
-  <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"> </span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">crossDomain</span>(<span class="params">url, fn</span>) </span>{</div><div class="line">      iframe = <span class="built_in">document</span>.createElement(<span class="string">'iframe'</span>);</div><div class="line">      iframe.style.display = <span class="string">'none'</span>;</div><div class="line">      <span class="keyword">var</span> state = <span class="number">0</span>;</div><div class="line">    </div><div class="line">      iframe.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{</div><div class="line">        <span class="keyword">if</span>(state === <span class="number">1</span>) {</div><div class="line">          fn(iframe.contentWindow.name);</div><div class="line">          iframe.contentWindow.document.write(<span class="string">''</span>);</div><div class="line">          iframe.contentWindow.close();</div><div class="line">          <span class="built_in">document</span>.body.removeChild(iframe);</div><div class="line">        } <span class="keyword">else</span> <span class="keyword">if</span>(state === <span class="number">0</span>) {</div><div class="line">          state = <span class="number">1</span>;</div><div class="line">          iframe.contentWindow.location = <span class="string">'http://a.com/proxy.html'</span>;</div><div class="line">        }</div><div class="line">      };</div><div class="line"></div><div class="line">      iframe.src = url;</div><div class="line">      <span class="built_in">document</span>.body.appendChild(iframe);</div><div class="line">    } </div><div class="line">    </div><div class="line">    <span class="comment">// 调用</span></div><div class="line">    <span class="comment">// 服务器地址</span></div><div class="line">    <span class="keyword">var</span> url = <span class="string">'http://b.com/response.html'</span>;</div><div class="line">    crossDomain(url, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>{ <span class="comment">// 处理数据 data就是window.name的值(string)</span></div><div class="line">      <span class="keyword">var</span> data = <span class="built_in">JSON</span>.parse(iframe.contentWindow.name);</div><div class="line">      <span class="built_in">console</span>.log(data);</div><div class="line">    });</div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></tbody></table></figure>
-<div class="page-reward">
-                                <a href="javascript:;" class="page-reward-btn tooltip-top">
-                                  <div class="tooltip tooltip-east">
-                                  <span class="tooltip-item">
-                                    赏
-                                  </span>
-                                  <span class="tooltip-content">
-                                    <span class="tooltip-text">
-                                      <span class="tooltip-inner">
-                                        <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你支持我买服务器！<i class="icon icon-quo-right"></i></p>
-                                        <div class="reward-box">
-                                          
-                                          <div class="reward-box-item">
-                                            <img class="reward-img" src="/img/zhifubao.jpg">
-                                            <span class="reward-type">支付宝</span>
-                                          </div>
-                                          
-                                          
-                                          <div class="reward-box-item">
-                                            <img class="reward-img" src="/img/weixin.jpg">
-                                            <span class="reward-type">微信</span>
-                                          </div>
-                                          
-                                        </div>
+                                <h1 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h1><p>前文提到用window.name+iframe的方式来跨域获取数据，本文为大家介绍下如何利用JSONP--解决ajax跨域问题跨域获取数据。</p>
+                                <p>JSONP--解决ajax跨域问题</p>
+                                <p>提及JSONP，联想到和我们经常用到的JSON有没有关系？简单的说，JSON是一种数据交换格式，Javsacript中的一个对象，描述信息的格式，而JSONP是一种跨域数据交换协议，返回的是脚本代码，描述信息传递双方约定的方法。</p>
+                                <div class="page-reward">
+                                    <a href="javascript:;" class="page-reward-btn tooltip-top">
+                                      <div class="tooltip tooltip-east">
+                                      <span class="tooltip-item">
+                                        赏
                                       </span>
-                                    </span>
-                                  </span>
+                                      <span class="tooltip-content">
+                                        <span class="tooltip-text">
+                                          <span class="tooltip-inner">
+                                            <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你支持我买服务器！<i class="icon icon-quo-right"></i></p>
+                                            <div class="reward-box">
+                                              
+                                              <div class="reward-box-item">
+                                                <img class="reward-img" src="/img/zhifubao.jpg">
+                                                <span class="reward-type">支付宝</span>
+                                              </div>
+                                              
+                                              
+                                              <div class="reward-box-item">
+                                                <img class="reward-img" src="/img/weixin.jpg">
+                                                <span class="reward-type">微信</span>
+                                              </div>
+                                              
+                                            </div>
+                                          </span>
+                                        </span>
+                                      </span>
+                                    </div>
+                                    </a>
                                 </div>
-                                </a>
-                        </div>
-                        </div>
+                            </div>
 
                             <div class="article-info article-info-index">
                                 <!-- 文档标签 -->
@@ -168,13 +152,12 @@
                             </div>
                         </div>  
                     </article>
-
                     <nav id="article-nav"><!-- 前一篇 后一篇 -->
-                        <a href="/2017/06/前端面试算法/" id="article-nav-newer" class="article-nav-link-wrap">
+                        <a href="/2017/06/跨域获取数据（二）/" id="article-nav-newer" class="article-nav-link-wrap">
                           <i class="icon-circle-left"></i>
-                          <div class="article-nav-title">前端面试算法</div>
+                          <div class="article-nav-title">跨域获取数据（二）</div>
                         </a>
-                        <a href="/2017/05/22/搜素自动补全下拉列表/" id="article-nav-older" class="article-nav-link-wrap">
+                        <a href="/2017/06/22/搜素自动补全下拉列表/" id="article-nav-older" class="article-nav-link-wrap">
                           <div class="article-nav-title">搜素自动补全下拉列表</div>
                           <i class="icon-circle-right"></i>
                         </a>
@@ -184,7 +167,7 @@
             <div class="duoshuo"></div>
             <section id="comments">
                   <!--高速版，加载速度快，使用前需测试页面的兼容性-->
-                  <div id="SOHUCS" sid="跨域获取数据"  style="padding: 0px 30px 0px 46px;"></div>
+                  <div id="SOHUCS" sid="跨域获取数据（二）"  style="padding: 0px 30px 0px 46px;"></div>
                   <script>
                     (function(){
                       var appid = 'cysXc9tTl',
