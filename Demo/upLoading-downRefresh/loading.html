@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;" />
+	<title>上拉加载</title>
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+	<style type="text/css">
+		.item {
+		    line-height: 100px;
+		    color: #cb1515;
+		    font-size: 28px;
+		    height: 100px;
+		}
+		#contain{
+			overflow:auto;
+			background-color: #ccc;
+			height: 1000px;
+			padding-bottom: 30px;
+			text-align: center;
+		}
+		span.loading-tip {
+		    color: #03A9F4;
+		    font-size: 26px;
+		}
+	</style>
+</head>
+<body>
+	<div id="contain">
+		<div id="itemContainer">
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+			<div class="item">原来的litem</div>
+		</div>	
+
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+var loadElement = document.createElement('div');
+var spanElement = document.createElement('span');
+var container = document.getElementById('contain');
+var itemContainer = document.getElementById('itemContainer');
+var count = 0;
+var finishLoading = true;//可加载标志
+
+loadElement.className="Loading-more";
+spanElement.className = "loading-tip";
+spanElement.innerHTML = '加载更多...';
+loadElement.appendChild(spanElement);
+container.appendChild(loadElement);
+function scrollBottomTest(){  
+	$("#contain").scroll(function(){  
+		var $this =$(this),  
+		viewH =$(this).height(),//可见高度  
+		contentH =$(this).get(0).scrollHeight,//内容高度  
+		scrollTop =$(this).scrollTop();//滚动高度  
+		if(finishLoading){
+			if(contentH - viewH - scrollTop <= 80) { //到达底部80px时,加载新内容  
+				//加载新数据10次，判断条件，也可无限制添加
+				if(count>10){
+					finishLoading = false;
+					return false;
+				}
+				// 这里加载数据.. 
+				spanElement.innerHTML = '加载中...';
+				var str = "";
+				//这里可以是AJAX请求获得的数据
+				for(var i=0;i<3;i++){
+					var itemElement = document.createElement('div');
+					itemElement.className="item";
+					itemElement.innerHTML="新加的item";
+					str+=itemElement;
+				}
+				//为加载效果明显，做了一个延时
+				setTimeout(function(){
+					itemContainer.appendChild(itemElement);
+					spanElement.innerHTML = '上拉加载...';
+				},1000);
+				count++;
+			}  
+		}else{
+			spanElement.innerHTML = '没有更多了';
+		}
+		
+	});  
+}
+scrollBottomTest();
+</script>
