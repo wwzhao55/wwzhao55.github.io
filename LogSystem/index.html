@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
 	<title>日志系统</title>
+	<script type="text/javascript" src="/plugin/jquery.min.js"></script>
+	<style type="text/css" href="/css/themStyle.css"></style>
 </head>
 <body>
 日志系统
+	<div id="container">
+		<div id="left">菜单栏</div>
+		<div id="right">内容</div>
+	</div>
 </body>
 </html>
+<script type="text/javascript">
+	$("#left").load("/resource/main.html");
+</script>
