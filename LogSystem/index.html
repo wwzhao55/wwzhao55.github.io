@@ -4,18 +4,28 @@
 	<meta charset="utf-8">
 	<title>日志系统</title>
 	<script type="text/javascript" src="plugin/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<style type="text/css" href="css/themStyle.css"></style>
 </head>
 <body>
 日志系统
-	<div id="container">
-		<div id="left"></div>
-		<div id="head"></div>
-		<div id="right">内容</div>
+	<div class="container-fluid">
+	  	<div class="row-fluid">
+	    	<div class="span2">
+	      		<!--Sidebar content-->
+	    	</div>
+	    <div class="span10">
+	      	<!--Body content-->
+	    </div>
+	  </div>
 	</div>
 </body>
 </html>
 <script type="text/javascript">
-	$("#left").load("resource/main.html");
-	$("#head").load("resource/head.html");
+	$(".span2").load("resource/main.html");
+	$(".span10").load("resource/head.html");
 </script>
