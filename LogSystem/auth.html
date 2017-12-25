@@ -10,34 +10,35 @@
   <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container">
-      <h1>LogSystem Analysis</h1>
-      <div class="row">
-        <div class="span3">
-          <img alt="140x140" src="images/a.png" />
-        </div>
-        <div class="span9">
-          <form class="form-horizontal">
-            <div class="control-group">
-               <label class="control-label" for="inputEmail">邮箱</label>
-              <div class="controls">
-                <input id="inputEmail" type="text" />
-              </div>
+      <div class="container" id="auth-page">
+        <h1>日志系统</h1>
+        <div class="row">
+            <div class="col-md-4">
+            <img alt="140x140" class="img-rounded"  src="images/a.png" style="width:200px;height: 200px;" />
             </div>
-            <div class="control-group">
-               <label class="control-label" for="inputPassword">密码</label>
-              <div class="controls">
-                <input id="inputPassword" type="password" />
-              </div>
+            <div class="col-md-8">
+              <form class="form-horizontal">
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">邮箱</label>
+                  <div class="col-sm-10">
+                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+                  <div class="col-sm-10">
+                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn"><a href="index.html">登陆</a></button>
+                  </div>
+                </div>
+              </form>
             </div>
-            <div class="control-group">
-              <div class="controls">
-                 <label class="checkbox"><input type="checkbox" /> Remember me</label> <button type="submit" class="btn">登陆</button>
-              </div>
-            </div>
-          </form>
-        </div>
+          </div>
+        
       </div>
-    </div>
 </body>
 </html>
