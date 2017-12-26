@@ -86,7 +86,162 @@
 				    	<h3 class="panel-title">节点分布</h3>
 				  	</div>
 				  	<div class="panel-body">
-				    	节点分布
+				    	<div>
+							<!-- Nav tabs -->
+							<ul class="nav nav-tabs" role="tablist">
+							    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">设备节点</a></li>
+							    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">应用</a></li>
+							    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">文件监视</a></li>
+							</ul>
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div role="tabpanel" class="tab-pane fade in active" id="home">
+								  	<table class="table table-condensed table-hover table table-striped" style="margin-top: 30px;">
+										<tr>
+											<th>节点序号</th>
+											<th>节点</th>
+											<th>IP地址</th>
+											<th>事件数</th>
+											<th>最后消息时间</th>
+											<th>下次扫描</th>
+											<th>状态</th>
+										</tr>
+									  	<tr>
+									  		<td>1</td>
+									  		<td>控制节点</td>
+									  		<td>192.168.123.202</td>
+									  		<td>1585</td>
+									  		<td>1</td>
+									  		<td>1</td>
+									  		<td class="warning">监听</td>
+									  	</tr>
+									  	<tr>
+									  		<td>2</td>
+									  		<td>云硬盘</td>
+									  		<td>192.168.56.1</td>
+									  		<td>3849</td>
+									  		<td>1</td>
+									  		<td>1</td>
+									  		<td class="warning">监听</td>
+									  	</tr>	
+									  	<tr>
+									  		<td>3</td>
+									  		<td>计算节点</td>
+									  		<td>192.168.123.85</td>
+									  		<td>13591</td>
+									  		<td>1</td>
+									  		<td>1</td>
+									  		<td class="warning">监听</td>
+									  	</tr>	
+									  	<tr>
+									  		<td>4</td>
+									  		<td>计算节点</td>
+									  		<td>192.168.123.86</td>
+									  		<td>15284</td>
+									  		<td>1</td>
+									  		<td>1</td>
+									  		<td class="warning">监听</td>
+									  	</tr>
+									</table>
+									<nav aria-label="Page navigation" style="text-align: center;">
+										  <ul class="pagination">
+										    <li>
+										      <a href="#" aria-label="Previous">
+										        <span aria-hidden="true">&laquo;</span>
+										      </a>
+										    </li>
+										    <li><a href="#">1</a></li>
+										    <li><a href="#">2</a></li>
+										    <li><a href="#">3</a></li>
+										    <li><a href="#">4</a></li>
+										    <li><a href="#">5</a></li>
+										    <li>
+										      <a href="#" aria-label="Next">
+										        <span aria-hidden="true">&raquo;</span>
+										      </a>
+										    </li>
+										  </ul>
+										</nav>		
+								</div>
+
+								<div role="tabpanel" class="tab-pane fade" id="profile">
+									<h4>应用分布</h4>
+									<canvas id="canvas">tuxiang</canvas>
+									<h4>应用汇总</h4>
+									<table class="table table-condensed table-hover table table-striped" style="margin-top: 30px;">
+										<tr>
+											<th>节点</th>
+											<th>IP地址</th>
+											<th>应用类型</th>
+											<th>事件数量</th>
+											<th>导入时间</th>
+											<th>起始时间</th>
+											<th>结束时间</th>
+										</tr>
+									  	<tr>
+									  		<td>控制节点</td>
+									  		<td>192.168.123.202</td>
+									  		<td>OracleLogs</td>
+									  		<td>1585</td>
+									  		<td>1</td>
+									  		<td>1</td>
+									  		<td>监听</td>
+									  	</tr>
+									  	<tr>
+									  		<td>云硬盘</td>
+									  		<td>192.168.56.1</td>
+									  		<td>MSSQL Audit Logs</td>
+									  		<td>3849</td>
+									  		<td>1</td>
+									  		<td>1</td>
+									  		<td>监听</td>
+									  	</tr>	
+									  	<tr>
+									  		<td>计算节点</td>
+									  		<td>192.168.123.85</td>
+									  		<td>TerminalServer Logs</td>
+									  		<td>13591</td>
+									  		<td>1</td>
+									  		<td>1</td>
+									  		<td>监听</td>
+									  	</tr>	
+									  	<tr>
+									  		<td>计算节点</td>
+									  		<td>192.168.123.86</td>
+									  		<td>import</td>
+									  		<td>15284</td>
+									  		<td>1</td>
+									  		<td>1</td>
+									  		<td>监听</td>
+									  	</tr>
+									</table>
+									<nav aria-label="Page navigation" style="text-align: center;">
+										  <ul class="pagination">
+										    <li>
+										      <a href="#" aria-label="Previous">
+										        <span aria-hidden="true">&laquo;</span>
+										      </a>
+										    </li>
+										    <li><a href="#">1</a></li>
+										    <li><a href="#">2</a></li>
+										    <li><a href="#">3</a></li>
+										    <li><a href="#">4</a></li>
+										    <li><a href="#">5</a></li>
+										    <li>
+										      <a href="#" aria-label="Next">
+										        <span aria-hidden="true">&raquo;</span>
+										      </a>
+										    </li>
+										  </ul>
+										</nav>
+								</div>
+
+								<div role="tabpanel" class="tab-pane fade" id="messages">
+								  	<h4>文件监视</h4>
+									<canvas id="canvas">tuxiang</canvas>
+								</div>
+							</div>
+						</div>
 				  	</div>
 				</div>
 	    	</div>
@@ -97,4 +252,5 @@
 <script type="text/javascript">
 	$('#element').tooltip('toggle');
 	$('#element').tooltip('hide');
+	$('#home').tab('show')
 </script>

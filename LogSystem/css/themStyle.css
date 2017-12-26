@@ -7,3 +7,7 @@ li.list-group-item:hover {
     background-color: #337ab7;
     text-decoration: none;
 }
+.tab-content h4 {
+    height: 30px;
+    border-bottom: 1px solid #ccc;
+}
