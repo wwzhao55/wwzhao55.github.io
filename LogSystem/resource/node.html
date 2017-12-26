@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 	<link rel="stylesheet" href="../css/themStyle.css">
 </head>
 <body>
@@ -166,7 +166,7 @@
 
 								<div role="tabpanel" class="tab-pane fade" id="profile">
 									<h4>应用分布</h4>
-									<canvas id="canvas">tuxiang</canvas>
+									<div id="chartContainer1" style="height: 500px; width: 100%;"></div>
 									<h4>应用汇总</h4>
 									<table class="table table-condensed table-hover table table-striped" style="margin-top: 30px;">
 										<tr>
@@ -215,30 +215,11 @@
 									  		<td>监听</td>
 									  	</tr>
 									</table>
-									<nav aria-label="Page navigation" style="text-align: center;">
-										  <ul class="pagination">
-										    <li>
-										      <a href="#" aria-label="Previous">
-										        <span aria-hidden="true">&laquo;</span>
-										      </a>
-										    </li>
-										    <li><a href="#">1</a></li>
-										    <li><a href="#">2</a></li>
-										    <li><a href="#">3</a></li>
-										    <li><a href="#">4</a></li>
-										    <li><a href="#">5</a></li>
-										    <li>
-										      <a href="#" aria-label="Next">
-										        <span aria-hidden="true">&raquo;</span>
-										      </a>
-										    </li>
-										  </ul>
-										</nav>
 								</div>
 
 								<div role="tabpanel" class="tab-pane fade" id="messages">
 								  	<h4>文件监视</h4>
-									<canvas id="canvas"></canvas>
+									<div id="chartContainer" style="height: 500px; width: 100%;"></div>
 								</div>
 							</div>
 						</div>
@@ -255,49 +236,55 @@
 	$('#home').tab('show')
 </script>
 <script type="text/javascript">
-	var ctx = document.getElementById('canvas').getContext('2d');
-	var data = [
-			{
-				value: 30,
-				color:"#F38630"
-			},
-			{
-				value : 50,
-				color : "#E0E4CC"
-			},
-			{
-				value : 100,
-				color : "#69D2E7"
-			}			
-		];
-	var chart = new Chart(ctx).Pie(data,options);
-	
-	var options = {
-	//Boolean - Whether we should show a stroke on each segment
-	segmentShowStroke : true,
-	
-	//String - The colour of each segment stroke
-	segmentStrokeColor : "#fff",
-	
-	//Number - The width of each segment stroke
-	segmentStrokeWidth : 2,
-	
-	//Boolean - Whether we should animate the chart	
-	animation : true,
-	
-	//Number - Amount of animation steps
-	animationSteps : 100,
-	
-	//String - Animation easing effect
-	animationEasing : "easeOutBounce",
-	
-	//Boolean - Whether we animate the rotation of the Pie
-	animateRotate : true,
+	var chart1 = new CanvasJS.Chart("chartContainer1", {
+	theme: "light2", // "light1", "light2", "dark1", "dark2"
+	exportEnabled: true,
+	animationEnabled: true,
+	title: {
+		text: "Log Data Sources"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 25,
+		toolTipContent: "<b>{label}</b>: {y}%",
+		showInLegend: "true",
+		legendText: "{label}",
+		indexLabelFontSize: 16,
+		indexLabel: "{label} - {y}%",
+		dataPoints: [
+			{ y: 4.01, label: "控制节点" },
+			{ y: 11.2, label: "云硬盘" },
+			{ y: 39.6, label: "计算节点1" },
+			{ y: 44.5, label: "计算节点2" },
+			{ y: 0.69, label:"其他"},
+		]
+	}]
+});
+chart1.render();
+	var chart = new CanvasJS.Chart("chartContainer", {
+	theme: "light1", // "light1", "light2", "dark1", "dark2"
+	exportEnabled: true,
+	animationEnabled: true,
+	title: {
+		text: "Log Data Sources"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 25,
+		toolTipContent: "<b>{label}</b>: {y}%",
+		showInLegend: "true",
+		legendText: "{label}",
+		indexLabelFontSize: 16,
+		indexLabel: "{label} - {y}%",
+		dataPoints: [
+			{ y: 4.01, label: "控制节点" },
+			{ y: 11.2, label: "云硬盘" },
+			{ y: 39.6, label: "计算节点1" },
+			{ y: 44.5, label: "计算节点2" },
+			{ y: 0.69, label:"其他"},
+		]
+	}]
+});
+chart.render();
 
-	//Boolean - Whether we animate scaling the Pie from the centre
-	animateScale : false,
-	
-	//Function - Will fire on animation completion.
-	onAnimationComplete : null
-}
 </script>
