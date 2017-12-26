@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<p>首先数据结构中有几种常用的排序算法，插入排序（直接插入+希尔排序）、选择排序(简单选择排序+堆排序)、交换排序（冒泡排序+快速排序）、归并排序、基数排序、桶排序、计数排序、拓扑排序</p>
+<h1>一、交换排序</h1>
+
+<p>1、冒泡排序</p>
+<p>冒泡算法：
+	<ol>
+		<li>比较两个相邻元素，下标小的元素较大则交换，从开始到结束；</li>
+		<li>此时最后一个元素是最大的，除了最后一个元素外，重复以上操作；</li>
+	</ol>
+</p>
+<p>代码实现</p>
+<script type="text/javascript">
+	function bubbleSort(arr){
+		var len = arr.length;
+		for(var i=0;i<len;i++){
+			for(var j=0;j<len-i-1;j++){
+				if(arr[i]>arr[j]){
+					var temp = arr[i];
+					arr[i] = arr[j];
+					arr[j] = temp;
+				}
+			}
+		}
+		return arr;
+	}
+	// 用一个改进的算法，用while循环比for循环快，切设置一个标志性变量，用于记录每趟排序中最后交换数据的位置，代表该位置之前数据已经为有序了，从下一个数据开始即可
+	function bubbleSortPlus(arr){
+		var i = arr.length-1;//初始时，最后位置不变
+		while(i>=0){
+			var pos = 0;//记录每趟开始交换位置
+			for(var j=0;j<i;j++){
+				if(arr[j]>arr[j+1]){
+					pos = j;//记录交换的位置
+					var temp = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = temp;
+				}
+				i = pos; 
+			}
+		}
+		return arr;
+	}
+	//由于传统冒泡中每趟操作只能找到一个最值，现在使用在每趟排序中进行正向和反向两边冒泡的方法得到两个最终值，则排序次数少了一半
+	function bubbleSortPlus2(arr){
+		var low = 0;
+		var high = arr.ength-1;
+		var temp,j;
+		while(low<high){
+			for(j=low;j<high;++j){//正向冒泡找到最大值
+				if(arr[j]>arr[j+1]){
+					temp = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = temp;
+				}
+			}
+			--high;//修改high值，向前移一位
+			for(j=high;j>low;--j){//反向冒泡，找到最小值
+				if(arr[j]<arr[j-1]){
+					temp = arr[j];
+					arr[j] = arr[j-1];
+					arr[j-1] = temp;
+				}
+			}
+		}
+		return arr;
+	}
+	//<p>最后稳定性和复杂度分析，由上面分析可得，冒泡排序是稳定的，切复杂度（在带排序为有序时）最小为O(n),（带排序为反序时）最大为O(n^2)</p>
+</script>
+<p>2、快速排序</p>
+<p>快速排序：
+	<ol>
+		<li>从序列中选一个元素作为‘基准’</li>
+		<li>重新排列，将所有比基准元素小的排在基准前面，大于基准的排在后面，包括相等的;</li>
+		<li>递归的把小于基准元素的子序列和大于基准的子序列排序</li>
+	</ol>
+</p>
+<p>代码实现</p>
+<script type="text/javascript">
+	function quickSort(arr){
+		if(arr.length<2){
+			return arr;
+		}
+		var pivotIndex = Math.floor(arr.length/2);
+		var pivot = arr.splice(pivotIndex,1)[0];
+		var left = [];
+		var right = [];
+		for(var i=0;i<arr.length;i++){
+			if(arr[i]<pivot){
+				left.push(arr[i]);
+			}else{
+				right.push(arr[i]);
+			}
+		}
+		return quickSort(left).concat([pivot]).concat(quickSort(right));
+		//quickSort(left).concat([pivot],quickSort(right));
+	}
+	//<p>快速排序，最大的优点就是速度快吧，但是不稳定，复杂度最小(原序列无序)为O(nlogn)，最大(原序列有序时)为O(n^2)，即序列越有序，对快速排序越不利，有时占用O(nlogn)的存储空间</p>
+</script>
+
+<h1>二、选择排序</h1>
+<p>1、简单选择排序
+	<ol>
+		<li>在未排序序列中找到最小的元素，存放到起始位置；</li>
+		<li>再从未排列的序列中找到最小的，依次存放到已排列末尾</li>
+		<li>依次类推，直到所有元素均排列完成</li>
+	</ol>
+</p>
+<p>代码实现</p>
+<script type="text/javascript">
+	function selectSort(arr){
+		var len = arr.length;
+		var minIndex,temp;
+		for(var i=0;i<len-1;i++){
+			minIndex = i;
+			for(var j = i+1;j<len;j++){
+				if(arr[j]<arr[minIndex]){//寻找最小的数
+					minIndex = j;//将最小数的索引保存
+					temp = arr[i];
+					arr[i] = arr[minIndex];
+					arr[minIndex] = temp;
+				}
+			}
+		}
+		return arr;
+	}
+	//由上分析可知，n个记录可经过n-1躺直接选择排序得到有序结果，无论原始记录是否有序都要进行遍历比较，复杂度恒定为O(n^2)
+</script>
+<p>2、堆排序
+	<ol>
+		<li>将初始待排序关键字构建大顶堆；</li>
+		<li>将堆顶元素与最后一个交换，得到新的无序，但要满足堆的性质即调整堆；</li>
+		<li>重复上面步骤；</li>
+	</ol>
+</p>
+<p>代码实现</p>
+<script type="text/javascript">
+	function headSort(arr){
+		var len = arr.length;
+		var temp;
+		//建堆
+		for(var i=Math.floor(len/2)-1;i<=0;i--){
+			heapModify(arr,i,len);
+		}
+		//堆排序
+		for(var j=len-1;j>=1;j--){
+			temp = arr[0];
+			aee[0] = arr[j];
+			arr[j] = temp;
+			heapModify(arr,0,--len);
+		}
+		return arr;
+	}
+	function heapModify(arr,i,len){
+		var left = 2*i+1;
+		var right = 2*i+2;
+		var largest = i,temp;
+		if(l<len&&arr[l]>arr[largest]){
+			largest = l;
+		}
+		if(r<len&&arr[r]>arr[largst]){
+			largest = r;
+		}
+		if(largest!=i){
+			temp = arr[i];
+			arr[i] = arr[largest];
+			arr[largest] = temp;
+			heapModify(arr,largest,len);
+		}
+	}
+	//堆排序是一种利用堆的概念来排序的选择排序，不稳定 复杂度O(logn)
+</script>
+
+<h1>三、插入排序</h1>
+<p>1、直接插入排序</p>
+<p>插入排序：
+	<ol>
+		<li>默认第一个元素以排序；</li>
+		<li>取出下一个元素，在已排序的元素从后向前扫描；</li>
+		<li>如果该元素（已排序）大于新元素，将该元素移到前一位置；</li>
+		<li>重复步骤，知道找到已排序的元素小于或者等于新元素的位置</li><li>将新元素查到该位置</li>
+	</ol>
+</p>
+<p>代码实现</p>
+<script type="text/javascript">
+	function insertSort(arr){
+		var len = arr.length;
+		for(var i=1;i<len;i++){
+			var key = arr[i];//比较的对象
+			var j = i-1;
+			while(j>=0 && arr[j]>key){
+				arr[j+1] = arr[j];
+				j--;
+			}
+			arr[j+1] = key;
+		}
+		return arr;
+	}
+	//我们可以进行下查找改进，由于待查找序列已经是有序地，所以可改为二分查找
+	function insertSortPlus(arr){
+		var len = arr.length;
+		for(var i=0;i<len;i++){
+			var left = 0;
+			var right = i-1;
+			var key = arr[i];
+			while(left<right){
+				var middle = parseInt((left+right)/2);
+				if(key < arr[middle]){
+					right = middle - 1;
+				}else{
+					right = middle + 1;
+				}
+			}
+			for(var j=i-1;j>=left;j--){
+				arr[j+1] = arr[j];
+			}
+			arr[left] = key;
+		}
+		return arr;
+	}
+	//插入排序是稳定的，复杂度为O(n)-O(n^2),复杂度和原始序列排序相关，其中：待排序记录越有序，速度越快，否则越慢
+</script>
+<p>2、希尔排序</p>
+<p>希尔排序：
+	<ol>
+		<li>首先突破O(n^2)的排序算法，是简单插入拍粗的改进版；</li>
+		<li>与简单直接插入不同的是，他会优先比较距离较远的元素，又叫缩小增量排序</li>
+		<li>其核心在于间隔序列的设定，既可提前设定也可动态定义间隔；</li>
+		<li>将整个记录序列分割成为若干子序列分别进行直接插入排序：
+			<ul>
+				<li>选择增量序列；</li>
+				<li>按增量序列个数K，对序列进行K遍排序</li>
+			</ul>
+		</li>
+	</ol>
+</p>
+<p>代码实现</p>
+<script type="text/javascript">
+	function shellSort(arr){
+		var len = arr.length;
+		var temp;
+		var gap =1;
+		while(gap<len/5){
+			gap = gap*5+1;
+		}
+		for(gap;gap>0;gap = Math.floor(gap/5)){
+			for(var i=gap;i<len;i++){
+				temp = arr[i];
+				for(var j=i-gap;i>=0 && arr[j]>temp;j-=gap){
+					arr[j+gap] = arr[j];
+				}
+				arr[j+gap] = temp;
+			}
+		}
+		return arr;
+	}
+	//希尔排序是不稳定的，复杂度O(nlog2n)-O(nlog2n)
+</script>
+
+<h1>四、归并排序</h1>
+
+</body>
+</html>

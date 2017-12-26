@@ -1,4 +1,9 @@
 #auth-page h1 {
     text-align: center;
-    margin: 80px;
+    margin: 80px 0 100px 0;
+}
+li.list-group-item:hover {
+    color: #fff;
+    background-color: #337ab7;
+    text-decoration: none;
 }

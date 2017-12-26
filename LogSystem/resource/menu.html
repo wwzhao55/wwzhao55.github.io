@@ -1,0 +1,71 @@
+<!-- <ul id="main">
+	<li>统一日志采集</li>
+	<li>故障分类</li>
+	<li>实时事件关联</li>
+	预置70多种事件关联规则
+	定位外部威胁、黑客攻击、内部违例
+	简单灵活定义关联规则
+	<li>日志取证分析</li>
+	深入分析原始日志事件，快速分析问题的根本原因。
+	生成网络取证报表，例如用户活动报表、系统审计报表以及合规性审计报表等。
+	<li>节点分布</li>
+	<li>数据统计分析</li>
+	<li>故障原因定位</li>
+	<li>日志采集</li>
+	<li>日志分析</li>
+	<li>日志查询</li>
+	<li>告警管理</li>
+	<li>日志管理</li>
+</ul> -->
+<ul class="list-group" style="cursor: pointer;">
+	<a href="resource/index.html#main">
+		<li class="list-group-item active">
+			<span class="glyphicon glyphicon-home" aria-hidden="true" style="margin-right: 20px;"></span>主页
+		</li>
+	</a>
+	<a href="resource/node.html#node">
+		<li class="list-group-item">
+  		<span class="glyphicon glyphicon-pushpin" aria-hidden="true" style="margin-right: 20px;"></span>节点分布
+  		</li>
+  	</a>
+	<a href="resource/input.html#input">
+	  	<li class="list-group-item">
+	  		<span class="glyphicon glyphicon-import" aria-hidden="true" style="margin-right: 20px;"></span>
+	  		日志采集
+	  	</li>
+	</a>
+	<a href="resource/logAnalysis.html#logAnalysis">
+	  	<li class="list-group-item">
+	  		<span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true" style="margin-right: 20px;"></span>
+	  		日志分析
+	  	</li>
+	</a>
+	<a href="resource/failure.html#failure">
+	  	<li class="list-group-item">
+	  		<span class="glyphicon glyphicon-list-alt" aria-hidden="true" style="margin-right: 20px;"></span>
+	  		故障分类
+	  	</li>
+	</a>
+	<a href="resource/warming.html#warming">
+	  	<li class="list-group-item">
+	  		<span class="glyphicon glyphicon-export" aria-hidden="true" style="margin-right: 20px;"></span>
+	  		告警管理
+	  	</li>
+	</a>
+</ul>
+<script type="text/javascript">
+	//after refresh 
+	var hash = window.location.hash;
+	var arr = ["main","node","input","logAnalysis","failure","warming"];
+	if(hash.length){
+		var tag = hash.split("#")[1];
+		for(var item in arr){
+			if(arr[item] == tag){
+				$(".list-group-item").removeClass("active");
+				$(".list-group-item").eq(item).addClass("active");
+				$(".panel-body").load("resource/"+arr[item]+".html");
+			}
+		}
+	}
+	
+</script>
