@@ -238,7 +238,7 @@
 
 								<div role="tabpanel" class="tab-pane fade" id="messages">
 								  	<h4>文件监视</h4>
-									<canvas id="canvas">tuxiang</canvas>
+									<canvas id="canvas"></canvas>
 								</div>
 							</div>
 						</div>
@@ -253,4 +253,51 @@
 	$('#element').tooltip('toggle');
 	$('#element').tooltip('hide');
 	$('#home').tab('show')
+</script>
+<script type="text/javascript">
+	var ctx = document.getElementById('canvas').getContext('2d');
+	var data = [
+			{
+				value: 30,
+				color:"#F38630"
+			},
+			{
+				value : 50,
+				color : "#E0E4CC"
+			},
+			{
+				value : 100,
+				color : "#69D2E7"
+			}			
+		];
+	var chart = new Chart(ctx).Pie(data,options);
+	
+	var options = {
+	//Boolean - Whether we should show a stroke on each segment
+	segmentShowStroke : true,
+	
+	//String - The colour of each segment stroke
+	segmentStrokeColor : "#fff",
+	
+	//Number - The width of each segment stroke
+	segmentStrokeWidth : 2,
+	
+	//Boolean - Whether we should animate the chart	
+	animation : true,
+	
+	//Number - Amount of animation steps
+	animationSteps : 100,
+	
+	//String - Animation easing effect
+	animationEasing : "easeOutBounce",
+	
+	//Boolean - Whether we animate the rotation of the Pie
+	animateRotate : true,
+
+	//Boolean - Whether we animate scaling the Pie from the centre
+	animateScale : false,
+	
+	//Function - Will fire on animation completion.
+	onAnimationComplete : null
+}
 </script>
