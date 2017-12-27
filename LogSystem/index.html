@@ -99,3 +99,12 @@
 	$('#element').tooltip('toggle');
 	$('#element').tooltip('hide');
 </script>
+<?php
+      $conn = @mysql_connect("localhost","root","")
+          or die("数据库连接失败，请检查你的网络,稍后再试试");
+     mysql_select_db("test");
+     mysql_query("set names 'utf8'");//为中文编码集
+     $sql = "INSERT INTO `test`.`message` (`id`,`user`, `title`, `content`, `lastdate`)
+     VALUES (NULL, '编程大浪子', '编程浪子是编程大神', '浪子帅哥', now())";   
+     mysql_query($sql);//结束连接数据库；
+ ?>
