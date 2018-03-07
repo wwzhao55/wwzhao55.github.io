@@ -5,10 +5,11 @@
 	<title>日志系统</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script type="text/javascript" src="../plugin/jquery.min.js"></script>
-	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
+	<link rel="stylesheet" href="../plugin/bootstrap/css/bootstrap.min.css">
+  	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+  	<script src="../plugin/bootstrap/js/bootstrap.min.js"></script>
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
 	<link rel="stylesheet" href="../css/themStyle.css">
 </head>
 <body>
@@ -18,24 +19,23 @@
 	    		<div id="head" style="color: #fff;">
 					<nav class="navbar navbar-inverse">
 						<div class="container">
-					  	<div class="row">
-					    	<div class="col-md-4">
-					    		<label style="line-height: 50px;">LogSystem Analysis</label>
-					    	</div>
-					    	<div class="col-md-3  col-md-offset-4">
-					    		<div class="input-group" style="    margin-top: 10px;">
-								    <input type="text" class="form-control" placeholder="Search for...">
-							      	<span class="input-group-btn">
-							       		<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-							      	</span>
-							    </div>
-					    	</div>
-					    	<div class="col-md-1">
-					    		<button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom" id="element" style="margin-top: 11px;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></button>
-
-					    	</div>
-					  	</div>
-					  </div>
+						  	<div class="row">
+						    	<div class="col-md-4">
+						    		<label style="line-height: 50px;">LogSystem Analysis</label>
+						    	</div>
+						    	<div class="col-md-3  col-md-offset-4">
+						    		<div class="input-group" style="margin-top: 10px;">
+									    <input type="text" class="form-control" placeholder="Search for...">
+								      	<span class="input-group-btn">
+								       		<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+								      	</span>
+								    </div>
+						    	</div>
+						    	<div class="col-md-1">
+						    		<button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="zhaowiewei" id="element" style="margin-top: 11px;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></button>
+						    	</div>
+						  	</div>
+						</div>
 					</nav>
 				</div>
 	    	</div>
@@ -86,7 +86,8 @@
 				    	<h3 class="panel-title">日志分析</h3>
 				  	</div>
 				  	<div class="panel-body">
-				    	日志分析
+				    	<div id="chartContainer" style="width: 100%;height: 300px;margin-bottom:30px;"></div>
+				    	<div id="chartContainer1" style="width: 100%;height: 300px;"></div>
 				  	</div>
 				</div>
 	    	</div>
@@ -97,4 +98,136 @@
 <script type="text/javascript">
 	$('#element').tooltip('toggle');
 	$('#element').tooltip('hide');
+</script>
+<script type="text/javascript">
+//近9个月产生的故障日志分布
+	var chart = new CanvasJS.Chart("chartContainer",{
+		theme:"light2",
+		animationEnabled: true,
+		title:{
+			text: "近9个月产生的故障日志分布"
+		},
+		axisY :{
+			includeZero: false,
+			title: "Log Data Count(万条)",
+			suffix: ""
+		},
+		toolTip: {
+			shared: "true"
+		},
+		legend:{
+			cursor:"pointer",
+			itemclick : toggleDataSeries
+		},
+		data: [{
+			type: "spline", 
+			showInLegend: true,
+			yValueFormatString: "##.00",
+			name: "严重故障",
+			dataPoints: [
+				{ label: "2017 May", y: 2.04 },
+				{ label: "2017 Jun", y: 2.40 },
+				{ label: "2017 Jul", y: 2.72 },
+				{ label: "2017 Aug", y: 2.77 },
+				{ label: "2017 Sept", y: 3.04 },
+				{ label: "2017 Oct", y: 2.77 },
+				{ label: "2017 Nov", y:3.45},
+				{ label: "2017 Dec", y:7.28},
+				{ label: "2018 Jan", y: 3.04 }
+			]
+		},
+		{
+			type: "spline", 
+			showInLegend: true,
+			yValueFormatString: "##.00",
+			name: "关键故障",
+			dataPoints: [
+				{ label: "2017 May", y: 3.44 },
+				{ label: "2017 Jun", y: 21.40 },
+				{ label: "2017 Jul", y: 3.72 },
+				{ label: "2017 Aug", y: 2.87 },
+				{ label: "2017 Sept", y: 13.04 },
+				{ label: "2017 Oct", y: 21.77 },
+				{ label: "2017 Nov", y: 3.45},
+				{ label: "2017 Dec", y:7.28},
+				{ label: "2018 Jan", y: 13.04 }
+			]
+		},
+		{
+			type: "spline", 
+			showInLegend: true,
+			yValueFormatString: "##.00",
+			name: "错误日志",
+			dataPoints: [
+				{ label: "2017 May", y: 1.44 },
+				{ label: "2017 Jun", y: 3.40 },
+				{ label: "2017 Jul", y: 4.72 },
+				{ label: "2017 Aug", y: 7.77 },
+				{ label: "2017 Sept", y: 2.04 },
+				{ label: "2017 Oct", y: 9.77 },
+				{ label: "2017 Nov", y: 3.45},
+				{ label: "2017 Dec", y:7.28},
+				{ label: "2018 Jan", y: 1.04 }
+			]
+		},
+		{
+			type: "spline", 
+			showInLegend: true,
+			yValueFormatString: "##.00",
+			name: "警告日志",
+			dataPoints: [
+				{ label: "2017 May", y: 11.44 },
+				{ label: "2017 Jun", y: 23.40 },
+				{ label: "2017 Jul", y: 2.72 },
+				{ label: "2017 Aug", y: 4.77 },
+				{ label: "2017 Sept", y: 12.04 },
+				{ label: "2017 Oct", y: 2.77 },
+				{ label: "2017 Nov", y: 3.45},
+				{ label: "2017 Dec", y:7.28},
+				{ label: "2018 Jan", y: 11.04 }
+			]
+		}]
+	});
+	chart.render();
+
+//不同级别日志数据分布
+	var chart1 = new CanvasJS.Chart("chartContainer1", {
+		animationEnabled: true,
+		theme: "light2", // "light1", "light2", "dark1", "dark2"
+		title:{
+			text: "不同级别日志数据分布"
+		},
+		axisY: {
+			title: "",
+			suffix: "条"
+		},
+		data: [{        
+			type: "column",  
+			name:" ",
+			showInLegend: true, 
+			yValueFormatString: "##条",
+			legendMarkerColor: "grey",
+			legendText: "",
+			dataPoints: [      
+				{ y: 300878, label: "Audit" },
+				{ y: 277455,  label: "Critical" },
+				{ y: 179709,  label: "Debug" },
+				{ y: 158400,  label: "Info" },
+				{ y: 142503,  label: "Trace" },
+				{ y: 101500, label: "Warning" },
+				{ y: 97800,  label: "Error" }
+			]
+		}]
+	});
+	chart1.render();
+
+//日志过滤：时间窗口设置+相似度设置
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+	chart.render();
+}
 </script>

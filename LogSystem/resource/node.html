@@ -5,10 +5,11 @@
 	<title>日志系统</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script type="text/javascript" src="../plugin/jquery.min.js"></script>
-	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	<link rel="stylesheet" href="../plugin/bootstrap/css/bootstrap.min.css">
+  	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+  	<script src="../plugin/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../plugin/Highcharts-6.0.7/code/highcharts.js"></script>
+	<script src="../plugin/Highcharts-6.0.7/code/highcharts-3d.js"></script>
 	<link rel="stylesheet" href="../css/themStyle.css">
 </head>
 <body>
@@ -31,7 +32,7 @@
 							    </div>
 					    	</div>
 					    	<div class="col-md-1">
-					    		<button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom" id="element" style="margin-top: 11px;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></button>
+					    		<button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="zhaowiewei" id="element" style="margin-top: 11px;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></button>
 
 					    	</div>
 					  	</div>
@@ -111,36 +112,36 @@
 									  		<td>控制节点</td>
 									  		<td>192.168.123.202</td>
 									  		<td>1585</td>
-									  		<td>1</td>
-									  		<td>1</td>
-									  		<td class="warning">监听</td>
+									  		<td class="latest-time">1</td>
+									  		<td class="next-time">1</td>
+									  		<td class="warning">监听中</td>
 									  	</tr>
 									  	<tr>
 									  		<td>2</td>
 									  		<td>云硬盘</td>
 									  		<td>192.168.56.1</td>
 									  		<td>3849</td>
-									  		<td>1</td>
-									  		<td>1</td>
-									  		<td class="warning">监听</td>
+									  		<td class="latest-time">1</td>
+									  		<td class="next-time">1</td>
+									  		<td class="warning">监听中</td>
 									  	</tr>	
 									  	<tr>
 									  		<td>3</td>
 									  		<td>计算节点</td>
 									  		<td>192.168.123.85</td>
 									  		<td>13591</td>
-									  		<td>1</td>
-									  		<td>1</td>
-									  		<td class="warning">监听</td>
+									  		<td class="latest-time">1</td>
+									  		<td class="next-time">1</td>
+									  		<td class="warning">监听中</td>
 									  	</tr>	
 									  	<tr>
 									  		<td>4</td>
 									  		<td>计算节点</td>
 									  		<td>192.168.123.86</td>
 									  		<td>15284</td>
-									  		<td>1</td>
-									  		<td>1</td>
-									  		<td class="warning">监听</td>
+									  		<td class="latest-time">1</td>
+									  		<td class="next-time">1</td>
+									  		<td class="warning">监听中</td>
 									  	</tr>
 									</table>
 									<nav aria-label="Page navigation" style="text-align: center;">
@@ -150,7 +151,7 @@
 										        <span aria-hidden="true">&laquo;</span>
 										      </a>
 										    </li>
-										    <li><a href="#">1</a></li>
+										    <li class="active"><a href="#">1</a></li>
 										    <li><a href="#">2</a></li>
 										    <li><a href="#">3</a></li>
 										    <li><a href="#">4</a></li>
@@ -166,7 +167,7 @@
 
 								<div role="tabpanel" class="tab-pane fade" id="profile">
 									<h4>应用分布</h4>
-									<div id="chartContainer1" style="height: 500px; width: 100%;"></div>
+									<div id="chartContainer1" style="height: 300px; width: 50%;margin:0 auto;"></div>
 									<h4>应用汇总</h4>
 									<table class="table table-condensed table-hover table table-striped" style="margin-top: 30px;">
 										<tr>
@@ -183,43 +184,43 @@
 									  		<td>192.168.123.202</td>
 									  		<td>OracleLogs</td>
 									  		<td>1585</td>
-									  		<td>1</td>
-									  		<td>1</td>
-									  		<td>监听</td>
+									  		<td>2017.10.12</td>
+									  		<td>10:28:33</td>
+									  		<td>10:29:06</td>
 									  	</tr>
 									  	<tr>
 									  		<td>云硬盘</td>
 									  		<td>192.168.56.1</td>
 									  		<td>MSSQL Audit Logs</td>
 									  		<td>3849</td>
-									  		<td>1</td>
-									  		<td>1</td>
-									  		<td>监听</td>
+									  		<td>2017.11.04</td>
+									  		<td>14:50:02</td>
+									  		<td>14:51:04</td>
 									  	</tr>	
 									  	<tr>
 									  		<td>计算节点</td>
 									  		<td>192.168.123.85</td>
 									  		<td>TerminalServer Logs</td>
 									  		<td>13591</td>
-									  		<td>1</td>
-									  		<td>1</td>
-									  		<td>监听</td>
+									  		<td>2017.12.16</td>
+									  		<td>19:20:44</td>
+									  		<td>19:21:56</td>
 									  	</tr>	
 									  	<tr>
 									  		<td>计算节点</td>
 									  		<td>192.168.123.86</td>
 									  		<td>import</td>
 									  		<td>15284</td>
-									  		<td>1</td>
-									  		<td>1</td>
-									  		<td>监听</td>
+									  		<td>2017.12.16</td>
+									  		<td>19:41:21</td>
+									  		<td>19:42:45</td>
 									  	</tr>
 									</table>
 								</div>
 
 								<div role="tabpanel" class="tab-pane fade" id="messages">
 								  	<h4>文件监视</h4>
-									<div id="chartContainer" style="height: 500px; width: 100%;"></div>
+									<div id="chartContainer" style="height: 500px; width: 50%;margin:0 auto;"></div>
 								</div>
 							</div>
 						</div>
@@ -233,58 +234,82 @@
 <script type="text/javascript">
 	$('#element').tooltip('toggle');
 	$('#element').tooltip('hide');
-	$('#home').tab('show')
+	$('#home').tab('show');
+	var latset = $(".latest-time");
+	var next = $(".next-time");
+	var data = new Date();
+	var year = data.getFullYear();
+	var month = data.getMonth()+1;
+	var day = data.getDate();
+	var hour = data.getHours();
+	var min = data.getMinutes();
+	var sec = data.getSeconds();
+	var min2;
+	if(min>50){
+		hour++;
+		min2 = 60-min;
+	}else{
+		min2 = parseInt(min)+10;
+	}
+	var str = year+"-"+month+"-"+day+" "+hour;
+	$(".latest-time").eq(0).html(str+":"+parseInt(min-2)+":45");
+	$(".latest-time").eq(1).html(str+":"+parseInt(min-1)+":11");
+	$(".latest-time").eq(2).html(str+":"+parseInt(min-3)+":23");
+	$(".latest-time").eq(3).html(str+":"+parseInt(min-1)+":57");
+	$(".next-time").eq(0).html(str+":"+parseInt(min2-2)+":45");
+	$(".next-time").eq(1).html(str+":"+parseInt(min2-1)+":11");
+	$(".next-time").eq(2).html(str+":"+parseInt(min2-3)+":23");
+	$(".next-time").eq(3).html(str+":"+parseInt(min2-1)+":57");
 </script>
 <script type="text/javascript">
-	var chart1 = new CanvasJS.Chart("chartContainer1", {
-	theme: "light2", // "light1", "light2", "dark1", "dark2"
-	exportEnabled: true,
-	animationEnabled: true,
-	title: {
-		text: "Log Data Sources"
-	},
-	data: [{
-		type: "pie",
-		startAngle: 25,
-		toolTipContent: "<b>{label}</b>: {y}%",
-		showInLegend: "true",
-		legendText: "{label}",
-		indexLabelFontSize: 16,
-		indexLabel: "{label} - {y}%",
-		dataPoints: [
-			{ y: 4.01, label: "控制节点" },
-			{ y: 11.2, label: "云硬盘" },
-			{ y: 39.6, label: "计算节点1" },
-			{ y: 44.5, label: "计算节点2" },
-			{ y: 0.69, label:"其他"},
-		]
-	}]
-});
-chart1.render();
-	var chart = new CanvasJS.Chart("chartContainer", {
-	theme: "light1", // "light1", "light2", "dark1", "dark2"
-	exportEnabled: true,
-	animationEnabled: true,
-	title: {
-		text: "Log Data Sources"
-	},
-	data: [{
-		type: "pie",
-		startAngle: 25,
-		toolTipContent: "<b>{label}</b>: {y}%",
-		showInLegend: "true",
-		legendText: "{label}",
-		indexLabelFontSize: 16,
-		indexLabel: "{label} - {y}%",
-		dataPoints: [
-			{ y: 4.01, label: "控制节点" },
-			{ y: 11.2, label: "云硬盘" },
-			{ y: 39.6, label: "计算节点1" },
-			{ y: 44.5, label: "计算节点2" },
-			{ y: 0.69, label:"其他"},
-		]
-	}]
-});
-chart.render();
+	var chart = {      
+      type: 'pie',     
+      options3d: {
+         enabled: true,
+         alpha: 45,
+         beta: 0
+      }
+   };
+   var title = {
+      text: 'Log Data Sources'   
+   };   
+   var tooltip = {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+   };
 
+   var plotOptions = {
+      pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          depth: 50,
+          dataLabels: {
+             enabled: true,
+             format: '{point.name}'
+          }
+      }
+   };   
+   var series= [{
+         type: 'pie',
+            name: '日志来源分布比例',
+            data: [
+            	['云硬盘控制节点',   1585],
+                ['云硬盘',   3849],
+                ['计算节点1', 13591],
+                {
+                    name: '计算节点2',
+                    y: 15284,
+                    sliced: true,
+                    selected: true
+                },
+                ['其他',     2633]
+            ]
+   }];     
+      
+   var json = {};   
+   json.chart = chart; 
+   json.title = title;       
+   json.tooltip = tooltip; 
+   json.plotOptions = plotOptions; 
+   json.series = series;   
+   $('#chartContainer1').highcharts(json);
 </script>

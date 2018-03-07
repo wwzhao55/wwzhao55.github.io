@@ -5,10 +5,11 @@
 	<title>日志系统</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script type="text/javascript" src="../plugin/jquery.min.js"></script>
-	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	<link rel="stylesheet" href="../plugin/bootstrap/css/bootstrap.min.css">
+  	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+  	<script src="../plugin/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../plugin/Highcharts-6.0.7/code/highcharts.js"></script>
+	<script src="../plugin/Highcharts-6.0.7/code/highcharts-3d.js"></script>
 	<link rel="stylesheet" href="../css/themStyle.css">
 </head>
 <body>
@@ -31,7 +32,7 @@
 							    </div>
 					    	</div>
 					    	<div class="col-md-1">
-					    		<button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom" id="element" style="margin-top: 11px;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></button>
+					    		<button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="zhaowiewei" id="element" style="margin-top: 11px;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></button>
 
 					    	</div>
 					  	</div>
@@ -86,7 +87,57 @@
 				    	<h3 class="panel-title">日志采集</h3>
 				  	</div>
 				  	<div class="panel-body">
-				    	<div id="chartContainer" style="height: 500px; width: 100%;"></div>
+				    	<div id="chartContainer" style="height: 480px; width: 50%;float: left;margin-bottom: 30px;">
+				    	</div>
+
+				    	<div id="chartContainer2" style="height: 500px; width: 50%;float: left;margin-bottom: 30px;"></div>
+				    	<h4 style="width: 100%;float: left;">日志数据</h4>
+				    	<table class="table table-condensed table-hover table table-striped" style="margin-top: 30px;">
+										<tr>
+											<th>生成时间</th>
+											<th>节点</th>
+											<th>消息</th>
+										</tr>
+									  	<tr>
+									  		<td>1</td>
+									  		<td>控制节点</td>
+									  		<td>192.168.123.202</td>
+									  	</tr>
+									  	<tr>
+									  		<td>2</td>
+									  		<td>云硬盘</td>
+									  		<td>192.168.56.1</td>
+									  	</tr>	
+									  	<tr>
+									  		<td>3</td>
+									  		<td>计算节点</td>
+									  		<td>192.168.123.85</td>
+									  	</tr>	
+									  	<tr>
+									  		<td>4</td>
+									  		<td>计算节点</td>
+									  		<td>192.168.123.86</td>
+									  	</tr>
+						</table>
+						<nav aria-label="Page navigation" style="text-align: center;">
+							  <ul class="pagination">
+							    <li>
+							      <a href="#" aria-label="Previous">
+							        <span aria-hidden="true">&laquo;</span>
+							      </a>
+							    </li>
+							    <li class="active"><a href="#">1</a></li>
+							    <li><a href="#">2</a></li>
+							    <li><a href="#">3</a></li>
+							    <li><a href="#">4</a></li>
+							    <li><a href="#">5</a></li>
+							    <li>
+							      <a href="#" aria-label="Next">
+							        <span aria-hidden="true">&raquo;</span>
+							      </a>
+							    </li>
+							  </ul>
+						</nav>	
 				  	</div>
 				</div>
 	    	</div>
@@ -99,95 +150,101 @@
 	$('#element').tooltip('hide');
 </script>
 <script type="text/javascript">
-	var chart = new CanvasJS.Chart("chartContainer", {
-	exportEnabled: true,
-	animationEnabled: true,
-	title:{
-		text: "不同节点原始数据"
-	},
-	subtitles: [{
-		text: "The original data sources and distribution"
-	}], 
-	axisX: {
-		title: "Time"
-	},
-	axisY: {
-		title: "LogData count",
-		titleFontColor: "#4F81BC",
-		lineColor: "#4F81BC",
-		labelFontColor: "#4F81BC",
-		tickColor: "#4F81BC"
-	},
-	toolTip: {
-		shared: true
-	},
-	legend: {
-		cursor: "pointer",
-		itemclick: toggleDataSeries,
-	},
-	data: [{
-		type: "column",
-		name: "控制节点r",
-		showInLegend: true,      
-		yValueFormatString: "#,##0.# Units",
-		dataPoints: [
-			{ label: "New Jersey",  y: 19034.5 },
-			{ label: "Texas", y: 20015 },
-			{ label: "Oregon", y: 25342 },
-			{ label: "Montana",  y: 20088 },
-			{ label: "Massachusetts",  y: 28234 }
-		]
-	},
-	{
-		type: "column",
-		name: "云硬盘",
-		axisYType: "secondary",
-		showInLegend: true,
-		yValueFormatString: "#,##0.# Units",
-		dataPoints: [
-			{ label: "New Jersey", y: 210.5 },
-			{ label: "Texas", y: 135 },
-			{ label: "Oregon", y: 425 },
-			{ label: "Montana", y: 130 },
-			{ label: "Massachusetts", y: 528 }
-		]
-	},
-	{
-		type: "column",
-		name: "计算节点1",
-		axisYType: "secondary",
-		showInLegend: true,
-		yValueFormatString: "#,##0.# Units",
-		dataPoints: [
-			{ label: "New Jersey", y: 21.5 },
-			{ label: "Texas", y: 13 },
-			{ label: "Oregon", y: 42 },
-			{ label: "Montana", y: 13 },
-			{ label: "Massachusetts", y: 52 }
-		]
-	},
-	{
-		type: "column",
-		name: "计算节点2",
-		axisYType: "secondary",
-		showInLegend: true,
-		yValueFormatString: "#,##0.# Units",
-		dataPoints: [
-			{ label: "New Jersey", y: 210.5 },
-			{ label: "Texas", y: 15 },
-			{ label: "Oregon", y: 45 },
-			{ label: "Montana", y: 130 },
-			{ label: "Massachusetts", y: 58 }
-		]
-	}]
-});
-chart.render();
-function toggleDataSeries(e) {
-	if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-		e.dataSeries.visible = false;
-	} else {
-		e.dataSeries.visible = true;
-	}
-	e.chart.render();
-}
+//一段时间内各节点收集的日志数据
+	var chart = {      
+      	type: 'column',
+      	marginTop: 40,
+     	marginRight: 40,
+      	options3d: {
+	      	enabled: true,
+	        alpha: 15,
+	        beta: 15,
+	        viewDistance: 25,
+	        depth: 40
+	    }
+   	};
+   	var title = {
+      	text: '一段时间内各节点收集的日志数据'   
+   	};   
+   	var xAxis = {
+      	categories: ["2017 May", "2017 June",	"2017 July",  "2017 Aug", "2017 Sept", "2017 Oct", "2017 Nov", "2017 Dec", "2018 Jan"]
+   	};
+   	var yAxis = {
+      	allowDecimals: false,
+      	min: 0,
+      	title: {
+         	text: '日志数据（万条）'
+      	}
+   	};  
+
+   	var tooltip = {
+      	headerFormat: '<b>{point.key}</b><br>',
+      	pointFormat: '<span style="color:{series.color}">\u25CF</span> {series.name}: {point.y} / {point.stackTotal}'
+   	};
+
+   	var plotOptions = {
+      	column: {
+         	stacking: 'normal',
+         	depth: 40
+      	}
+   	};   
+   	var series= [{
+        name: '控制节点',
+            data: [5, 3, 4, 7, 2, 1, 3, 2, 1]
+        }, {
+            name: '云硬盘',
+            data: [3, 4, 4, 2, 5, 3, 4, 4, 7]
+        }, {
+            name: '计算节点',
+            data: [2, 5, 6, 2, 1, 6, 8, 12, 13]
+        }, {
+            name: '结算节点',
+            data: [3, 0, 4, 4, 3, 7, 1, 23, 4]
+   	}];     
+      
+   	var json = {};   
+   	json.chart = chart; 
+   	json.title = title;      
+   	json.xAxis = xAxis; 
+   	json.yAxis = yAxis; 
+   	json.tooltip = tooltip; 
+   	json.plotOptions = plotOptions; 
+   	json.series = series;   
+   	$('#chartContainer').highcharts(json);
+
+//一天内日志数量时间分布
+	var title1 = {
+      	text: '一天内日志数量时间分布'   
+   	};
+   	var xAxis1 = {
+      	categories: ['00:00', '2:00', '4:00', '6:00', '8:00', '10:00',
+         '12:00', '14:00', '16:00', '18:00', '20:00', '22:00','24:00']
+   	};
+   	var yAxis1 = {
+      	title: {
+         	text: '数量(千条)'
+      	}
+   	};
+   	var plotOptions1 = {
+      	line: {
+         	dataLabels: {
+            	enabled: true
+         	},   
+        	enableMouseTracking: false
+      	}
+   	};
+   	var series1= [{
+        name: '时间分布',
+        data: [1.3, 2.9, 4.5, 6.3, 8.4, 15.5, 29.2, 56.5, 80.3, 98.3, 113.9,121.6,129.4]
+      }
+   	];
+   
+   	var json1 = {};
+
+   	json1.title = title1;
+   	json1.xAxis = xAxis1;
+   	json1.yAxis = yAxis1;  
+   	json1.series = series1;
+   	json1.plotOptions = plotOptions1;
+   	$('#chartContainer2').highcharts(json1);
 </script>

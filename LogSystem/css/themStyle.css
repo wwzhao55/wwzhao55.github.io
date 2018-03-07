@@ -1,6 +1,81 @@
-#auth-page h1 {
+.breeze-container{
+  position: absolute;
+  top: 50%;left: 50%;
+  width:200px;height:260px;
+  transform: translate(-50%, 77%);
+  text-align: center;
+  font-size: 200%;
+  color: #fff;
+  background: #a8a7e9;
+  border-radius:5px;
+}
+.breeze-container:after{
+  content:"";
+  position:absolute;
+  top:58%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  width:6px;
+  height:70px;
+  background:#fff;
+}
+.breeze{
+  position:absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(1deg);
+  border-bottom:60px solid #fff;
+  border-left:5px solid transparent;
+  border-right:5px solid transparent;
+  animation: windmill 12s infinite linear;
+  transform-origin:50.5% 62px;
+}
+.breeze:before{
+  position:absolute;
+  top: 75px;left: -59px;
+  content:"";
+  border-right:60px solid #fff;
+  border-top:5px solid transparent;
+  border-bottom:5px solid transparent;
+  transform:rotate(-30deg);
+}
+.breeze:after{
+  position:absolute;
+  top: 75px;left: -1px;
+  content:"";
+  border-left:60px solid #fff;
+  border-top:5px solid transparent;
+  border-bottom:5px solid transparent;
+  transform:rotate(30deg);
+}
+@keyframes windmill{
+  0%{
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100%{
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+.col-md-4.margin-top {
+    margin-top: 200px;
+    background-color: #a8a7e9;
+    padding: 30px;
+    border: 1px solid #a8a7e9;
+    border-radius: 10px;
+}
+h3.login-title {
     text-align: center;
-    margin: 80px 0 100px 0;
+    margin-bottom: 30px;
+}
+.margin-top h2 {
+    margin-top: 80px;
+}
+text.highcharts-credits {
+    display: none;
+}
+td.warning {
+    text-align: center;
+    cursor: pointer;
 }
 li.list-group-item:hover {
     color: #fff;
@@ -10,4 +85,10 @@ li.list-group-item:hover {
 .tab-content h4,.panel-body h4 {
     height: 30px;
     border-bottom: 1px solid #ccc;
+}
+table{border: 1px solid #ebe0e0;}
+
+/*chart right-bottom*/
+a.canvasjs-chart-credit {
+    display: none;
 }

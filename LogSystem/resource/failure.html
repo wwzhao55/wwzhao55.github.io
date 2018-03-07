@@ -5,15 +5,15 @@
 	<title>日志系统</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script type="text/javascript" src="../plugin/jquery.min.js"></script>
-	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	<link rel="stylesheet" href="../plugin/bootstrap/css/bootstrap.min.css">
+  	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+  	<script src="../plugin/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../plugin/Highcharts-6.0.7/code/highcharts.js"></script>
 	<link rel="stylesheet" href="../css/themStyle.css">
 </head>
 <body>
 	<div class="container" id="index-page">
-	  	<div class="row">
+	  	<div 	<script src="../plugin/Highcharts-6.0.7/code/highcharts-3d.js"></script>class="row">
 	    	<div class="col-md-12" id="nav">
 	    		<div id="head" style="color: #fff;">
 					<nav class="navbar navbar-inverse">
@@ -31,7 +31,7 @@
 							    </div>
 					    	</div>
 					    	<div class="col-md-1">
-					    		<button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom" id="element" style="margin-top: 11px;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></button>
+					    		<button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="zhaowiewei" id="element" style="margin-top: 11px;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></button>
 
 					    	</div>
 					  	</div>
@@ -87,7 +87,7 @@
 				  	</div>
 				  	<div class="panel-body">
 				  		<h4>故障聚类分析</h4>
-				    	<div id="chartContainer" style="height: 500px; width: 100%;"></div>
+				    	<div id="chartContainer" style="height: 500px; width: 50%;margin:0 auto;"></div>
 				  	</div>
 				</div>
 	    	</div>
@@ -98,36 +98,55 @@
 <script type="text/javascript">
 	$('#element').tooltip('toggle');
 	$('#element').tooltip('hide');
-	var chart = new CanvasJS.Chart("chartContainer", {
-	theme: "dark1", // "light1", "light2", "dark1", "dark2"
-	exportEnabled: true,
-	animationEnabled: true,
-	title: {
-		text: "故障聚类分布比例"
-	},
-	data: [{
-		type: "pie",
-		startAngle: 25,
-		toolTipContent: "<b>{label}</b>: {y}%",
-		showInLegend: "true",
-		legendText: "{label}",
-		indexLabelFontSize: 16,
-		indexLabel: "{label} - {y}%",
-		dataPoints: [
-			{ y: 3, label: "磁盘" },
-			{ y: 4, label: "设备" },
-			{ y: 2, label: "I/O" },
-			{ y: 2, label: "内存" },
-			{ y: 11, label:"网络"},
-			{ y: 3, label: "进程" },
-			{ y: 15, label: "认证" },
-			{ y: 4, label: "数据库" },
-			{ y: 3, label: "文件" },
-			{ y: 18, label:"网站"},
-			{ y: 26, label: "应用程序" },
-			{ y: 9, label: "其他" },
-		]
-	}]
+	$(document).ready(function() {  
+   var chart = {      
+      type: 'pie',     
+      options3d: {
+         enabled: true,
+         alpha: 45         
+      }
+   };
+   var title = {
+      text: ''   
+   };   
+   var subtitle = {
+      text: '故障聚类分布'
+   };  
+	var tooltip = {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+   };
+   var plotOptions = {
+      pie: {
+         innerSize: 100,
+         depth: 60
+      }
+   };   
+   var series= [{
+         name: '故障类型',
+         data: [
+            ['磁盘', 3],
+            ['设备', 4],
+            ['I/0', 2],
+            ['内存', 2],
+            ['网络', 11],
+            ['进程', 3],
+            ['登陆认证', 15],
+            ['数据库', 4],
+            ['文件', 3],
+			['网站',18],
+	    	['应用程序', 26],
+			['其他', 9]
+         ]
+   }];     
+      
+   var json = {};   
+   json.chart = chart; 
+   json.title = title;     
+	json.tooltip = tooltip; 
+   json.subtitle = subtitle; 
+   json.plotOptions = plotOptions; 
+   json.series = series;   
+   $('#chartContainer').highcharts(json);
 });
-chart.render();
+
 </script>
