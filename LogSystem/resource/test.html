@@ -1,0 +1,58 @@
+设计过程
+（1）创建日志Filter实现类LogFilter.java主要是在初次调用时开始记录，执行时获取访问的URI和执行前的时间，关键代码如下：
+
+publicclass LogFilter implements Filter {
+
+private Log log = LogFactory.getLog(this.getClass());
+
+private String filterName;
+
+public void init(FilterConfig config) throws ServletException {
+
+filterName = config.getFilterName();//获取 Filter的 name，启动Filter
+
+log.info("启动 Filter: " + filterName);//
+
+}
+
+public void doFilter(ServletRequest req, ServletResponse res,FilterChain chain)
+
+throws IOException, ServletException {
+
+HttpServletRequest request = (HttpServletRequest) req;
+
+HttpServletResponse response = (HttpServletResponse) res;
+
+long startTime = System.currentTimeMillis(); //运行前的时间
+
+String requestURI = request.getRequestURI(); //获取访问的URI
+
+requestURI = request.getQueryString() == null ? requestURI //所有的地址栏参数对比
+
+: (requestURI + "?" + request.getQueryString());
+
+chain.doFilter(request, response);
+
+long endTime = System.currentTimeMillis();
+
+//消耗的总时间
+
+log.info(request.getRemoteAddr() + " 访问了 " + requestURI + ", 总用时 "+ (endTime - startTime) + " 毫秒。");
+
+}
+
+public void destroy() { //销毁时记录日志
+
+}
+
+}
+
+（2）使用日志记录需要commons-logging的Log4j来输出日志，本例输出格式如下：
+
+log4j.rootLogger=INFO, A1
+
+log4j.appender.A1=org.apache.log4j.ConsoleAppender
+
+log4j.appender.A1.layout=org.apache.log4j.PatternLayout
+
+log4j.appender.A1.layout.ConversionPattern=%-d{yyyy-MM-dd HH\:mm\:ss,SSS} [%l]-[%p] %m%n

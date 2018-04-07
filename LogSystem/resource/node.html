@@ -24,7 +24,7 @@
 					    		<label style="line-height: 50px;">LogSystem Analysis</label>
 					    	</div>
 					    	<div class="col-md-3  col-md-offset-4">
-					    		<div class="input-group" style="    margin-top: 10px;">
+					    		<div class="input-group" style="    margin-top: 10px;display: none;">
 								    <input type="text" class="form-control" placeholder="Search for...">
 							      	<span class="input-group-btn">
 							       		<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
@@ -43,75 +43,84 @@
 	  	</div>
 	  	<div class="row">
 	    	<div class="col-md-2" id="menu">
-	    		<ul class="list-group" style="cursor: pointer;">
-					<a href="../index.html#main">
-						<li class="list-group-item">
-							<span class="glyphicon glyphicon-home" aria-hidden="true" style="margin-right: 20px;"></span>主页
-						</li>
-					</a>
-					<a href="node.html#node">
-						<li class="list-group-item active">
-				  		<span class="glyphicon glyphicon-pushpin" aria-hidden="true" style="margin-right: 20px;"></span>节点分布
-				  		</li>
-				  	</a>
-					<a href="input.html#input">
-					  	<li class="list-group-item">
-					  		<span class="glyphicon glyphicon-import" aria-hidden="true" style="margin-right: 20px;"></span>
-					  		日志采集
-					  	</li>
-					</a>
-					<a href="logAnalysis.html#logAnalysis">
-					  	<li class="list-group-item">
-					  		<span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true" style="margin-right: 20px;"></span>
-					  		日志分析
-					  	</li>
-					</a>
-					<a href="failure.html#failure">
-					  	<li class="list-group-item">
-					  		<span class="glyphicon glyphicon-list-alt" aria-hidden="true" style="margin-right: 20px;"></span>
-					  		故障分类
-					  	</li>
-					</a>
-					<a href="warming.html#warming">
-					  	<li class="list-group-item">
-					  		<span class="glyphicon glyphicon-export" aria-hidden="true" style="margin-right: 20px;"></span>
-					  		告警管理
-					  	</li>
-					</a>
-				</ul>
+	    		
+				<ul class="list-group" style="cursor: pointer;">
+                    <a href="index.html#main">
+                        <li class="list-group-item">
+                            <span class="glyphicon glyphicon-home" aria-hidden="true" style="margin-right: 20px;"></span>主页
+                        </li>
+                    </a>
+                    <a href="node.html#node">
+                        <li class="list-group-item active">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true" style="margin-right: 20px;"></span>数据源管理
+                        </li>
+                    </a>
+                    <a href="search.html#search">
+                        <li class="list-group-item">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true" style="margin-right: 20px;"></span>搜索统计
+                        </li>
+                    </a>
+                    <a>
+                        <div class="has-feedback">
+                            <li class="list-group-item" data-toggle="collapse" data-target="#list-secend" id="menu-collapse">
+                                <span class="glyphicon glyphicon-check" aria-hidden="true" style="margin-right: 20px;"></span>数据分析
+                            </li>
+                        </div>
+                    </a>
+                    <div id="list-secend" class="collapse">
+                        <div class="has-feedback">
+                            <a href="input.html#input">
+                                <li class="list-group-item menu11">日志采集</li>
+                            </a>
+                            <a href="logAnalysis.html#logAnalysis">
+                                <li class="list-group-item menu11">日志分析</li>
+                            </a>
+                            <a href="failure.html#failure">
+                                <li class="list-group-item menu11">故障聚类</li>
+                            </a>
+                        </div>
+                    </div>
+                    <a href="warming.html#warming">
+                        <li class="list-group-item">
+                            <span class="glyphicon glyphicon-warning-sign" aria-hidden="true" style="margin-right: 20px;"></span>
+                            告警管理
+                        </li>
+                    </a>
+                </ul>
 	    	</div>
 	    	<div class="col-md-10" id="content">
 	    		<!-- content -->
 	    		<div class="panel panel-default">
 				  	<div class="panel-heading">
-				    	<h3 class="panel-title">节点分布</h3>
+				    	<h3 class="panel-title">数据源管理</h3>
 				  	</div>
 				  	<div class="panel-body">
 				    	<div>
 							<!-- Nav tabs -->
 							<ul class="nav nav-tabs" role="tablist">
+
 							    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">设备节点</a></li>
-							    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">应用</a></li>
-							    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">文件监视</a></li>
+							    <li role="presentation" id="message-tab"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">文件监视</a></li>
+							    <li role="presentation" id="profile-tab"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">应用分布</a></li>
+							    
 							</ul>
 							<!-- Tab panes -->
 							<div class="tab-content">
 								<div role="tabpanel" class="tab-pane fade in active" id="home">
-								  	<table class="table table-condensed table-hover table table-striped" style="margin-top: 30px;">
+									<h4>目标节点</h4>
+								  	<table class="table table-condensed table-hover table table-striped" style="margin-top: 30px;text-align: center;">
 										<tr>
-											<th>节点序号</th>
-											<th>节点</th>
-											<th>IP地址</th>
-											<th>事件数</th>
-											<th>最后消息时间</th>
-											<th>下次扫描</th>
-											<th>状态</th>
+											<th style="text-align: center;">节点序号</th>
+											<th style="text-align: center;">节点</th>
+											<th style="text-align: center;">IP地址</th>
+											<th style="text-align: center;">最后消息时间</th>
+											<th style="text-align: center;">下次扫描</th>
+											<th style="text-align: center;">状态</th>
 										</tr>
 									  	<tr>
 									  		<td>1</td>
 									  		<td>控制节点</td>
 									  		<td>192.168.123.202</td>
-									  		<td>1585</td>
 									  		<td class="latest-time">1</td>
 									  		<td class="next-time">1</td>
 									  		<td class="warning">监听中</td>
@@ -120,7 +129,6 @@
 									  		<td>2</td>
 									  		<td>云硬盘</td>
 									  		<td>192.168.56.1</td>
-									  		<td>3849</td>
 									  		<td class="latest-time">1</td>
 									  		<td class="next-time">1</td>
 									  		<td class="warning">监听中</td>
@@ -129,7 +137,6 @@
 									  		<td>3</td>
 									  		<td>计算节点</td>
 									  		<td>192.168.123.85</td>
-									  		<td>13591</td>
 									  		<td class="latest-time">1</td>
 									  		<td class="next-time">1</td>
 									  		<td class="warning">监听中</td>
@@ -138,36 +145,82 @@
 									  		<td>4</td>
 									  		<td>计算节点</td>
 									  		<td>192.168.123.86</td>
-									  		<td>15284</td>
 									  		<td class="latest-time">1</td>
 									  		<td class="next-time">1</td>
 									  		<td class="warning">监听中</td>
 									  	</tr>
-									</table>
-									<nav aria-label="Page navigation" style="text-align: center;">
-										  <ul class="pagination">
-										    <li>
-										      <a href="#" aria-label="Previous">
-										        <span aria-hidden="true">&laquo;</span>
-										      </a>
-										    </li>
-										    <li class="active"><a href="#">1</a></li>
-										    <li><a href="#">2</a></li>
-										    <li><a href="#">3</a></li>
-										    <li><a href="#">4</a></li>
-										    <li><a href="#">5</a></li>
-										    <li>
-										      <a href="#" aria-label="Next">
-										        <span aria-hidden="true">&raquo;</span>
-										      </a>
-										    </li>
-										  </ul>
-										</nav>		
+									</table>		
 								</div>
-
+								<div role="tabpanel" class="tab-pane fade" id="messages">
+									<h4>文件监听</h4>
+									<div id="chartContainer2" style="height: 300px; width: 70%;margin:0 auto;"></div>
+								  	<h4>文件监视汇总</h4>
+									<table class="table table-condensed table-hover table table-striped" style="margin-top: 30px;text-align: center;">
+										<tr>
+											<th style="text-align: center;">ID</th>
+											<th style="text-align: center;">时间</th>
+											<th style="text-align: center;">文件位置</th>
+											<th style="text-align: center;">状态</th>
+											<th style="text-align: center;">创建的</th>
+											<th style="text-align: center;">修改的</th>
+											<th style="text-align: center;">删除的</th>
+											<th style="text-align: center;">重命名的</th>
+											<th style="text-align: center;">权限变更的</th>
+											<th style="text-align: center;">总数</th>
+										</tr>
+									  	<tr>
+									  		<td>1</td>
+									  		<td>2017.12.16</td>
+									  		<td>home/admin/integral/logs/integral-use.log</td>
+									  		<td>状态</td>
+									  		<td>1765</td>
+									  		<td>727</td>
+									  		<td>18</td>
+									  		<td>10</td>
+									  		<td>15</td>
+									  		<td>2535</td>
+									  	</tr>
+									  	<tr>
+									  		<td>2</td>
+									  		<td>2018.02.26</td>
+									  		<td>home/admin/test/logs/business/trace-manage.log</td>
+									  		<td>状态</td>
+									  		<td>1765</td>
+									  		<td>727</td>
+									  		<td>18</td>
+									  		<td>10</td>
+									  		<td>15</td>
+									  		<td>2535</td>
+									  	</tr>
+									  	<tr>
+									  		<td>3</td>
+									  		<td>2018.03.02</td>
+									  		<td>home/admin/order/logs/web/web-order.log</td>
+									  		<td>状态</td>
+									  		<td>1765</td>
+									  		<td>727</td>
+									  		<td>18</td>
+									  		<td>10</td>
+									  		<td>15</td>
+									  		<td>2535</td>
+									  	</tr>
+									  	<tr>
+									  		<td>4</td>
+									  		<td>2017.03.11</td>
+									  		<td>home/admin/homepage/logs/login/homepage.log</td>
+									  		<td>状态</td>
+									  		<td>1765</td>
+									  		<td>727</td>
+									  		<td>18</td>
+									  		<td>10</td>
+									  		<td>15</td>
+									  		<td>2535</td>
+									  	</tr>
+									</table>	
+								</div>
 								<div role="tabpanel" class="tab-pane fade" id="profile">
-									<h4>应用分布</h4>
-									<div id="chartContainer1" style="height: 300px; width: 50%;margin:0 auto;"></div>
+									<h4>应用</h4>
+									<div id="chartContainer1" style="height: 300px; width: 70%;margin:0 auto;"></div>
 									<h4>应用汇总</h4>
 									<table class="table table-condensed table-hover table table-striped" style="margin-top: 30px;">
 										<tr>
@@ -209,18 +262,13 @@
 									  	<tr>
 									  		<td>计算节点</td>
 									  		<td>192.168.123.86</td>
-									  		<td>import</td>
+									  		<td>Application</td>
 									  		<td>15284</td>
 									  		<td>2017.12.16</td>
 									  		<td>19:41:21</td>
 									  		<td>19:42:45</td>
 									  	</tr>
 									</table>
-								</div>
-
-								<div role="tabpanel" class="tab-pane fade" id="messages">
-								  	<h4>文件监视</h4>
-									<div id="chartContainer" style="height: 500px; width: 50%;margin:0 auto;"></div>
 								</div>
 							</div>
 						</div>
@@ -232,9 +280,14 @@
 </body>
 </html>
 <script type="text/javascript">
+
 	$('#element').tooltip('toggle');
 	$('#element').tooltip('hide');
 	$('#home').tab('show');
+	$("#menu-collapse").click(function(){
+		$(".list-group-item").removeClass("active");
+		$(this).addClass("active");
+	});
 	var latset = $(".latest-time");
 	var next = $(".next-time");
 	var data = new Date();
@@ -262,54 +315,90 @@
 	$(".next-time").eq(3).html(str+":"+parseInt(min2-1)+":57");
 </script>
 <script type="text/javascript">
-	var chart = {      
-      type: 'pie',     
-      options3d: {
-         enabled: true,
-         alpha: 45,
-         beta: 0
-      }
-   };
-   var title = {
-      text: 'Log Data Sources'   
-   };   
-   var tooltip = {
-      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-   };
-
-   var plotOptions = {
-      pie: {
-          allowPointSelect: true,
-          cursor: 'pointer',
-          depth: 50,
-          dataLabels: {
-             enabled: true,
-             format: '{point.name}'
-          }
-      }
-   };   
-   var series= [{
-         type: 'pie',
-            name: '日志来源分布比例',
-            data: [
-            	['云硬盘控制节点',   1585],
-                ['云硬盘',   3849],
-                ['计算节点1', 13591],
-                {
-                    name: '计算节点2',
-                    y: 15284,
-                    sliced: true,
-                    selected: true
-                },
-                ['其他',     2633]
-            ]
-   }];     
-      
-   var json = {};   
-   json.chart = chart; 
-   json.title = title;       
-   json.tooltip = tooltip; 
-   json.plotOptions = plotOptions; 
-   json.series = series;   
-   $('#chartContainer1').highcharts(json);
+	
+   $("#message-tab").click(function(){
+	   	$('#chartContainer2').highcharts({
+	        chart: {
+	            plotBackgroundColor: null,
+	            plotBorderWidth: null,
+	            plotShadow: false
+	        },
+	        title: {
+	            text: ''
+	        },
+	        tooltip: {
+	            headerFormat: '{series.name}<br>',
+	            pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
+	        },
+	        plotOptions: {
+	            pie: {
+	                allowPointSelect: true,
+	                cursor: 'pointer',
+	                dataLabels: {
+	                    enabled: false
+	                },
+	                showInLegend: true
+	            }
+	        },
+	        series: [{
+	            type: 'pie',
+	            name: '',
+	            data: [
+	                ['CERATE',   1765],
+	                ['MODIFIED',       727],
+	                {
+	                    name: 'DELETE',
+	                    y: 18,
+	                    sliced: true,
+	                    selected: true
+	                },
+	                ['RANAMED',    10],
+	                ['PEMISSIONCHANGED',     15],
+	                ['其他',   1]
+	            ]
+	        }]
+	    });
+   });
+   $("#profile-tab").click(function(){
+   		$('#chartContainer1').highcharts({
+	   		chart: {
+	            plotBackgroundColor: null,
+	            plotBorderWidth: null,
+	            plotShadow: false
+	        },
+		   	title : {
+		      text: ''   
+		   	},   
+		   	tooltip: {
+	            headerFormat: '{series.name}<br>',
+	            pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
+	        },
+		   	plotOptions: {
+	            pie: {
+	                allowPointSelect: true,
+	                cursor: 'pointer',
+	                dataLabels: {
+	                    enabled: false
+	                },
+	                showInLegend: true
+	            }
+	        }, 
+		   	series: [{
+		         type: 'pie',
+		            name: '日志来源分布比例',
+		            data: [
+		            	['云硬盘控制节点',   1585],
+		                ['云硬盘',   3849],
+		                ['计算节点1', 13591],
+		                {
+		                    name: '计算节点2',
+		                    y: 15284,
+		                    sliced: true,
+		                    selected: true
+		                },
+		                ['其他',     2633]
+		            ]
+		   	}]    
+	 	});
+   });
 </script>

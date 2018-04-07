@@ -9,11 +9,12 @@
   	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
   	<script src="../plugin/bootstrap/js/bootstrap.min.js"></script>
 	<script src="../plugin/Highcharts-6.0.7/code/highcharts.js"></script>
+	<script src="../plugin/Highcharts-6.0.7/code/highcharts-3d.js"></script>
 	<link rel="stylesheet" href="../css/themStyle.css">
 </head>
 <body>
 	<div class="container" id="index-page">
-	  	<div 	<script src="../plugin/Highcharts-6.0.7/code/highcharts-3d.js"></script>class="row">
+	  	<div class="row">
 	    	<div class="col-md-12" id="nav">
 	    		<div id="head" style="color: #fff;">
 					<nav class="navbar navbar-inverse">
@@ -23,7 +24,7 @@
 					    		<label style="line-height: 50px;">LogSystem Analysis</label>
 					    	</div>
 					    	<div class="col-md-3  col-md-offset-4">
-					    		<div class="input-group" style="    margin-top: 10px;">
+					    		<div class="input-group" style="    margin-top: 10px;display: none;">
 								    <input type="text" class="form-control" placeholder="Search for...">
 							      	<span class="input-group-btn">
 							       		<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
@@ -42,52 +43,62 @@
 	  	</div>
 	  	<div class="row">
 	    	<div class="col-md-2" id="menu">
-	    		<ul class="list-group" style="cursor: pointer;">
-					<a href="../index.html#main">
-						<li class="list-group-item">
-							<span class="glyphicon glyphicon-home" aria-hidden="true" style="margin-right: 20px;"></span>主页
-						</li>
-					</a>
-					<a href="node.html#node">
-						<li class="list-group-item">
-				  		<span class="glyphicon glyphicon-pushpin" aria-hidden="true" style="margin-right: 20px;"></span>节点分布
-				  		</li>
-				  	</a>
-					<a href="input.html#input">
-					  	<li class="list-group-item">
-					  		<span class="glyphicon glyphicon-import" aria-hidden="true" style="margin-right: 20px;"></span>
-					  		日志采集
-					  	</li>
-					</a>
-					<a href="logAnalysis.html#logAnalysis">
-					  	<li class="list-group-item">
-					  		<span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true" style="margin-right: 20px;"></span>
-					  		日志分析
-					  	</li>
-					</a>
-					<a href="failure.html#failure">
-					  	<li class="list-group-item active">
-					  		<span class="glyphicon glyphicon-list-alt" aria-hidden="true" style="margin-right: 20px;"></span>
-					  		故障分类
-					  	</li>
-					</a>
-					<a href="warming.html#warming">
-					  	<li class="list-group-item">
-					  		<span class="glyphicon glyphicon-export" aria-hidden="true" style="margin-right: 20px;"></span>
-					  		告警管理
-					  	</li>
-					</a>
-				</ul>
+
+				<ul class="list-group" style="cursor: pointer;">
+                    <a href="index.html#main">
+                        <li class="list-group-item">
+                            <span class="glyphicon glyphicon-home" aria-hidden="true" style="margin-right: 20px;"></span>主页
+                        </li>
+                    </a>
+                    <a href="node.html#node">
+                        <li class="list-group-item">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true" style="margin-right: 20px;"></span>数据源管理
+                        </li>
+                    </a>
+                    <a href="search.html#search">
+                        <li class="list-group-item">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true" style="margin-right: 20px;"></span>搜索统计
+                        </li>
+                    </a>
+                    <a>
+                        <div class="has-feedback">
+                            <li class="list-group-item active" data-toggle="collapse" data-target="#list-secend" id="menu-collapse" aria-expanded="true">
+                                <span class="glyphicon glyphicon-check" aria-hidden="true" style="margin-right: 20px;"></span>数据分析
+                            </li>
+                        </div>
+                    </a>
+                    <div id="list-secend" class="collapse">
+                        <div class="has-feedback">
+                            <a href="input.html#input">
+                                <li class="list-group-item menu11">日志采集</li>
+                            </a>
+                            <a href="logAnalysis.html#logAnalysis">
+                                <li class="list-group-item menu11">日志分析</li>
+                            </a>
+                            <a href="failure.html#failure">
+                                <li class="list-group-item menu11 on">故障聚类</li>
+                            </a>
+                        </div>
+                    </div>
+                    <a href="warming.html#warming">
+                        <li class="list-group-item">
+                            <span class="glyphicon glyphicon-warning-sign" aria-hidden="true" style="margin-right: 20px;"></span>
+                            告警管理
+                        </li>
+                    </a>
+                </ul>
 	    	</div>
 	    	<div class="col-md-10" id="content">
 	    		<!-- content -->
 	    		<div class="panel panel-default">
 				  	<div class="panel-heading">
-				    	<h3 class="panel-title">故障分类</h3>
+				    	<h3 class="panel-title">故障聚类</h3>
 				  	</div>
 				  	<div class="panel-body">
 				  		<h4>故障聚类分析</h4>
-				    	<div id="chartContainer" style="height: 500px; width: 50%;margin:0 auto;"></div>
+				    	<div id="chartContainer" style="height: 400px; width: 80%;margin:0 auto;"></div>
+				    	<h4>聚类算法适应度</h4>
+				    	<div id="chart" style="height: 400px; width: 60%;margin:0 auto;"></div>
 				  	</div>
 				</div>
 	    	</div>
@@ -98,55 +109,172 @@
 <script type="text/javascript">
 	$('#element').tooltip('toggle');
 	$('#element').tooltip('hide');
-	$(document).ready(function() {  
-   var chart = {      
-      type: 'pie',     
-      options3d: {
-         enabled: true,
-         alpha: 45         
-      }
-   };
-   var title = {
-      text: ''   
-   };   
-   var subtitle = {
-      text: '故障聚类分布'
-   };  
-	var tooltip = {
-      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-   };
-   var plotOptions = {
-      pie: {
-         innerSize: 100,
-         depth: 60
-      }
-   };   
-   var series= [{
-         name: '故障类型',
-         data: [
-            ['磁盘', 3],
-            ['设备', 4],
-            ['I/0', 2],
-            ['内存', 2],
-            ['网络', 11],
-            ['进程', 3],
-            ['登陆认证', 15],
-            ['数据库', 4],
-            ['文件', 3],
-			['网站',18],
-	    	['应用程序', 26],
-			['其他', 9]
-         ]
-   }];     
-      
-   var json = {};   
-   json.chart = chart; 
-   json.title = title;     
-	json.tooltip = tooltip; 
-   json.subtitle = subtitle; 
-   json.plotOptions = plotOptions; 
-   json.series = series;   
-   $('#chartContainer').highcharts(json);
-});
+	$("#menu-collapse").click(function(){
+		$(".list-group-item").removeClass("active");
+		$(this).addClass("active");
+	});
+	$("#menu-collapse").click();
+</script>
+<script type="text/javascript">
+$(document).ready(function() {  
+    $('#chartContainer').highcharts({
+        title: {
+            text: '故障分类及准确率'
+        },
+        yAxis: {
+            floor: 70,
+            ceiling: 200,
+            title: {
+                text: '准确率(%)'
+            }
+        },
+        xAxis: {
 
+            categories: ['磁盘',
+                         '设备',
+                         'I/0',
+                         '内存',
+                         '网络',
+                         '进程',
+                         '登陆认证',
+                         '数据库',
+                         '文件',
+                         '网站',
+                         '应用程序',
+                         '其他'
+                        ]},
+        plotOptions: {
+            series: {
+                stacking: 'normal'
+            }
+        },
+        labels: {
+            items: [{
+                html: '故障分类',
+                style: {
+                    left: '120px',
+                    top: '-20px',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                }
+            }]
+        },
+        series: [{
+            type: 'column',
+            name: '故障类型',
+            colorByPoint: true,
+            tooltip: {
+                valueSuffix: '%'
+            },
+            data: [95,93,85,90,92,90,96,90,93,97,92,91]
+        }, {
+            type: 'pie',
+            name: '故障分类',
+            tooltip: {
+                valueSuffix: '%'
+            },
+            data: [{
+                name: '磁盘',
+                y: 3,
+                color: Highcharts.getOptions().colors[0]
+            }, {
+                name: 'I/O',
+                y: 4,
+                color: Highcharts.getOptions().colors[1]
+            }, {
+                name: '设备',
+                y: 2,
+                color: Highcharts.getOptions().colors[2]
+            }, {
+                name: '内存',
+                y: 2,
+                color: Highcharts.getOptions().colors[3]
+            }, {
+                name: '网络',
+                y: 11,
+                color: Highcharts.getOptions().colors[4]
+            }, {
+                name: '进程',
+                y: 3,
+                color: Highcharts.getOptions().colors[5]
+            }, {
+                name: '登陆认证',
+                y: 15,
+                color: Highcharts.getOptions().colors[6]
+            }, {
+                name: '数据库',
+                y: 4,
+                color: Highcharts.getOptions().colors[7]
+            }, {
+                name: '文件',
+                y: 3,
+                color: Highcharts.getOptions().colors[8]
+            }, {
+                name: '网站',
+                y: 18,
+                color: Highcharts.getOptions().colors[9]
+            }, {
+                name: '应用程序',
+                y: 26,
+                color: Highcharts.getOptions().colors[10]
+            }, {
+                name: '其他',
+                y: 9,
+                color: Highcharts.getOptions().colors[11]
+            }],
+            center: [120, 30],
+            size: 100,
+            showInLegend: false,
+            dataLabels: {
+                enabled: false
+            }
+        }]
+    });
+    var chart = Highcharts.chart('chart', {
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: '最优适应度'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            title: {
+                text: '迭代次数'
+            },
+            categories: ['0','5','10','15','20','25','30','35','40','45','50','55','60']
+        },
+        yAxis: {
+            title: {
+                text: '最优解均值'
+            },
+            labels: {
+                formatter: function () {
+                    return this.value;
+                }
+            }
+        },
+        tooltip: {
+            crosshairs: true,
+            shared: true
+        },
+        plotOptions: {
+            spline: {
+                marker: {
+                    radius: 4,
+                    lineColor: '#666666',
+                    lineWidth: 1
+                }
+            }
+        },
+        series: [{
+            name: 'K-means',
+            marker: {
+                symbol: 'square'
+            },
+            data: [0.4, 1,1.6, 1.4,1.5,1.6,1.5,1.55,1.5,1.5,1.5,1.5,1.5]
+        }]
+    });
+});
 </script>

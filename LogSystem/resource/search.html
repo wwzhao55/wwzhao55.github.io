@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>日志系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript" src="../plugin/jquery.min.js"></script>
+	<link rel="stylesheet" href="../plugin/bootstrap/css/bootstrap.min.css">
+  	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+  	<script src="../plugin/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../plugin/Highcharts-6.0.7/code/highcharts.js"></script>
+	<script src="../plugin/Highcharts-6.0.7/code/highcharts-3d.js"></script>
+	<link rel="stylesheet" href="../css/themStyle.css">
+</head>
+<body>
+	<div class="container" id="index-page">
+	  	<div class="row">
+	    	<div class="col-md-12" id="nav">
+	    		<div id="head" style="color: #fff;">
+					<nav class="navbar navbar-inverse">
+						<div class="container">
+					  	<div class="row">
+					    	<div class="col-md-4">
+					    		<label style="line-height: 50px;">LogSystem Analysis</label>
+					    	</div>
+					    	<div class="col-md-3  col-md-offset-4">
+					    		
+					    	</div>
+					    	<div class="col-md-1">
+					    		<button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="zhaoweiwei" id="element" style="margin-top: 11px;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></button>
+
+					    	</div>
+					  	</div>
+					  </div>
+					</nav>
+				</div>
+	    	</div>
+	  	</div>
+	  	<div class="row">
+	    	<div class="col-md-2" id="menu">
+				<ul class="list-group" style="cursor: pointer;">
+                    <a href="index.html#main">
+                        <li class="list-group-item">
+                            <span class="glyphicon glyphicon-home" aria-hidden="true" style="margin-right: 20px;"></span>主页
+                        </li>
+                    </a>
+                    <a href="node.html#node">
+                        <li class="list-group-item">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true" style="margin-right: 20px;"></span>数据源管理
+                        </li>
+                    </a>
+                    <a href="search.html#search">
+                        <li class="list-group-item  active">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true" style="margin-right: 20px;"></span>搜索统计
+                        </li>
+                    </a>
+                    <a>
+                        <div class="has-feedback">
+                            <li class="list-group-item" data-toggle="collapse" data-target="#list-secend" id="menu-collapse">
+                                <span class="glyphicon glyphicon-check" aria-hidden="true" style="margin-right: 20px;"></span>数据分析
+                            </li>
+                        </div>
+                    </a>
+                    <div id="list-secend" class="collapse">
+                        <div class="has-feedback">
+                            <a href="input.html#input">
+                                <li class="list-group-item menu11">日志采集</li>
+                            </a>
+                            <a href="logAnalysis.html#logAnalysis">
+                                <li class="list-group-item menu11">日志分析</li>
+                            </a>
+                            <a href="failure.html#failure">
+                                <li class="list-group-item menu11">故障聚类</li>
+                            </a>
+                        </div>
+                    </div>
+                    <a href="warming.html#warming">
+                        <li class="list-group-item">
+                            <span class="glyphicon glyphicon-warning-sign" aria-hidden="true" style="margin-right: 20px;"></span>
+                            告警管理
+                        </li>
+                    </a>
+                </ul>
+	    	</div>
+	    	<div class="col-md-10" id="content">
+	    		<!-- content -->
+	    		<div class="panel panel-default">
+				  	<div class="panel-heading">
+				    	<h3 class="panel-title">搜索统计</h3>
+				  	</div>
+				  	<div class="panel-body">
+				  		<div class="input-group" style="    margin-top: 10px;float: left;width: 70%">
+						    <input type="text" class="form-control" placeholder="Search for..." id="search">
+					      	<span class="input-group-btn">
+					       		<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+					      	</span>
+					    </div>
+					    <div class="search-type">
+					    	<input type="radio" name="type" checked value="1" onclick="chooseType(1)">基本搜索
+					    	<input type="radio" name="type" value="2" onclick="chooseType(2)">高级搜索
+					    </div>
+					    <div  id="log-level" style="display: none;margin:10 0px;clear: both;">
+					    	<div>
+					    		<select onchange="changeLevel(this)" style="height: 34px;border-radius: 4px;background-color: #5bc0de;border: 1px solid #5bc0de;color: #fff; ">
+						    		<option value="0">日志类型</option>
+						    		<option value="1">CRITICAL</option>
+						    		<option value="2">AUDIT</option>
+						    		<option value="3">INFO</option>
+						    		<option value="4">DEBUG</option>
+						    		<option value="5">TRACE</option>
+						    		<option value="6">WARNING</option>
+						    		<option value="7">ERROR</option>
+						    	</select>
+						    	<button type="button" class="btn btn-info type-list">事件ID</button>
+						    	<button type="button" class="btn btn-info type-list">来源</button>
+						    	<button type="button" class="btn btn-info type-list">用户</button>
+						    	<button type="button" class="btn btn-info type-list">自定义字段</button>
+					    	</div>
+					    	<div style="float: left;width: 50%;" class="type-list-box">
+					    		<label for="ID" class="control-label" style="width: 70px;">事件ID</label>
+					    		<input type="number" class="form-control input-box" placeholder="事件ID..." id="ID">
+					    	</div>
+					    	
+					    	<div style="float: left;width: 50%;" class="type-list-box">
+						    	<label for="source" class="control-label" style="width: 70px;">来源</label>
+						    	<input type="text" class="form-control input-box" placeholder="来源..." id="source">
+							</div>
+							<div style="float: left;width: 50%;" class="type-list-box">
+						    	<label for="user" class="control-label" style="width: 70px;">用户</label>
+						    	<input type="text" class="form-control input-box" placeholder="用户..." id="user">
+						    </div>
+						    <div style="float: left;width: 50%;" class="type-list-box">
+						    	<label for="self" class="control-label" style="width: 70px;">自定义字段</label>
+					    		<input type="text" class="form-control input-box" placeholder="自定义字段..." id="self">
+						    </div>
+					    </div>
+					    <p class="bg-primary" style="line-height: 30px;padding: 0 10px;margin-top: 20px;float: left;width: 100%">消息列表</p>
+					    <table class="table table-condensed table-hover table table-striped table-style">
+					    	<thead>
+					    		<th>事件ID</th>
+				    			<th>日志类型</th>
+				    			<th>message</th>
+				    			<th>操作</th>
+					    	</thead>
+					    	<tbody id="information"></tbody>
+					    </table>
+					    <div id="barcon" name="barcon"></div>
+					    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+								  	<div class="modal-dialog modal-lg" role="document">
+								    	<div class="modal-content">
+								    	<div class="modal-header">
+									        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									        <h4 class="modal-title" id="gridSystemModalLabel">详细信息</h4>
+									    </div>
+								      	<div class="modal-body">
+								      		<div class="row">
+											  	<div class="col-md-1">Module</div>
+											  	<div class="col-md-9">.col-md-9</div>
+											</div>
+											<div class="row">
+											  	<div class="col-md-1">Location</div>
+											  	<div class="col-md-9">.col-md-9</div>
+											</div>
+											<div class="row">
+											  	<div class="col-md-1">Tag</div>
+											  	<div class="col-md-9">.col-md-9</div>
+											</div>
+											<div class="row">
+											  	<div class="col-md-1">Main</div>
+											  	<div class="col-md-9">.col-md-9</div>
+											</div>
+								      		<table  class="table table-condensed table-hover table table-striped" style="text-align: center;vertical-align: middle;">
+									    		<tr>
+									    			<th style="text-align: center;">Time</th>
+									    			<th style="text-align: center;">Number</th>
+									    			<th style="text-align: center;">Grade</th>
+									    			<th style="text-align: center;">Module</th>
+									    			<th style="text-align: center;">Main</th>
+									    			<th style="text-align: center;">Tag</th>
+									    		</tr>
+									    		<tr id="table-detail">
+									    			<td>2018.01.12 10.21.45</td>
+									    			<td>3548</td>
+									    			<td>Error</td>
+									    			<td>zww001</td>
+									    			<td>receive_packet failed on eth3:Network is down</td>
+									    			<td>receive_packet Network</td>
+									    		</tr>
+									    	</table>
+									    	<h4 class="modal-title">日志样本</h4>
+									    	<div id="model-detail-content">
+									    		
+									    	</div>
+								      	</div>
+								    	</div>
+								  	</div>
+						</div>
+				  	</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+	var log_type=1;
+	var log_level=0;
+	var log_id;
+	var log_source;
+	var log_user;
+	var log_self;
+	function chooseType(val){
+		if (val==1) {
+			$('#log-level').hide();
+			log_type=1;
+		}else{
+			$('#log-level').show();
+			log_type=2;
+		}
+	}
+	function changeType(n){
+		n = parseInt(n);
+		switch(n){
+			case 0:
+				return false;
+				break;
+			case 1:
+				return "CRITICAL";
+				break;
+			case 2:
+				return "AUDIT";
+				break;
+
+			case 3:
+				return "INFO";
+				break;
+			case 4:
+				return "DEBUG";
+				break;
+			case 5:
+				return "TRACE";
+				break;
+			case 6:
+				return "WARNING";
+				break;
+			case 7:
+				return "ERROR";
+				break;
+			default:
+				return false;
+				break;
+		}
+	}
+	function changeLevel(obj){
+		var levev = $(obj).val();
+		log_level = changeType(levev);
+		log_id = $('#ID').val();
+		var data = JSON.parse(localStorage.getItem('key'));
+		$("#information").html(" ");
+	    $.each(data,function(i,key){
+	    	//查找ID唯一性、等级不一定唯一
+	    	//ID
+	    	if(log_id == data[i].id){
+	    		var tr = '<tr>'+
+    				'<td>'+data[i].id+'</td>'+
+    				'<td>'+data[i].grade+'</td>'+
+    				'<td>'+data[i].content+'</td>'+
+    				'<td><button type="button" class="view btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="view('+data[i].id+')">查看</button>'+
+    			'</tr>';
+    			$("#information").append(tr);
+	    	}
+	    	//等级
+	    	if(log_level){
+	    		if(data[i].grade==log_level){
+	    			var tr = '<tr>'+
+	    				'<td>'+data[i].id+'</td>'+
+	    				'<td>'+data[i].grade+'</td>'+
+	    				'<td>'+data[i].content+'</td>'+
+	    				'<td><button type="button" class="view btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="view('+data[i].id+')">查看</button>'+
+	    			'</tr>';
+	    			$("#information").append(tr);
+	    		}
+	    	}
+	    	
+	    })
+	    goPage(1); 
+	}
+	$('#ID').bind('input prppertychange',function(){
+		log_level = changeType(log_level);
+		log_id = $(this).val();
+		var data = JSON.parse(localStorage.getItem('key'));
+		$("#information").html(" ");
+	    $.each(data,function(i,key){
+	    	//查找ID唯一性、等级不一定唯一
+	    	//ID
+	    	if(log_id == data[i].id){
+	    		var tr = '<tr>'+
+    				'<td>'+data[i].id+'</td>'+
+    				'<td>'+data[i].grade+'</td>'+
+    				'<td>'+data[i].content+'</td>'+
+    				'<td><button type="button" class="view btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="view('+data[i].id+')">查看</button>'+
+    			'</tr>';
+    			$("#information").append(tr);
+	    	}
+	    	//等级
+	    	if(log_level){
+	    		if(data[i].grade==log_level){
+	    			var tr = '<tr>'+
+	    				'<td>'+data[i].id+'</td>'+
+	    				'<td>'+data[i].grade+'</td>'+
+	    				'<td>'+data[i].content+'</td>'+
+	    				'<td><button type="button" class="view btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="view('+data[i].id+')">查看</button>'+
+	    			'</tr>';
+	    			$("#information").append(tr);
+	    		}
+	    	}
+	    	
+	    })
+	    goPage(1); 
+	})
+	$('.type-list').eq(0).click(function(){
+		var status = $(".type-list-box").eq(0).css('display');
+		if(status=='none'){
+			$(".type-list-box").eq(0).css('display','block');
+			log_id = $('#ID').val();
+		}else{
+			$(".type-list-box").eq(0).css('display','none');
+			$('#ID').val("");
+		}
+	});
+	$('.type-list').eq(1).click(function(){
+		var status = $(".type-list-box").eq(1).css('display');
+		if(status=='none'){
+			$(".type-list-box").eq(1).css('display','block');
+			log_source = $('#source').val();
+		}else{
+			$(".type-list-box").eq(1).css('display','none');
+			$('#source').val("");
+		}
+	});
+	$('.type-list').eq(2).click(function(){
+		var status = $(".type-list-box").eq(2).css('display');
+		if(status=='none'){
+			$(".type-list-box").eq(2).css('display','block');
+			log_user = $('#user').val();
+		}else{
+			$(".type-list-box").eq(2).css('display','none');
+			$('#user').val("");
+		}
+	});
+	$('.type-list').eq(3).click(function(){
+		var status = $(".type-list-box").eq(3).css('display');
+		if(status=='none'){
+			$(".type-list-box").eq(3).css('display','block');
+			log_self = $('#self').val();
+		}else{
+			$(".type-list-box").eq(3).css('display','none');
+			$('#self').val("");
+		}
+	});
+	function getData(){
+			var data = JSON.parse(localStorage.getItem('key'));
+			$("#information").html(" ");
+		    $.each(data,function(i,key){
+		    	var tr = '<tr>'+
+		    				'<td>'+data[i].id+'</td>'+
+		    				'<td>'+data[i].grade+'</td>'+
+		    				'<td>'+data[i].content+'</td>'+
+		    				'<td><button type="button" class="view btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="view('+data[i].id+')">查看</button>'+
+		    			'</tr>';
+		    	$("#information").append(tr);
+		    })
+	}
+	getData();    
+	    /**
+	 * 分页函数
+	 * pno--页数
+	 * psize--每页显示记录数
+	 * 分页部分是从真实数据行开始，因而存在加减某个常数，以确定真正的记录数
+	 * 纯js分页实质是数据行全部加载，通过是否显示属性完成分页功能
+	 **/
+	function goPage(pno){
+	    var itable = document.getElementById("information");
+	    var num = itable.rows.length;//表格所有行数(所有记录数)
+	    var totalPage = 0;//总页数
+	    var pageSize = 5;//每页显示行数
+	    //总共分几页
+	    if(num/pageSize > parseInt(num/pageSize)){
+	        totalPage=parseInt(num/pageSize)+1;
+	    }else{
+	        totalPage=parseInt(num/pageSize);
+	    }
+	    var currentPage = pno;//当前页数
+	    var startRow = (currentPage - 1) * pageSize+1;//开始显示的行  31
+	    var endRow = currentPage * pageSize;//结束显示的行   40
+	    endRow = (endRow > num)? num : endRow;    //40
+	    //遍历显示数据实现分页
+	    for(var i=1;i<(num+1);i++){
+	        var irow = itable.rows[i-1];
+	        if(i>=startRow && i<=endRow){
+	            irow.style.display = "table-row";
+	        }else{
+	            irow.style.display = "none";
+	        }
+	    }
+	    var pageEnd = document.getElementById("pageEnd");
+	    //var tempStr = "";
+	    var tempStr = "<span>当前第"+pno+"页</span>";
+	    if(currentPage>1){
+	        tempStr += "<span class='btn' href=\"#\" onClick=\"goPage("+(1)+")\">首页</span>";
+	        tempStr += "<span class='btn' href=\"#\" onClick=\"goPage("+(currentPage-1)+")\">上一页</span>"
+	    }else{
+	        tempStr += "<span class='btn'>首页</span>";
+	        tempStr += "<span class='btn'>上一页</span>";
+	    }
+	 
+	    for(var pageIndex= 1;pageIndex<totalPage+1;pageIndex++){
+	        tempStr += "<a onclick=\"goPage("+pageIndex+")\"><span>"+ pageIndex +"</span></a>";
+	    }
+	 
+	    if(currentPage<totalPage){
+	        tempStr += "<span class='btn' href=\"#\" onClick=\"goPage("+(currentPage+1)+")\">下一页</span>";
+	        tempStr += "<span class='btn' href=\"#\" onClick=\"goPage("+(totalPage)+")\">尾页</span>";
+	    }else{
+	        tempStr += "<span class='btn'>下一页</span>";
+	        tempStr += "<span class='btn'>尾页</span>";
+	    }
+	    document.getElementById("barcon").innerHTML = tempStr;
+	}
+	goPage(1); 
+	function view(i){
+		var info = JSON.parse(localStorage.getItem('key'));
+	 	var item = info[i-1];
+	 	var div = $(".modal-body .row");
+	 	console.log(div)
+	 	div.eq(0).children('.col-md-9').html(item.module);
+	 	div.eq(1).children('.col-md-9').html(item.location);
+	 	div.eq(2).children('.col-md-9').html(item.tags);
+	 	div.eq(3).children('.col-md-9').html(item.main);
+	 	$("#model-detail-content").html(item.content);
+	};
+	$('#search').bind('input prppertychange',function(){
+		var keyword = $(this).val().toUpperCase();
+		var data = JSON.parse(localStorage.getItem('key'));
+		var reg = new RegExp("("+keyword +")","ig");
+		$("#information").html(" ");
+		$.each(data,function(i,key){
+			if(data[i].content.toUpperCase().search(keyword)!=-1){
+				data[i].content = data[i].content.replace(reg,"<b>$1</b>");
+				var tr = '<tr>'+
+    				'<td>'+data[i].id+'</td>'+
+    				'<td>'+data[i].grade+'</td>'+
+    				'<td>'+data[i].content+'</td>'+
+    				'<td><button type="button" class="view btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="view('+data[i].id+')">查看</button>'+
+    			'</tr>';
+		    	$("#information").append(tr);
+			}   	
+		})
+		goPage(1); 
+	})
+</script>

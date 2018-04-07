@@ -1,71 +1,150 @@
-<!-- <ul id="main">
-	<li>统一日志采集</li>
-	<li>故障分类</li>
-	<li>实时事件关联</li>
-	预置70多种事件关联规则
-	定位外部威胁、黑客攻击、内部违例
-	简单灵活定义关联规则
-	<li>日志取证分析</li>
-	深入分析原始日志事件，快速分析问题的根本原因。
-	生成网络取证报表，例如用户活动报表、系统审计报表以及合规性审计报表等。
-	<li>节点分布</li>
-	<li>数据统计分析</li>
-	<li>故障原因定位</li>
-	<li>日志采集</li>
-	<li>日志分析</li>
-	<li>日志查询</li>
-	<li>告警管理</li>
-	<li>日志管理</li>
-</ul> -->
-<ul class="list-group" style="cursor: pointer;">
-	<a href="resource/index.html#main">
-		<li class="list-group-item active">
-			<span class="glyphicon glyphicon-home" aria-hidden="true" style="margin-right: 20px;"></span>主页
-		</li>
-	</a>
-	<a href="resource/node.html#node">
-		<li class="list-group-item">
-  		<span class="glyphicon glyphicon-pushpin" aria-hidden="true" style="margin-right: 20px;"></span>节点分布
-  		</li>
-  	</a>
-	<a href="resource/input.html#input">
-	  	<li class="list-group-item">
-	  		<span class="glyphicon glyphicon-import" aria-hidden="true" style="margin-right: 20px;"></span>
-	  		日志采集
-	  	</li>
-	</a>
-	<a href="resource/logAnalysis.html#logAnalysis">
-	  	<li class="list-group-item">
-	  		<span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true" style="margin-right: 20px;"></span>
-	  		日志分析
-	  	</li>
-	</a>
-	<a href="resource/failure.html#failure">
-	  	<li class="list-group-item">
-	  		<span class="glyphicon glyphicon-list-alt" aria-hidden="true" style="margin-right: 20px;"></span>
-	  		故障分类
-	  	</li>
-	</a>
-	<a href="resource/warming.html#warming">
-	  	<li class="list-group-item">
-	  		<span class="glyphicon glyphicon-export" aria-hidden="true" style="margin-right: 20px;"></span>
-	  		告警管理
-	  	</li>
-	</a>
-</ul>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>日志系统</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="../plugin/jquery.min.js"></script>
+    <link rel="stylesheet" href="../plugin/bootstrap/css/bootstrap.min.css" >
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="../plugin/bootstrap/js/bootstrap.min.js" ></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
+    <link rel="stylesheet" href="../css/themStyle.css">
+</head>
+<body>
+    <div class="container" id="index-page">
+        <div class="row">
+            <div class="col-md-12" id="nav">
+                <div id="head" style="color: #fff;">
+                    <nav class="navbar navbar-inverse">
+                        <div class="container">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label style="line-height: 50px;">LogSystem Analysis</label>
+                            </div>
+                            <div class="col-md-3  col-md-offset-4">
+                                <div class="input-group" style="    margin-top: 10px;">
+                                    <input type="text" class="form-control" placeholder="Search for...">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="zhaoweiwei" id="element" style="margin-top: 11px;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></button>
+                                <!-- HTML to write -->
+                                <div class="tooltip bottom" role="tooltip">
+                                  <div class="tooltip-arrow"></div>
+                                  <div class="tooltip-inner">
+                                    Some tooltip text!
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2" id="menu">
+                <ul class="list-group" style="cursor: pointer;">
+                    <a href="index.html#main">
+                        <li class="list-group-item active">
+                            <span class="glyphicon glyphicon-home" aria-hidden="true" style="margin-right: 20px;"></span>主页
+                        </li>
+                    </a>
+                    <a href="node.html#node">
+                        <li class="list-group-item">
+                        <span class="glyphicon glyphicon-pushpin" aria-hidden="true" style="margin-right: 20px;"></span>节点分布
+                        </li>
+                    </a>
+                    <a href="input.html#input">
+                        <li class="list-group-item">
+                            <span class="glyphicon glyphicon-import" aria-hidden="true" style="margin-right: 20px;"></span>
+                            日志采集
+                        </li>
+                    </a>
+                    <a href="logAnalysis.html#logAnalysis">
+                        <li class="list-group-item">
+                            <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true" style="margin-right: 20px;"></span>
+                            日志分析
+                        </li>
+                    </a>
+                    <a href="failure.html#failure">
+                        <li class="list-group-item">
+                            <span class="glyphicon glyphicon-list-alt" aria-hidden="true" style="margin-right: 20px;"></span>
+                            故障分类
+                        </li>
+                    </a>
+                    <a href="warming.html#warming">
+                        <li class="list-group-item">
+                            <span class="glyphicon glyphicon-export" aria-hidden="true" style="margin-right: 20px;"></span>
+                            告警管理
+                        </li>
+                    </a>
+                </ul>
+                
+                <ul class="list-group" style="cursor: pointer;">
+                    <a href="index.html#main">
+                        <li class="list-group-item active">
+                            <span class="glyphicon glyphicon-home" aria-hidden="true" style="margin-right: 20px;"></span>主页
+                        </li>
+                    </a>
+                    <a href="node.html#node">
+                        <li class="list-group-item">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true" style="margin-right: 20px;"></span>数据源管理
+                        </li>
+                    </a>
+                    <a>
+                        <div class="has-feedback">
+                            <li class="list-group-item" data-toggle="collapse" data-target="#list-secend" id="menu-collapse">
+                                <span class="glyphicon glyphicon-check" aria-hidden="true" style="margin-right: 20px;"></span>数据分析
+                            </li>
+                        </div>
+                    </a>
+                    <div id="list-secend" class="collapse">
+                        <div class="has-feedback">
+                            <a href="input.html#input">
+                                <li class="list-group-item menu11">日志采集</li>
+                            </a>
+                            <a href="logAnalysis.html#logAnalysis">
+                                <li class="list-group-item menu11">日志分析</li>
+                            </a>
+                            <a href="failure.html#failure">
+                                <li class="list-group-item menu11">故障分类</li>
+                            </a>
+                        </div>
+                    </div>
+                    <a href="warming.html#warming">
+                        <li class="list-group-item">
+                            <span class="glyphicon glyphicon-warning-sign" aria-hidden="true" style="margin-right: 20px;"></span>
+                            告警管理
+                        </li>
+                    </a>
+                </ul>
+            </div>
+            <div class="col-md-10" id="content">
+                <!-- content -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">主页</h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4>整个系统流程分析图</h4>
+                        <canvas id="homePage"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
 <script type="text/javascript">
-	//after refresh 
-	var hash = window.location.hash;
-	var arr = ["main","node","input","logAnalysis","failure","warming"];
-	if(hash.length){
-		var tag = hash.split("#")[1];
-		for(var item in arr){
-			if(arr[item] == tag){
-				$(".list-group-item").removeClass("active");
-				$(".list-group-item").eq(item).addClass("active");
-				$(".panel-body").load("resource/"+arr[item]+".html");
-			}
-		}
-	}
-	
+    $('#element').tooltip('toggle');
+    $('#element').tooltip('hide');
+    $("#menu-collapse").click(function(){
+        $(".list-group-item").removeClass("active");
+        $(this).addClass("active");
+    });
 </script>

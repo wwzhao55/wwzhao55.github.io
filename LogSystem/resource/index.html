@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>日志系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript" src="../plugin/jquery.min.js"></script>
+	<link rel="stylesheet" href="../plugin/bootstrap/css/bootstrap.min.css" >
+  	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+  	<script src="../plugin/bootstrap/js/bootstrap.min.js" ></script>
+  	<script src="../plugin/Highcharts-6.0.7/code/highcharts.js"></script>
+	<script src="../plugin/Highcharts-6.0.7/code/highcharts-3d.js"></script>
+	
+	<link rel="stylesheet" href="../css/themStyle.css">
+</head>
+<body>
+	<div class="container" id="index-page">
+	  	<div class="row">
+	    	<div class="col-md-12" id="nav">
+	    		<div id="head" style="color: #fff;">
+					<nav class="navbar navbar-inverse">
+						<div class="container">
+					  	<div class="row">
+					    	<div class="col-md-4">
+					    		<label style="line-height: 50px;">LogSystem Analysis</label>
+					    	</div>
+					    	<div class="col-md-3  col-md-offset-4">
+					    		<div class="input-group" style="    margin-top: 10px;display: none;">
+								    <input type="text" class="form-control" placeholder="Search for...">
+							      	<span class="input-group-btn">
+							       		<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+							      	</span>
+							    </div>
+					    	</div>
+					    	<div class="col-md-1">
+					    		<button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="zhaoweiwei" id="element" style="margin-top: 11px;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></button>
+					    		<!-- HTML to write -->
+								<div class="tooltip bottom" role="tooltip">
+								  <div class="tooltip-arrow"></div>
+								  <div class="tooltip-inner">
+								    Some tooltip text!
+								  </div>
+								</div>
+					    	</div>
+					  	</div>
+					  </div>
+					</nav>
+				</div>
+	    	</div>
+	  	</div>
+	  	<div class="row">
+	    	<div class="col-md-2" id="menu">
+	    		<ul class="list-group" style="cursor: pointer;">
+                    <a href="index.html#main">
+                        <li class="list-group-item active">
+                            <span class="glyphicon glyphicon-home" aria-hidden="true" style="margin-right: 20px;"></span>主页
+                        </li>
+                    </a>
+                    <a href="node.html#node">
+                        <li class="list-group-item">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true" style="margin-right: 20px;"></span>数据源管理
+                        </li>
+                    </a>
+                    <a href="search.html#search">
+                        <li class="list-group-item">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true" style="margin-right: 20px;"></span>搜索统计
+                        </li>
+                    </a>
+                    <a>
+                        <div class="has-feedback">
+                            <li class="list-group-item" data-toggle="collapse" data-target="#list-secend" id="menu-collapse">
+                                <span class="glyphicon glyphicon-check" aria-hidden="true" style="margin-right: 20px;"></span>数据分析
+                            </li>
+                        </div>
+                    </a>
+                    <div id="list-secend" class="collapse">
+                        <div class="has-feedback">
+                            <a href="input.html#input">
+                                <li class="list-group-item menu11">日志采集</li>
+                            </a>
+                            <a href="logAnalysis.html#logAnalysis">
+                                <li class="list-group-item menu11">日志分析</li>
+                            </a>
+                            <a href="failure.html#failure">
+                                <li class="list-group-item menu11">故障聚类</li>
+                            </a>
+                        </div>
+                    </div>
+                    <a href="warming.html#warming">
+                        <li class="list-group-item">
+                            <span class="glyphicon glyphicon-warning-sign" aria-hidden="true" style="margin-right: 20px;"></span>
+                            告警管理
+                        </li>
+                    </a>
+                </ul>
+	    	</div>
+	    	<div class="col-md-10" id="content">
+	    		<!-- content -->
+	    		<div class="panel panel-default">
+				  	<div class="panel-heading">
+				    	<h3 class="panel-title">主页</h3>
+				  	</div>
+				  	<div class="panel-body">
+				  		<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" class="active"><a href="#chartPan" aria-controls="chartPan" role="tab" data-toggle="tab">仪表盘</a></li>
+						    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">日志模型</a></li>
+						</ul>
+							<!-- Tab panes -->
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane fade in active" id="chartPan">
+								<div id="log-trend" style="width: 100%;height: 300px;"></div>
+								<div id="log-important" style="width: 50%;height: 300px;float: left;"></div>
+								<div id="log-all" style="width: 50%;height: 300px;float: left;"></div>
+								<div id="log-security" style="width: 50%;height: 350px;float: left;"></div>
+								<div id="log-kind" style="width: 50%;height: 350px;float: left;"></div>
+
+								<div id="log-alert" style="width: 100%;height: 300px;"></div>
+							</div>
+							<div role="tabpanel" class="tab-pane fade" id="profile">
+								<h4>日志模型</h4>
+						    	<table class="table table-condensed table-hover table table-striped" style="text-align: center;vertical-align: middle;" >
+						    		<thead>
+						    			<tr id="table-head">
+							    			<th style="text-align: center;">ID</th>
+							    			<th style="text-align: center;">Type</th>
+							    			<th style="text-align: center;">Path</th>
+							    			<th style="text-align: center;">Date</th>
+							    			<th style="text-align: center;">操作</th>
+							    		</tr>
+						    		</thead>
+						    		<tbody id="table-container">
+						    			
+						    		</tbody>
+						    	</table>
+						    	
+								<div id="barcon" name="barcon"></div>
+						    	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+								  	<div class="modal-dialog modal-lg" role="document">
+								    	<div class="modal-content">
+								    	<div class="modal-header">
+									        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									        <h4 class="modal-title" id="gridSystemModalLabel">标准格式化</h4>
+									    </div>
+								      	<div class="modal-body">
+								      		<table  class="table table-condensed table-hover table table-striped" style="text-align: center;vertical-align: middle;">
+									    		<tr>
+									    			<th style="text-align: center;">Time</th>
+									    			<th style="text-align: center;">Number</th>
+									    			<th style="text-align: center;">Grade</th>
+									    			<th style="text-align: center;">Module</th>
+									    			<th style="text-align: center;">Main</th>
+									    			<th style="text-align: center;">Tag</th>
+									    		</tr>
+									    		<tr id="table-detail">
+									    			<td>2018.01.12 10.21.45</td>
+									    			<td>3548</td>
+									    			<td>ERROR</td>
+									    			<td>zww001</td>
+									    			<td>receive_packet failed on eth3:Network is down</td>
+									    			<td>receive_packet Network</td>
+									    		</tr>
+									    	</table>
+									    	<h4 class="modal-title">日志样本</h4>
+									    	<div id="model-detail-content">
+									    		
+									    	</div>
+								      	</div>
+								    	</div>
+								  	</div>
+								</div>
+								<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+								  	<div class="modal-dialog modal-sm" role="document">
+								    	<div class="modal-content">
+								      		<div class="modal-header">
+									        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									        <h4 class="modal-title" id="gridSystemModalLabel">删除消息记录？</h4>
+									       	<div class="modal-footer">
+										        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+										        <button type="button" class="btn btn-primary" id="confirm-delete" data-key="">Yes</button>
+										    </div>
+									    </div>
+								    	</div>
+								  	</div>
+								</div>
+						    	<canvas id="homePage"></canvas>
+							</div>
+						</div>
+				    	
+				  	</div>
+				</div>
+	    	</div>
+	  	</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+	$('#element').tooltip('toggle');
+	$('#element').tooltip('hide');
+	$("#menu-collapse").click(function(){
+		$(".list-group-item").removeClass("active");
+		$(this).addClass("active");
+	});
+	$('.bs-example-modal-lg').modal('hide');
+</script>
+<script type="text/javascript">
+	//获取时间
+		var date = new Date();
+		var year = date.getFullYear();
+		var month = date.getMonth()+1;
+		var day = date.getDate();
+		var hour = date.getHours();
+		var min = date.getMinutes();
+		var sec = date.getSeconds();
+		var min2;
+		if(min<10){
+			hour--;
+			min2 = 60-min;
+		}else{
+			min2 = parseInt(min)-10;
+		}
+		if(hour<10){
+			hour='0'+hour;
+		}
+		if (min2<10) {
+			min2 = '0'+min2;
+		}
+		var str = year+"-"+month+"-"+day+" "+hour+":"+min2;
+		var time = str+":"+parseInt(min-2)+":45"
+
+	//保存数据到本地
+	   var info = {
+	        '0':{id:'1',type:'File',location:'home/admin/integral/logs/integral-use.log',time:str,grade:'INFO',number:'02',module:'master',main:'Master: Registering app Spark Pi',tags:'Registering app Spark Pi',content:'Sep 08 14:08:47 192.168.218.133 WIN-SERVER-2012	MSWinEventLog 2	Application	500221	Mon Sep 08 15:45:29 2017	202	Microsoft-Windows-TerminalServices-Gateway	ELA-W2K8-32\Administrator	N/A	warning 192.168.218.133 WIN-SERVER-2012	Application	The user "ELA-W2K8-32\Administrator", on client computer "192.168.8.26", disconnected from the following network resource: "ela-w2k8-32". Before the user disconnected, the client transferred 3155387 bytes and received 4677623 bytes. The client session duration was 3193 seconds.'},
+	        '1':{id:'2',type:'Application',location:'home/admin/order/logs/web/web-order.log',time:str,grade:'ERROR',number:'22',module:'zww002',main:'The staff started the performer app-20170914191555-0025 / 0-20170825172933-10.76.9.198-40179 failed',tags:'staff started the performer  faild',content:'Sep 08 14:08:47 192.168.218.133 WIN-SERVER-2012	MSWinEventLog 2	Application	500221	Mon Sep 08 15:45:29 2017	202	Microsoft-Windows-TerminalServices-Gateway	ELA-W2K8-32\Administrator	N/A	warning 192.168.218.133 WIN-SERVER-2012	Application	The user "ELA-W2K8-32\Administrator", on client computer "192.168.8.26", disconnected from the following network resource: "ela-w2k8-32". Before the user disconnected, the client transferred 3155387 bytes and received 4677623 bytes. The client session duration was 3193 seconds.'},
+	        '2':{id:'3',type:'System',location:'C:/Users/ZhaoWeiwei/Documents/systemLog.evtx',time:str,grade:'ERROR',number:'03',module:'system',main:'Received a logout failure request from application app-20170914191555-0025',tags:'logout failure request',content:'GET /webapp/wcs/stores/TBP/common/javascript/jquery.dropkick-1.0.0.js HTTP/1.1	'},
+	        '3':{id:'4',type:'OracleLogs',location:'home/admin/homepage/logs/login/homepage.log',time:str,grade:'CRITICAL',number:'01',module:'login',main:'Unknown performer app-20170914191555-0025 / 0 status update failed',tags:'performer status update failed',content:'GET /webapp/wcs/stores/servlet/qs_searchResult_tbp?storeId=10001%22%27&catalogId=10051%22%27&langId=100%22%27&searchTerm=John%20Burrows%22%27 HTTP/1.1	'},
+	        '4':{id:'5',type:'Apache Access Logs',location:'home/admin/order/logs/web/web-order.log',time:str,grade:'AUDIT',number:'281',module:'zww002',main:'in C:/WINDOWS/System32/Winevt/Logs/AirSpaceChannel.etl has nod found in computer disk',tags:'computer disk',content:'GET /webapp/wcs/stores/TBP/common/javascript/jquery.dropkick-1.0.0.js HTTP/1.1'},
+	        '5':{id:'6',type:'OracleLogs',location:'home/admin/integral/logs/integral-use.log',time:str,grade:'ERROR',number:'22',module:'zww003',main:'socket failed',tags:'computer disk',content:'GET /webapp/wcs/stores/servlet/qs_addedToWishlist_tbp?storeId=10001&langId=100&catalogId=10051&productId=252224 HTTP/1.1'},
+	        '6':{id:'7',type:'MSSQL Audit Logs',location:'home/admin/order/logs/web/web-order.log',time:str,grade:'WARNING',number:'22',module:'zww002',main:'GET Source failed',tags:'Network',content:'webapp/wcs/stores/servlet/qs_searchResult_tbp?storeId=10001%22%27&catalogId=10051%22%27&langId=100%22%27&searchTerm=John%20Burrows%22%27 HTTP/1.1'},
+	        '7':{id:'8',type:'locatioApache Access Logsn:',location:'C:/Users/ZhaoWeiwei/Documents/systemLog.evtx',time:str,grade:'ERROR',number:'256',module:'system',main:'socket failed',tags:'socket faild',content:'ASA-6-106015:Malicious IP(s) detected : 188.190.98.6 Log Message : Deny TCP (no connection) from 188.190.98.6/43316 to 74.121.144.4/22 flags RST on interface outside '},
+	        '8':{id:'9',type:'OracleLogs',location:'home/admin/integral/logs/integral-use.log',time:str,grade:'ERROR',number:'42',module:'integral-use',main:'socket failed',tags:'socket faild',content:"[02/Feb/2016:17:44:13 +0800]GET /favicon.ico HTTP/1.1 404 209 http:\\localhost/x1.html Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36"},
+	        '9':{id:'10',type:'File',location:'C:/Users/ZhaoWeiwei/Documents/systemLog.evtx',time:str,grade:'INFO',number:'114',module:'master',main:'Registered app Spark Pi with ID app-20170914191555-0025 already exists and duplicate',tags:'app Spark Pi exists duplicate',content:'Correlation:Logon Success by Source Host rule was triggered on the network '},
+	        '10':{id:'11',type:'MSSQL Audit Logs',location:'home/admin/order/logs/web/web-order.log',time:str,grade:'AUDIT',number:'22',module:'zww002',main:'socket failed',tags:'computer disk',content:'POST/PutData?Category=YunOsAccountOpLog&AccessKeyId=U0UjpekFQOVJW45A&Date=Fri%2C%2028%20Jun%202013%2006%3A53%3A30%20GMT&Topic=raw&Signature=pD12XYLmGxKQ%2Bmkd6x7hAgQ7b1c%3D'},
+	        '11':{id:'12',type:'File',location:'C:/Users/ZhaoWeiwei/Documents/systemLog.evtx',time:str,grade:'WARNING',number:'12',module:'system',main:'socket failed',tags:'socket faild',content:'ERROR com.aliyun.sls.test_log4j - catch exception !'},
+	        '12':{id:'13',type:'OracleLogs',location:'home/admin/homepage/logs/login/homepage.log',time:str,grade:'INFO',number:'02',module:'login',main:'socket failed',tags:'Login authentication',content:'Microsoft Windows SMB Server NTLM Multiple Vulnerabilities (971468)'},
+	        '13':{id:'14',Audit:'MSSQL Audit Logs',location:'home/admin/order/logs/web/web-order.log',time:str,grade:'ERROR',number:'22',module:'zww002',main:'socket failed',tags:'website faild',content:'ISC BIND 9 Remote Dynamic Update Message Denial of Service Vulnerability	'},
+	        '14':{id:'15',type:'File',location:'C:/Users/ZhaoWeiwei/Documents/systemLog.evtx',time:str,grade:'ERROR',number:'153',module:'system',main:'socket failed',tags:'socket faild',content:'TCP Sequence Number Approximation Reset Denial of Service Vulnerability'},
+	        '15':{id:'16',type:'File',location:'C:/Users/ZhaoWeiwei/Documents/manageLog.evtx',time:str,grade:'WARNING',number:'22',module:'manage',main:'socket failed',tags:'computer disk',content:"HIK JYD-E9201/X DAHUA IPC-HFW3100C(OS Type = -, Vendor = - ) , HIK JYD-E9201/X(OS Type = -, Vendor = - ) , DD-WRT v24-sp2 (Linux 2.6.19)(OS Type = general purpose, Vendor = Linux "},
+	        '16':{id:'17',type:'MSSQL Audit Logs',location:'home/admin/order/logs/web/web-order.log',time:str,grade:'AUDIT',number:'22',module:'compute',main:'socket failed',tags:'website faild',content:'WIN-JLDTHUDDHDF, WIN-SERVER-2012, 192.168.218.134, 192.168.218.135, 192.168.218.136, CISCO-ONE, UNIX-ONE, UNIX-TWO, UNIX-THREE, SYMANTEC-SERVER'},
+	        '17':{id:'18',type:'Application',location:'C:/Users/ZhaoWeiwei/Documents/applicationLog.evtx',time:str,grade:'ERROR',number:'22',module:'application',main:'socket failed',tags:'application faild',content:'ela-demo-win	07 Sep 2017, 10:56:02	-	10.1.4.83	192.168.123.202	443	TCP connection abort received; TCP connection dropped'},
+	        '18':{id:'19',type:'File',location:'C:/Users/ZhaoWeiwei/Documents/systemLog.evtx',time:str,grade:'ERROR',number:'15',module:'zww002',main:'socket failed',tags:'socket faild',content:'ela-demo-win	07 Sep 2017, 10:56:02	-	10.1.4.83	199.83.135.55	443	TCP packet received on non-existent/closed connection; TCP packet dropped'},
+	        '19':{id:'20',type:'MSSQL Audit Logs',location:'home/admin/order/logs/web/web-order.log',time:str,grade:'AUDIT',number:'22',module:'compute',main:'socket failed',tags:'website faild',content:'emp-2268	192.168.213.159	192.168.27.21	sshd Accepted password for emp-2268 from 192.168.27.21 port 53335 ssh2'},
+	        '20':{id:'21',type:'File',location:'C:/Users/ZhaoWeiwei/Documents/systemLog.evtx',time:str,grade:'ERROR',number:'644',module:'system',main:'socket failed',tags:'socket faild',content:'vishnu	192.168.213.159	192.168.27.21	sshd	Accepted password for vishnu from 192.168.27.21 port 53527 ssh2 07 Sep 2017, 15:15:15'},
+	        '21':{id:'22',type:'MSSQL Audit Logs',location:'home/admin/order/logs/web/web-order.log',time:str,grade:'AUDIT',number:'22',module:'compute',main:'socket failed',tags:'website faild',content:"192.168.213.159	root	el-u10-1.csez.zohocorpin.com	vsftpd	pam_unix(vsftpd:auth): authentication failure; logname= uid=0 euid=0 tty=ftp ruser=root rhost=el-u10-1.csez.zohocorpin.com user=root 07 Sep 2017, 15:15:15	"},
+	        '22':{id:'23',type:'File',location:'C:/Users/ZhaoWeiwei/Documents/manageLog.evtx',time:str,grade:'INFO',number:'22',module:'manage',main:'Removing app app-20170914191555-0025',tags:'none',content:"192.168.213.159	emp-2268	-	passwd	pam_unix(passwd:chauthtok): authentication failure; logname=emp-2268 uid=1005 euid=0 tty= ruser= rhost= user=emp-2268 07 Sep 2017, 15:15:15	"},
+	        '23':{id:'24',type:'File',location:'C:/Users/ZhaoWeiwei/Documents/manageLog.evtx',time:str,grade:'ERROR',number:'22',module:'manage',main:'socket failed',tags:'socket faild',content:"Windows Installer installed the product. Product Name: Oracle VM VirtualBox 5.2.2. Product Version: 5.2.2. Product Language: 1033. Manufacturer: Oracle Corporation. Installation success or eRROR status: 0.	126244 "},
+	        '24':{id:'25',type:'Application',location:'C:/Users/ZhaoWeiwei/Documents/applicationLog.evtx',time:str,grade:'ERROR',number:'22',module:'application',main:'socket failed',tags:'application',content:"An account was successfully logged on. Subject: Security ID: S-1-0-0 Account Name: - Account Domain: - Logon ID: 0x0 Logon Type: 3 Impersonation Level: Delegation New Logon: Security ID: S-1-5-18 Account Name: administrator Account Domain: ELALAB Logon ID: 0xE61EBF Logon GUID: {245FAC85-BBDF-CEF7-8186-EC8547E370E0} Process Information: Process ID: 0x0 Process Name: - Network Information: Workstation Name: Source Network Address: 10.10.1.10 Source Port: 52189 Detailed Authentication Information: Logon Process: Kerberos Authentication Package: Kerberos Transited Services: - Package Name (NTLM only): - Key Length: 0 "},
+	        '25':{id:'26',type:'TerminalServer Logs',location:'home/admin/integral/logs/integral-use.log',time:str,grade:'ERROR',number:'22',module:'integral-use',main:'socket failed',tags:'socket faild',content:""},
+	        '26':{id:'27',type:'OracleLogs',location:'home/admin/integral/logs/integral-use.log',time:str,grade:'ERROR',number:'22',module:'zww001',main:'socket failed',tags:'socket faild',content:"A handle to an object was requested. Subject: Security ID: S-1-5-18 Account Name: scott Account Domain: ELANEW2014 Logon ID: 0x3E7 Object: Object Server: Security Object Type: File Object Name: C:\ManageEngine\EventLog\pgsql\data\pg_stat_tmp\pgstat5.tmp Handle ID: 0xac Resource Attributes: - Process Information: Process ID: 0xd98 Process Name: C:\ManageEngine\EventLog\pgsql\bin\postgres.exe Access Request Information: Transaction ID: {00000000-0000-0000-0000-000000000000} Accesses: DELETE SYNCHRONIZE ReadAttributes Access Reasons: DELETE: Granted by D:(A;ID;FA;;;AU) SYNCHRONIZE: Granted by D:(A;ID;FA;;;AU) ReadAttributes: Granted by D:(A;ID;FA;;;AU) Access Mask: 0x110080 Privileges Used for Access Check: - Restricted SID Count: 0	130978 "},
+	        '27':{id:'28',type:'MSSQL Audit Logs',location:'home/admin/order/logs/web/web-order.log',time:str,grade:'AUDIT',number:'22',module:'compute',main:'socket failed',tags:'website equipment faild',content:""},
+	        '28':{id:'29',type:'File',location:'C:/Users/ZhaoWeiwei/Documents/systemLog.evtx',time:str,grade:'INFO',number:'65',module:'system',main:'socket failed',tags:'socket faild',content:"System audit policy was changed. Subject: Security ID: S-1-5-18 Account Name: EL-WIN2012-LAP Account Domain: ELANEW2014 Logon ID: 0x3E7 Audit Policy Change: Category: Logon/Logoff Subcategory: Logoff Subcategory GUID: {0CCE9216-69AE-11D9-BED3-505054503030} Changes: Success removed, Failure removed	9049"},
+	        '29':{id:'30',type:'OracleLogs',location:'home/admin/integral/logs/integral-use.log',time:str,grade:'TRACE',number:'22',module:'zww003',main:'socket failed',tags:'socket faild',content:"A user account was locked out. Subject: Security ID: S-1-5-18 Account Name: EL-WIN2012-LAP Account Domain: ELANEW2014 Logon ID: 0x3E7 Account That Was Locked Out: Security ID: S-1-5-21-2477490969-972611893-3386141825-1169 Account Name: scott Additional Information: Caller Computer Name: EL-WIN2012-LAP	291209730 "},
+	        '30':{id:'31',type:'MSSQL Audit Logs',location:'home/admin/order/logs/web/web-order.log',time:str,grade:'ERROR',number:'22',module:'zww001',main:'socket failed',tags:'website equipmen faild',content:" Permissions on an object were changed. Subject: Security ID: S-1-5-18 Account Name: EL-WIN2012-LAP Account Domain: ELANEW2014 Logon ID: 0x3E7 Object: Object Server: Security Object Type: File Object Name: C:\ProgramData\Kaspersky Lab\~PRCustomProps#3#09.dat Handle ID: 0x1a10 Process: Process ID: 0xbb8 Process Name: C:\Program Files (x86)\Kaspersky Lab\Kaspersky Endpoint Security 10 for Windows\avp.exe Permissions Change: Original Security Descriptor: D:(A;;FA;;;WD) New Security Descriptor: D:(A;;GA;;;WD)	126206 "},
+	        '31':{id:'32',type:'OracleLogs',location:'home/admin/homepage/logs/login/homepage.log',time:str,grade:'AUDIT',number:'22',module:'compute',main:'socket failed',tags:'Login authentication',content:"The audit log was cleared. Subject: Security ID: S-1-5-21-2477490969-972611893-3386141825-500 Account Name: administrator Domain Name: ELANEW2014 Logon ID: 0x8D71B	9077 "},
+	        '32':{id:'33',type:'MSSQL Audit Logs',location:'home/admin/order/logs/web/web-order.log',time:str,grade:'ERROR',number:'22',module:'zww002',main:'socket failed',tags:'website socket faild',content:"System audit policy was changed. Subject: Security ID: S-1-5-18 Account Name: EL-WIN2012-LAP Account Domain: ELANEW2014 Logon ID: 0x3E7 Audit Policy Change: Category: Logon/Logoff Subcategory: Logoff Subcategory GUID: {0CCE9216-69AE-11D9-BED3-505054503030} Changes: Success removed, Failure removed	9049 "},
+	        '33':{id:'34',type:'File',location:'C:/Users/ZhaoWeiwei/Documents/systemLog.evtx',time:str,grade:'ERROR',number:'708',module:'system',main:'socket failed',tags:'socket faild',content:"License Activation (slui.exe) failed with the following eRROR code: hr=0x8007007B Command-line arguments: RuleId=eeba1977-569e-4571-b639-7623d8bfecc0;Action=AutoActivate;AppId=55c92734-d682-4d71-983e-d6ec3f16059f;SkuId=b3ca044e-a358-4d68-9883-aaa2941aca99;NotificationInterval=1440;Trigger=TimerEvent "},
+	        '34':{id:'35',type:'OracleLogs',location:'home/admin/homepage/logs/login/homepage.log',time:str,grade:'ERROR',number:'102',module:'login',main:'socket failed',tags:'Login authentication',content:"Task Compatibility module failed to update task DCAgentUpdater.job to the required status 4. Additional Data: ERROR Value: 2147942402."},
+	        '35':{id:'36',type:'File',location:'C:/Users/ZhaoWeiwei/Documents/manageLog.evtx',time:str,grade:'ERROR',number:'22',module:'manage',main:'socket failed',tags:'Login authentication',content:'date=2017-09-08 time=05:35:50 logid=0101023003 type=event subtype=ipsec pri=eRROR vd=root loc_ip=69.49.150.10 loc_port=500 rem_ip=63.77.242.162 rem_port=500 out_if=external vpn_tunnel=SCC-Primarycookies=1349866be05ab9e6/669e8b95aeea00e1 action=negotiate status=negotiate_eRROR msg=Negotiate SA ERROR:Peers id payloads do not match local policy.'},
+	        '36':{id:'37',type:'MSSQL Audit Logs',location:'home/admin/order/logs/web/web-order.log',time:str,grade:'ERROR',number:'22',module:'compute',main:'socket failed',tags:'socket faild',content:": Could not open output pipe '/dev/xconsole' [try http://www.rsyslog.com/e/2039 ] "},
+	        '37':{id:'38',type:'Application',location:'C:/Users/ZhaoWeiwei/Documents/applicationLog.evtx',time:str,grade:'ERROR',number:'22',module:'application',main:'socket failed',tags:'application',content:" unable to execute /usr/sbin/sendmail: No such file or directory "},
+	        '38':{id:'39',type:'OracleLogs',location:'home/admin/integral/logs/integral-use.log',time:str,grade:'ERROR',number:'22',module:'zww003',main:'socket failed',tags:'socket faild',content:"RDPClient_Gateway: An eRROR was encountered when transitioning from AAStateCreatingOutChannel to AAStateERROR in response to AAEventOutChannelSendRequestFailed (eRROR code 0x80072F8F). "},
+	        '39':{id:'40',type:'MSSQL Audit Logs',location:'home/admin/order/logs/web/web-order.logg',time:str,grade:'DEBUG',number:'22',module:'zww002',main:'socket failed',tags:'RAM website Network faild',content:"Windows Installer installed the product. Product Name: Oracle VM VirtualBox 5.2.2. Product Version: 5.2.2. Product Language: 1033. Manufacturer: Oracle Corporation. Installation success or eRROR status: 0.	126244 "},
+	        '40':{id:'41',type:'File',location:'C:/Users/ZhaoWeiwei/Documents/manageLog.evtx',time:str,grade:'INFO',number:'22',module:'manage',main:'socket failed',tags:'socket faild',content:"An account was successfully logged on. Subject: Security ID: S-1-0-0 Account Name: - Account Domain: - Logon ID: 0x0 Logon Type: 3 Impersonation Level: Delegation New Logon: Security ID: S-1-5-18 Account Name: administrator Account Domain: ELALAB Logon ID: 0xE61EBF Logon GUID: {245FAC85-BBDF-CEF7-8186-EC8547E370E0} Process Information: Process ID: 0x0 Process Name: - Network Information: Workstation Name: Source Network Address: 10.10.1.10 Source Port: 52189 Detailed Authentication Information: Logon Process: Kerberos Authentication Package: Kerberos Transited Services: - Package Name (NTLM only): - Key Length: 0"},
+	        '41':{id:'42',type:'File',location:'C:/Users/ZhaoWeiwei/Documents/application.evtx',time:str,grade:'ERROR',number:'22',module:'zww001',main:'socket failed',tags:'socket faild',content:"Permissions on an object were changed. Subject: Security ID: S-1-5-18 Account Name: EL-WIN2012-LAP Account Domain: ELANEW2014 Logon ID: 0x3E7 Object: Object Server: Security Object Type: File Object Name: C:\ProgramData\Kaspersky Lab\~PRCustomProps#3#09.dat Handle ID: 0x1a10 Process: Process ID: 0xbb8 Process Name: C:\Program Files (x86)\Kaspersky Lab\Kaspersky Endpoint Security 10 for Windows\avp.exe Permissions Change: Original Security Descriptor: D:(A;;FA;;;WD) New Security Descriptor: D:(A;;GA;;;WD)	126206 "},
+	        '42':{id:'43',type:'MSSQL Audit Logs',location:'home/admin/order/logs/web/web-order.log',time:str,grade:'WARNING',number:'22',module:'compute',main:'socket failed',tags:'process I/O faild',content:"Sep 08 12:39:07 192.168.111.40 CP-GW - Log [Fields@1.3.6.1.4.1.2620 Action=accept UUid={0x58d11eeb,0x9,0x24889151,0xc0000001 inzone=Internal outzone=External rule=9 rule_uid={BE9187FE-B210-4E16-A8BE-B561DEF43702} rule_name=Internal Hosts Outbound Svcs service_id=http src=192.168.55.69 dst=151.249.94.20 proto=6 xlatesrc=192.168.111.40 NAT_rulenum=38 NAT_addtnl_rulenum=1 product=VPN-1 & FireWall-1 service=80 s_port=52053 xlatesport=59647 product_family=Network] "},
+	        '43':{id:'44',type:'File',location:'C:/Users/ZhaoWeiwei/Documents/systemLog.evtx',time:str,grade:'ERROR',number:'256',module:'system',main:'socket failed',tags:'socket faild',content:'Sep 08 12:39:07 192.168.111.40 CP-GW - Log [Fields@1.3.6.1.4.1.2620 Action="accept" UUid="{0x58d11eeb,0x9,0x24889151,0xc0000001}" inzone="Internal" outzone="External" rule="9" rule_uid="{BE9187FE-B210-4E16-A8BE-B561DEF43702}" rule_name="Internal Hosts Outbound Svcs" service_id="http" src="192.168.55.69" dst="151.249.94.20" proto="6" xlatesrc="192.168.111.40" NAT_rulenum="38" NAT_addtnl_rulenum="1" product="VPN-1 & FireWall-1" service="80" s_port="52053" xlatesport="59647" product_family="Network"] '},
+	        '44':{id:'45',type:'File',location:'C:/Users/ZhaoWeiwei/Documents/systemLog.evtx',time:str,grade:'INFO',number:'578',module:'zww001',main:'socket failed',tags:'socket faild',content:'Sep 08 12:39:07 192.168.111.40 CP-GW - Log [Fields@1.3.6.1.4.1.2620 Action="accept" UUid="{0x58d11eeb,0x9,0x24889151,0xc0000001}" inzone="Internal" outzone="External" rule="9" rule_uid="{BE9187FE-B210-4E16-A8BE-B561DEF43702}" rule_name="Internal Hosts Outbound Svcs" service_id="http" src="192.168.55.69" dst="151.249.94.20" proto="6" xlatesrc="192.168.111.40" NAT_rulenum="38" NAT_addtnl_rulenum="1" product="VPN-1 & FireWall-1" service="80" s_port="52053" xlatesport="59647" product_family="Network"] '},
+	        '45':{id:'46',type:'MSSQL Audit Logs',location:'home/admin/order/logs/web/web-order.log',time:str,grade:'ERROR',number:'22',module:'zww002',main:'socket failed',tags:'process Network faild',content:'Sep 08 12:40:07 192.168.111.40 CP-GW - Log [Fields@1.3.6.1.4.1.2620 Action="accept" UUid="{0x58d11f27,0x0,0x24889151,0xc0000001}" src="10.0.0.25" dst="194.72.6.57" proto="17" product="FG" service="53" s_port="55606" product_family="Network"] '},
+	        '46':{id:'47',type:'File',location:'C:/Users/ZhaoWeiwei/Documents/application.evtx',time:str,grade:'ERROR',number:'22',module:'zww001',main:'socket failed',tags:'socket faild',content:"Teardown TCP connection 326 for shared:10.0.100.201/4800 to NP Identity Ifc:10.0.100.35/443 duration :00:03 bytes 988 TCP FIN"},
+	        '47':{id:'48',type:'MSSQL Audit Logs',location:'home/admin/order/logs/web/web-order.log',time:str,grade:'DEBUG',number:'22',module:'compute',main:'socket failed',tags:'process Network failed',content:"Authentication failed for user peter from 192.168.27.26/5555 to 192.168.27.232/1109 on interface outside. "},
+	        '48':{id:'49',type:'Application',location:'C:/Users/ZhaoWeiwei/Documents/applicationLog.evtx',time:str,grade:'ERROR',number:'22',module:'application',main:'socket failed',tags:'application',content:"AAA user credentials Rejected : reason = Invalid password : server = 192.168.21.22 : user = david "},
+	        '49':{id:'50',type:'File',location:'C:/Users/ZhaoWeiwei/Documents/systemLog.evtx',time:str,grade:'INFO',number:'468',module:'system',main:'socket failed',tags:'socket faild',content:"IPS:1100 IP Fragment Attack from 10.1.1.1 to 192.168.1.1 on interface inside "},
+	        '50':{id:'51',type:'File',location:'C:/Users/ZhaoWeiwei/Documents/manageLog.evtx',time:str,grade:'ERROR',number:'22',module:'manage',main:'socket failed',tags:'socket faild',content:" RIP auth failed from 192.21.65.66: version=2, type=string, mode=md5, sequence=1234 on interface intf3 "},
+	        '51':{id:'52',type:'TerminalServer Logs',location:'home/admin/integral/logs/integral-use.log',time:str,grade:'ERROR',number:'22',module:'integral-use',main:'socket failed',tags:'socket faild',content:"Deny TCP (no connection) from 172.25.128.8/4236 to 172.25.0.176/12792 flags ACK on interface outside "},
+	    };
+		localStorage.setItem("key",JSON.stringify(info));
+
+	//从本地存储获取数据
+		function getData(){
+			var data = JSON.parse(localStorage.getItem('key'));
+			$("#table-container").html(" ");
+		    $.each(data,function(i,key){
+		    	var tr = '<tr>'+
+		    				'<td>'+data[i].id+'</td>'+
+		    				'<td>'+data[i].type+'</td>'+
+		    				'<td>'+data[i].location+'</td>'+
+		    				'<td>'+data[i].time+'</td>'+
+		    				'<td><button type="button" class="view btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="view('+data[i].id+')">查看</button>'+
+		    					'<button type="button" class="delete btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm" onclick="Delete('+data[i].id+')">删除</button></td>'+
+		    			'</tr>';
+		    	$("#table-container").append(tr);
+		    })
+		}
+		getData();    
+		    /**
+		 * 分页函数
+		 * pno--页数
+		 * psize--每页显示记录数
+		 * 分页部分是从真实数据行开始，因而存在加减某个常数，以确定真正的记录数
+		 * 纯js分页实质是数据行全部加载，通过是否显示属性完成分页功能
+		 **/
+		function goPage(pno){
+		    var itable = document.getElementById("table-container");
+		    var num = itable.rows.length;//表格所有行数(所有记录数)
+		    var totalPage = 0;//总页数
+		    var pageSize = 8;//每页显示行数
+		    //总共分几页
+		    if(num/pageSize > parseInt(num/pageSize)){
+		        totalPage=parseInt(num/pageSize)+1;
+		    }else{
+		        totalPage=parseInt(num/pageSize);
+		    }
+		    var currentPage = pno;//当前页数
+		    var startRow = (currentPage - 1) * pageSize+1;//开始显示的行  31
+		    var endRow = currentPage * pageSize;//结束显示的行   40
+		    endRow = (endRow > num)? num : endRow;    //40
+		    //遍历显示数据实现分页
+		    for(var i=1;i<(num+1);i++){
+		        var irow = itable.rows[i-1];
+		        if(i>=startRow && i<=endRow){
+		            irow.style.display = "table-row";
+		        }else{
+		            irow.style.display = "none";
+		        }
+		    }
+		    var pageEnd = document.getElementById("pageEnd");
+		    //var tempStr = "";
+		    var tempStr = "<span>当前第"+pno+"页</span>";
+		    if(currentPage>1){
+		        tempStr += "<span class='btn' href=\"#\" onClick=\"goPage("+(1)+")\">首页</span>";
+		        tempStr += "<span class='btn' href=\"#\" onClick=\"goPage("+(currentPage-1)+")\">上一页</span>"
+		    }else{
+		        tempStr += "<span class='btn'>首页</span>";
+		        tempStr += "<span class='btn'>上一页</span>";
+		    }
+		 
+		    for(var pageIndex= 1;pageIndex<totalPage+1;pageIndex++){
+		        tempStr += "<a onclick=\"goPage("+pageIndex+")\"><span>"+ pageIndex +"</span></a>";
+		    }
+		 
+		    if(currentPage<totalPage){
+		        tempStr += "<span class='btn' href=\"#\" onClick=\"goPage("+(currentPage+1)+")\">下一页</span>";
+		        tempStr += "<span class='btn' href=\"#\" onClick=\"goPage("+(totalPage)+")\">尾页</span>";
+		    }else{
+		        tempStr += "<span class='btn'>下一页</span>";
+		        tempStr += "<span class='btn'>尾页</span>";
+		    }
+		    document.getElementById("barcon").innerHTML = tempStr;
+		}
+		goPage(1); 
+
+	function view(i){
+	 	var item = info[i-1];
+	 	var tr = $("#table-detail").children();
+	 	tr.eq(0).html(str);
+	 	tr.eq(1).html(item.number);
+	 	tr.eq(2).html(item.grade);
+	 	tr.eq(3).html(item.module);
+	 	tr.eq(4).html(item.main);
+	 	tr.eq(5).html(item.tags);
+	 	$("#model-detail-content").html(item.content);
+	};
+
+	function Delete(j){
+		$("#confirm-delete").attr('data-key',j);
+	}
+	$('#confirm-delete').click(function(){
+		var id = $("#confirm-delete").attr('data-key');
+		id=id-1;
+		//sessionStorage.removeItem('key');
+		$('.bs-example-modal-sm').modal('hide');
+		$("#table-container").find('tr').eq(id).remove();
+		delete info[''+id];
+		localStorage.setItem("key",JSON.stringify(info));
+		getData(); 
+		goPage(1); 
+	})
+	/*// 本地存储中删除某个保存的数据
+
+	    sessionStorage.removeItem('key');
+	    localStorage.removeItem('key');
+	*/
+</script>
+<script type="text/javascript">
+	var chart = Highcharts.chart('log-trend', {
+	    title: {
+	        text: '日志趋势'
+	    },
+	    subtitle: {
+	        text: ''
+	    },
+	    yAxis: {
+	        title: {
+	            text: 'count(k)'
+	        },
+	    },
+	    xAxis: {
+	        categories: ["2017 May", "2017 June",	"2017 July",  "2017 Aug", "2017 Sept", "2017 Oct", "2017 Nov", "2017 Dec", "2018 Jan"]
+	    },
+	    series: [{
+	        name: '时间',
+	        data: [781, 2250, 8553, 6346, 2977, 6170, 2703, 2023,3990]
+	    }],
+	});
+	$('#log-important').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '重要事件'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: [
+                'Locked Accounts',
+                'User Logons',
+                'Ploicy Changd',
+                'Faled Logons',
+                'SSH Logons(unix)',
+                'Logs Cleard',
+                'SSH Logoffs(Unix)',
+                'Failed logons(Unix)',
+                'SU Logons',
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'count(k)'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: '事件名称',
+            data: [71, 96, 71, 64, 11, 71, 90, 64, 42]
+        }]
+    });
+    $('#log-all').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '全部事件'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: [
+                'Information',
+                'Success',
+                'Failure',
+                'ERROR',
+                'Notice',
+                'Debug',
+                'Warning',
+                'Emergency',
+                'Alert',
+                'Critical'
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'count(k)'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: '严重性',
+            data: [146, 64, 74, 51, 56, 71,40, 26,139,90]
+        }]
+    });
+    $('#log-security').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '安全事件'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: [
+                'Security Assessment',
+                'System Events',
+                'Object Access',
+                'Account Logon',
+                'Logon',
+                'Account Management',
+                'User Access',
+                'Policey Changes',
+                'Process Tracking',
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            max:100,
+            title: {
+                text: 'count(k)'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: '安全事件',
+            data: [69, 37, 51, 22, 91, 41,99, 71,24]
+        }]
+    });
+    $('#log-kind').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '事件分类'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: [
+                'security',
+                'application',
+                'system',
+                'authpriv',
+                'daemon',
+                'microsoft-window',
+                'ftp',
+                'local1',
+                'lpr',
+                'local2',
+                'local3',
+                'local4',
+                'mail',
+                'user',
+                'auth',
+                'kernel',
+                'cron',
+                'syslog',
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'count(k)'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: '安全事件',
+            data: [91, 69, 38, 26, 40, 53,72, 44,49,48,38,31,36,19,16,14,12,11]
+        }]
+    });
+    $('#log-alert').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '告警'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: [
+                '安装的服务',
+                '暴力破解',
+                '可能的蠕虫活动',
+                '默认风险',
+                '用户账号密码重置',
+                '异地登陆',
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'count'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: '告警',
+            data: [68, 56, 53, 28, 87, 64]
+        }]
+    });
+</script>

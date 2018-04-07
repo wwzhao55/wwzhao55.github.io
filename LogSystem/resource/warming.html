@@ -24,7 +24,7 @@
 					    		<label style="line-height: 50px;">LogSystem Analysis</label>
 					    	</div>
 					    	<div class="col-md-3  col-md-offset-4">
-					    		<div class="input-group" style="    margin-top: 10px;">
+					    		<div class="input-group" style="    margin-top: 10px;display: none;">
 								    <input type="text" class="form-control" placeholder="Search for...">
 							      	<span class="input-group-btn">
 							       		<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
@@ -43,42 +43,49 @@
 	  	</div>
 	  	<div class="row">
 	    	<div class="col-md-2" id="menu">
-	    		<ul class="list-group" style="cursor: pointer;">
-					<a href="../index.html#main">
-						<li class="list-group-item">
-							<span class="glyphicon glyphicon-home" aria-hidden="true" style="margin-right: 20px;"></span>主页
-						</li>
-					</a>
-					<a href="node.html#node">
-						<li class="list-group-item">
-				  		<span class="glyphicon glyphicon-pushpin" aria-hidden="true" style="margin-right: 20px;"></span>节点分布
-				  		</li>
-				  	</a>
-					<a href="input.html#input">
-					  	<li class="list-group-item">
-					  		<span class="glyphicon glyphicon-import" aria-hidden="true" style="margin-right: 20px;"></span>
-					  		日志采集
-					  	</li>
-					</a>
-					<a href="logAnalysis.html#logAnalysis">
-					  	<li class="list-group-item">
-					  		<span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true" style="margin-right: 20px;"></span>
-					  		日志分析
-					  	</li>
-					</a>
-					<a href="failure.html#failure">
-					  	<li class="list-group-item">
-					  		<span class="glyphicon glyphicon-list-alt" aria-hidden="true" style="margin-right: 20px;"></span>
-					  		故障分类
-					  	</li>
-					</a>
-					<a href="warming.html#warming">
-					  	<li class="list-group-item active">
-					  		<span class="glyphicon glyphicon-export" aria-hidden="true" style="margin-right: 20px;"></span>
-					  		告警管理
-					  	</li>
-					</a>
-				</ul>
+				<ul class="list-group" style="cursor: pointer;">
+                    <a href="index.html#main">
+                        <li class="list-group-item">
+                            <span class="glyphicon glyphicon-home" aria-hidden="true" style="margin-right: 20px;"></span>主页
+                        </li>
+                    </a>
+                    <a href="node.html#node">
+                        <li class="list-group-item">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true" style="margin-right: 20px;"></span>数据源管理
+                        </li>
+                    </a>
+                    <a href="search.html#search">
+                        <li class="list-group-item">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true" style="margin-right: 20px;"></span>搜索统计
+                        </li>
+                    </a>
+                    <a>
+                        <div class="has-feedback">
+                            <li class="list-group-item" data-toggle="collapse" data-target="#list-secend" id="menu-collapse">
+                                <span class="glyphicon glyphicon-check" aria-hidden="true" style="margin-right: 20px;"></span>数据分析
+                            </li>
+                        </div>
+                    </a>
+                    <div id="list-secend" class="collapse">
+                        <div class="has-feedback">
+                            <a href="input.html#input">
+                                <li class="list-group-item menu11">日志采集</li>
+                            </a>
+                            <a href="logAnalysis.html#logAnalysis">
+                                <li class="list-group-item menu11">日志分析</li>
+                            </a>
+                            <a href="failure.html#failure">
+                                <li class="list-group-item menu11">故障聚类</li>
+                            </a>
+                        </div>
+                    </div>
+                    <a href="warming.html#warming">
+                        <li class="list-group-item active">
+                            <span class="glyphicon glyphicon-warning-sign" aria-hidden="true" style="margin-right: 20px;"></span>
+                            告警管理
+                        </li>
+                    </a>
+                </ul>
 	    	</div>
 	    	<div class="col-md-10" id="content">
 	    		<!-- content -->
@@ -87,7 +94,185 @@
 				    	<h3 class="panel-title">告警管理</h3>
 				  	</div>
 				  	<div class="panel-body">
-				    	告警管理
+				  		<ul class="nav nav-tabs" role="tablist">
+				  			<li role="presentation" class="active"><a href="#system-tab" aria-controls="system-tab" role="tab" data-toggle="tab">系统实时监控</a></li>
+						    <li role="presentation"  id="first" ><a href="#Warning" aria-controls="Warning" role="tab" data-toggle="tab">故障警告</a></li>
+						    <li role="presentation"  id="second" ><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">性能测试</a></li>
+						    <li role="presentation"  id="third" ><a href="#denstity" aria-controls="denstity" role="tab" data-toggle="tab">误差分析</a></li>
+						    <li role="presentation" id="fourth" ><a href="#report" aria-controls="report" role="tab" data-toggle="tab">趋势报表</a></li>
+						</ul>
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane fade in active" id="system-tab">
+								<div id="day-chart" style="width: 60%;margin:0 auto;"></div>
+							</div>
+							<div role="tabpanel" class="tab-pane fade" id="Warning">
+								<ul class="nav nav-tabs" role="tablist" id="meunList">
+								    <li role="presentation" class="tab-btn active"><a href="#All-tab" aria-controls="All-tab" role="tab" data-toggle="tab">全部警告</a></li>
+								    <li role="presentation" id="my-alert-tab" class="tab-btn"><a href="#My-tab" aria-controls="My-tab" role="tab" data-toggle="tab">我的警告</a></li>
+								    <li role="presentation" id="yes-alert-tab" class="tab-btn"><a href="#Yes-tab" aria-controls="Yes-tab" role="tab" data-toggle="tab">指派的警告</a></li>
+								    <li role="presentation" id="no-alert-tab" class="tab-btn"><a href="#NO-tab" aria-controls="No-tab" role="tab" data-toggle="tab">未指派的警告</a></li>
+								</ul>
+								<div class="tab-content">
+									<div role="tabpanel" class="tab-pane fade in active" id="All-tab">
+										<div id="all-alert" style="width: 60%;margin:0 auto;height: 300px;"></div>
+										<table class="table table-condensed table-hover table table-striped table-style">
+											<tr>
+												<th>设备</th>
+												<th>严重性</th>
+												<th>状态</th>
+												<th style="max-width: 500px;">消息</th>
+												<th>数量</th>
+											</tr>
+											<tr>
+												<td>基于相关性规则</td>
+												<td>High</td>
+												<td style="color: red;">Open</td>
+												<td style="max-width: 500px;">Correlation:Logon Success by Source Host rule was triggered on the network </td>
+												<td>23</td>
+											</tr>
+											<tr>
+												<td>ela-demo-win</td>
+												<td>High</td>
+												<td style="color: red;">Open</td>
+												<td style="max-width: 500px;text-overflow: ellipsis;overflow: hidden;">ASA-6-106015:Malicious IP(s) detected : 188.190.98.6 Log Message : Deny TCP (no connection) from 188.190.98.6/43316 to 74.121.144.4/22 flags RST on interface outside </td>
+												<td>6</td>
+											</tr>
+											<tr>
+												<td>182.168.123.202</td>
+												<td>High</td>
+												<td style="color: red;">Open</td>
+												<td style="max-width: 500px;text-overflow: ellipsis;overflow: hidden;">[02/Feb/2016:17:44:13 +0800] "GET /favicon.ico HTTP/1.1" 404 209 "http://localhost/x1.html" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36"</td>
+												<td>4</td>
+											</tr>
+											<tr>
+												<td>Network</td>
+												<td>High</td>
+												<td style="color: red;">Open</td>
+												<td style="max-width: 500px;text-overflow: ellipsis;overflow: hidden;">Correlation:Logon Success by Source Host rule was triggered on the network </td>
+												<td>7</td>
+											</tr>
+											<tr>
+												<td>Login</td>
+												<td>High</td>
+												<td style="color: red;">Open</td>
+												<td style="max-width: 500px;text-overflow: ellipsis;overflow: hidden;">POST/PutData?Category=YunOsAccountOpLog&AccessKeyId=U0UjpekFQOVJW45A&Date=Fri%2C%2028%20Jun%202013%2006%3A53%3A30%20GMT&Topic=raw&Signature=pD12XYLmGxKQ%2Bmkd6x7hAgQ7b1c%3D</td>
+												<td>3</td>
+											</tr>
+											<tr>
+												<td>severity</td>
+												<td>High</td>
+												<td style="color: red;">Open</td>
+												<td style="max-width: 500px;text-overflow: ellipsis;overflow: hidden;"> ERROR com.aliyun.sls.test_log4j - catch exception !</td>
+												<td>21</td>
+											</tr>
+										</table>
+									</div>
+								  	<div role="tabpanel" class="tab-pane fade" id="My-tab">
+										<div id="My-chart" style="width: 40%;margin:0 auto;"></div>	
+										<table class="table table-condensed table-hover table table-striped table-style">
+											<tr>
+												<th>生成时间</th>
+												<th>严重性</th>
+												<th>状态</th>
+												<th style="max-width: 500px;">消息</th>
+												<th>数量</th>
+											</tr>
+											<tr>
+												<td>2018-03-22</td>
+												<td>High</td>
+												<td style="color: red;">Open</td>
+												<td style="max-width: 500px;">[02/Feb/2016:17:44:13 +0800] "GET /favicon.ico HTTP/1.1" 404 209 "http://localhost/x1.html" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36" </td>
+												<td>4</td>
+											</tr>
+										</table>
+									</div>
+									<div role="tabpanel" class="tab-pane fade" id="Yes-tab">
+										<div style="text-align: center;color: red;">暂无指派的警告</div>
+											
+									</div>	
+									<div role="tabpanel" class="tab-pane fade" id="NO-tab">
+										<div id="No-chart" style="width: 80%;margin:0 auto;"></div>	
+										<table class="table table-condensed table-hover table table-striped table-style">
+											<tr>
+												<th>生成时间</th>
+												<th>严重性</th>
+												<th>状态</th>
+												<th style="max-width: 500px;">消息</th>
+												<th>数量</th>
+												<th>操作</th>
+											</tr>
+											<tr>
+												<td>201.03.24</td>
+												<td>High</td>
+												<td style="color: red;">Open</td>
+												<td style="max-width: 500px;">Correlation:Logon Success by Source Host rule was triggered on the network </td>
+												<td>23</td>
+												<td><button type="button" class="view btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm">指派</button></td>
+											</tr>
+											<tr>
+												<td>201.03.24</td>
+												<td>High</td>
+												<td style="color: red;">Open</td>
+												<td style="max-width: 500px;text-overflow: ellipsis;overflow: hidden;">ASA-6-106015:Malicious IP(s) detected : 188.190.98.6 Log Message : Deny TCP (no connection) from 188.190.98.6/43316 to 74.121.144.4/22 flags RST on interface outside </td>
+												<td>6</td>
+												<td><button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm">指派</button></td>
+											</tr>
+											<tr>
+												<td>201.03.24</td>
+												<td>High</td>
+												<td style="color: red;">Open</td>
+												<td style="max-width: 500px;text-overflow: ellipsis;overflow: hidden;">Correlation:Logon Success by Source Host rule was triggered on the network </td>
+												<td>7</td>
+												<td><button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm">指派</button></td>
+											</tr>
+											<tr>
+												<td>201.03.24</td>
+												<td>High</td>
+												<td style="color: red;">Open</td>
+												<td style="max-width: 500px;text-overflow: ellipsis;overflow: hidden;">POST/PutData?Category=YunOsAccountOpLog&AccessKeyId=U0UjpekFQOVJW45A&Date=Fri%2C%2028%20Jun%202013%2006%3A53%3A30%20GMT&Topic=raw&Signature=pD12XYLmGxKQ%2Bmkd6x7hAgQ7b1c%3D</td>
+												<td>3</td>
+												<td><button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm">指派</button></td>
+											</tr>
+											<tr>
+												<td>201.03.24</td>
+												<td>High</td>
+												<td style="color: red;">Open</td>
+												<td style="max-width: 500px;text-overflow: ellipsis;overflow: hidden;"> ERROR com.aliyun.sls.test_log4j - catch exception !</td>
+												<td>21</td>
+												<td><button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm">指派</button></td>
+											</tr>
+										</table>
+										<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+										  	<div class="modal-dialog modal-sm" role="document">
+										    	<div class="modal-content">
+										      		<div class="modal-header">
+											        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											        	<h5 class="modal-title" id="gridSystemModalLabel">无权限指派任务</h5>
+											       	
+											    	</div>
+										    	</div>
+										  	</div>
+										</div>
+									</div>	
+							  	</div>
+							</div>
+							<div role="tabpanel" class="tab-pane fade" id="profile">
+							  	<div id="DCR-chart" style="width: 50%;float: left;height: 400px;margin-top: 30px;"></div>
+				  
+						    	<div id="ROC-chart" style="width: 50%;float: left;height: 400px;margin-top: 30px;"></div>
+						    	<div id="result-chart" style="width: 70%;float: left;height: 400px;"></div>
+						    	<div id="PR-chart" style="width: 50%;float: left;height: 400px;"></div>		
+							</div>
+							<div role="tabpanel" class="tab-pane fade" id="denstity">
+								<div id="Sequence-chart" style="width: 50%;float: left;height: 400px;"></div>
+						    	<div id="Time-chart" style="width: 50%;float: left;height: 400px;"></div>
+							</div>
+							<div role="tabpanel" class="tab-pane fade" id="report">
+								报表
+								
+							</div>
+						</div>
+				  		
 				  	</div>
 				</div>
 	    	</div>
@@ -98,4 +283,556 @@
 <script type="text/javascript">
 	$('#element').tooltip('toggle');
 	$('#element').tooltip('hide');
+	$('#Warning').tab('show');
+	$("#menu-collapse").click(function(){
+		$(".list-group-item").removeClass("active");
+		$(this).addClass("active");
+	});
+	
+</script>
+<script type="text/javascript">
+
+	Highcharts.setOptions({
+	    global: {
+	        useUTC: false
+	    }
+	});
+	function activeLastPointToolip(chart) {
+	    var points = chart.series[0].points;
+	    chart.tooltip.refresh(points[points.length -1]);
+	}
+	$('#day-chart').highcharts({
+	    chart: {
+	        type: 'spline',
+	        animation: Highcharts.svg, // don't animate in old IE
+	        marginRight: 10,
+	        events: {
+	            load: function () {
+	                // set up the updating of the chart each second
+	                var series = this.series[0],
+	                    chart = this;
+	                setInterval(function () {
+	                    var x = (new Date()).getTime(), // current time
+	                        y = Math.random();
+	                    series.addPoint([x, y], true, true);
+	                    activeLastPointToolip(chart)
+	                },6000);
+	            }
+	        }
+	    },
+	    title: {
+	        text: '动态实时数据-天'
+	    },
+	    xAxis: {
+	        type: 'datetime',
+	        title: {
+	            text: '时间'
+	        },
+	        tickPixelInterval: 150
+	    },
+	    yAxis: {
+	        title: {
+	            text: 'probability value'
+	        },
+	        plotLines: [{
+	            value: 0,
+	            width: 1,
+	            color: '#808080'
+	        }]
+	    },
+	    tooltip: {
+	        formatter: function () {
+	            return '<b>' + this.series.name + '</b><br/>' +
+	                Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+	                Highcharts.numberFormat(this.y, 2);
+	        }
+	    },
+	    legend: {
+	        enabled: false
+	    },
+	    exporting: {
+	        enabled: false
+	    },
+	    series: [{
+	        name: 'probability value',
+	        data: (function () {
+	            // generate an array of random data
+	            var data = [],
+	                time = (new Date()).getTime(),
+	                i;
+	            for (i = -10; i <= 10; i += 1) {
+	                data.push({
+	                    x: time + i * 60000,
+	                    y: Math.random()
+	                });
+	            }
+	            return data;
+	        }())
+	    }]
+	}, function(c) {
+	    activeLastPointToolip(c)
+	});
+	//故障警告
+		$("#first").click(function(){
+			$('#all-alert').highcharts({
+		        chart: {
+		            plotBackgroundColor: null,
+		            plotBorderWidth: 0,
+		            plotShadow: false
+		        },
+		        title: {
+		            text: '',
+		            align: 'center',
+		            verticalAlign: 'middle',
+		            y: 50
+		        },
+		        tooltip: {
+		            headerFormat: '{series.name}<br>',
+		            pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
+		        },
+		        plotOptions: {
+		            pie: {
+		                dataLabels: {
+		                    enabled: true,
+		                    distance: -50,
+		                    style: {
+		                        fontWeight: 'bold',
+		                        color: 'white',
+		                        textShadow: '0px 1px 2px black'
+		                    }
+		                },
+		                startAngle: -90,
+		                endAngle: 90,
+		                center: ['50%', '75%']
+		            }
+		        },
+		        series: [{
+		            type: 'pie',
+		            name: '警告',
+		            innerSize: '50%',
+		            data: [
+		                ['ela-demo-win',  6],
+		                ['182.168.123.202',       4],
+		                ['基于相关规则',23],
+		                ['Network',    7],
+		                ['Login',     3],
+		                ['severity',     21],
+		                {
+		                    name: '其他',
+		                    y: 0.7,
+		                    dataLabels: {
+		                        // 数据比较少，没有空间显示数据标签，所以将其关闭
+		                        enabled: false
+		                    }
+		                }
+		            ]
+		        }]
+		    });
+		})
+		
+		$("#my-alert-tab").click(function(){
+			$('#My-chart').highcharts({
+		        chart: {
+		            type: 'column'
+		        },
+		        title: {
+		            text: ''
+		        },
+		        subtitle: {
+		            text: ''
+		        },
+		        xAxis: {
+		            min: 0,
+		            title: {
+		                text: ''
+		            },
+		            categories: [
+		                '安装服务',
+		                '可能的蠕虫活动',
+		                '账户密码重置',
+		            ],
+		            crosshair: true
+		        },
+		        yAxis: {
+		            min: 0,
+		            max:2,
+		            title: {
+		                text: 'count'
+		            }
+		        },
+		        plotOptions: {
+		            column: {
+		                borderWidth: 0
+		            }
+		        },
+		        series: [{
+		            name: '192.168.123.202',
+		            data: [1,2,1]
+		        }]
+		    });
+		});
+		$("#yes-alert-tab").click(function(){
+
+		});
+		$("#no-alert-tab").click(function(){
+			$('#no-chart').highcharts({
+		        chart: {
+		            type: 'column'
+		        },
+		        title: {
+		            text: ''
+		        },
+		        subtitle: {
+		            text: ''
+		        },
+		        xAxis: {
+		            min: 0,
+		            title: {
+		                text: ''
+		            },
+		            categories: [
+		                'ela-demo-win',
+		                '基于相关规则',
+		                'Network',
+		                'Login',
+	                	'severity',    
+		            ],
+		            crosshair: true
+		        },
+		        yAxis: {
+		            min: 0,
+		            max:2,
+		            title: {
+		                text: 'count'
+		            }
+		        },
+		        plotOptions: {
+		            column: {
+		                borderWidth: 0
+		            }
+		        },
+		        series: [{
+		            name: '无指派警告',
+		            data: [6,23,7,3,21]
+		        }]
+		    });
+		});
+</script>
+<script type="text/javascript">
+	//性能测试
+	$("#second").click(function(){
+		var chart = Highcharts.chart('DCR-chart', {
+		    chart: {
+		        type: 'line'
+		    },
+		    title: {
+		        text: '不同DCR条件下故障预测性能'
+		    },
+		    subtitle: {
+		        text: ''
+		    },
+		    xAxis: {
+		        categories: ['0.5', '0.55', '0.6', '0.65', '0.7', '0.75', '0.8', '0.85', '0.9', '0.95', '1'],
+		        title: {
+		            text: 'DCR'
+		        }
+		    },
+		    yAxis: {
+		        title: {
+		            text: '精度值'
+		        }
+		    },
+		    plotOptions: {
+		        line: {
+		            dataLabels: {
+		                enabled: false          // 开启数据标签
+		            },
+		            enableMouseTracking: false // 关闭鼠标跟踪，对应的提示框、点击事件会失效
+		        }
+		    },
+		    series: [{
+		        name: 'P(准确率)',
+		        data: [0.83, 0.85,0.83, 0.86, 0.88, 0.89, 0.81, 0.79, 0.72, 0.3]
+		    }, {
+		        name: 'R(召回率)',
+		        data: [0.57, 0.61, 0.62, 0.74, 0.75, 0.76, 0.75, 0.69, 0.66, 0.4]
+		    }, {
+		        name: 'F-measure',
+		        data: [0.67, 0.71, 0.69, 0.79, 0.81, 0.84, 0.78, 0.73, 0.69, 0.34]
+		    }]
+		});
+		$('#ROC-chart').highcharts({
+	        chart: {
+	            type: 'areaspline'
+	        },
+	        title: {
+	            text: 'ROC曲线图'
+	        },
+	        
+	        xAxis: {
+	            categories: ['0', '0.1', '0.2', '0.3', '0.4', '0.5', '0.6', '0.7', '0.8', '0.9', '1'],
+	            title: {
+	                text: 'FPR'
+	            },
+	        },
+	        yAxis: {
+	            title: {
+	                text: 'TPR'
+	            },
+	             max:1.0,
+	        },
+	        credits: {
+	            enabled: false
+	        },
+	        plotOptions: {
+	            areaspline: {
+	                fillOpacity: 0.5
+	            }
+	        },
+	        series: [{
+	            name: 'CE-OFPM方法',
+	            data: [0, 0.39, 0.56, 0.68, 0.79, 0.84, 0.87, 0.90, 0.92, 0.95,1.0]
+	        }, {
+	            type: 'line',
+	            name: '随机分类',
+	            dashStyle: 'ShortDash',
+	            data: [0, 0.1, 0.2, 0.3,0.4, 0.5, 0.6, 0.7, 0.8, 0.9,1,]
+	        }],
+	    });
+	    $('#result-chart').highcharts({
+	        chart: {
+	            type: 'column'
+	        },
+	        title: {
+	            text: '预测结果对比'
+	        },
+	        subtitle: {
+	            text: ''
+	        },
+	        xAxis: {
+	            categories: [
+	                'Reliability',
+	                'DFT',
+	                'Eventest',
+	                'CE-OFPM'
+	            ],
+	            crosshair: true,
+	            title:{
+	                text:'预测方法'
+	            }
+	        },
+	        yAxis: {
+	            min: 0,
+	            title: {
+	                text: '预测值'
+	            }
+	        },
+	        tooltip: {
+	            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+	            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+	            '<td style="padding:0"><b>{point.y:.2f}</b></td></tr>',
+	            footerFormat: '</table>',
+	            shared: true,
+	            useHTML: true
+	        },
+	        plotOptions: {
+	            column: {
+	                borderWidth: 0,
+	                dataLabels: {
+		                enabled: false          // 开启数据标签
+		            },
+	            }
+	        },
+
+	        series: [{
+	            name: '准确率(P)',
+	            data: [0.215, 0.342,0.242, 0.89]
+	        }, {
+	            name: '召回率(R)',
+	            data: [0.271, 0.452,0.917, 0.76]
+	        }, {
+	            name: 'F-measure',
+	            data: [0.239, 0.399,0.384, 0.84]
+	        }, {
+	            name: 'ROC',
+	            data: [0.416, 0.541,0.62, 0.82]
+	        }, {
+	            name: 'AUC',
+	            data: [0.37,0.523,0.61, 0.79]
+	        }]
+	    });
+	    $('#PR-chart').highcharts({
+	        chart: {
+	            type: 'scatter',
+	            zoomType: 'xy'
+	        },
+	        title: {
+	            text: '准确率-召回率图'
+	        },
+	        subtitle: {
+	            text: ''
+	        },
+	        xAxis: {
+	            title: {
+	                enabled: true,
+	                text: 'Recall'
+	            },
+	            startOnTick: true,
+	            endOnTick: true,
+	            showLastLabel: false
+	        },
+	        yAxis: {
+	            title: {
+	                text: 'Precision'
+	            }
+	        },
+	        series: [{
+	            name: ' ',
+	            color: 'rgba(223, 83, 83, .5)',
+	            data: [[0.01, 1.0],[0.6,0.84]]
+	        }, {
+	            name: ' ',
+	            color: 'rgba(119, 152, 191, .5)',
+	            data: [ [0.05, 1.0], [0.65, 0.81]]
+	        }, {
+	            name: ' ',
+	            data: [ [0.1, 0.99], [0.7, 0.79]]
+	        }, {
+	            name: ' ',
+	            data: [ [0.2, 0.98], [0.75, 0.72],[0.78,0.56]]
+	        }, {
+	            name: ' ',
+	            data: [ [0.3, 0.97], [0.8, 0.41]]
+	        }, {
+	            name: ' ',
+	            data: [ [0.4, 0.94], [0.82, 0.36]]
+	        }, {
+	            name: ' ',
+	            data: [ [0.5, 0.89], [0.83, 0.31]]
+	        }, {
+	            name: ' ',
+	            data: [ [0.6, 0.84], [0.85, 0.30]]
+	        }, {
+	            name: ' ',
+	            data: [ [0.9, 0.19]]
+	        }, {
+	            name: ' ',
+	            data: [ [0.95, 0.17], [0.99, 0.16]]
+	        }]
+	    });
+	})
+	
+    //误差分析
+    $("#third").click(function(){
+	    $('#Sequence-chart').highcharts({
+	        chart: {
+	            type: 'column'
+	        },
+	        title: {
+	            text: ''
+	        },
+	        subtitle: {
+	            text: '序列长度直方图'
+	        },
+	        xAxis: {
+	            min: 0,
+	            title: {
+	                text: '序列长度'
+	            },
+	            categories: [
+	                '0',
+	                '5',
+	                '10',
+	                '15',
+	                '20',
+	                '25',
+	                '30',
+	                '35',
+	                '40',
+	                '45',
+	                '50',
+	                '55',
+	                '60',
+	                '65',
+	                '70',
+	                '75',
+	                '80'
+	            ],
+	            crosshair: true
+	        },
+	        yAxis: {
+	            min: 0,
+	            max:0.04,
+	            title: {
+	                text: '延时误差（s）'
+	            }
+	        },
+	        plotOptions: {
+	            column: {
+	                borderWidth: 0
+	            }
+	        },
+	        series: [{
+	            name: ' ',
+	            pointPadding: -0.4,
+	            pointPlacement: 0.2,
+	            data: [0.002, 0.008, 0.015, 0.008, 0.008, 0.002, 0.0021, 0.0018, 0.039, 0.03, 0.017, 0.007,0,0.001,0.0005,0.0002,0.0003]
+	        }]
+	    });
+	    $('#Time-chart').highcharts({
+	        chart: {
+	            type: 'column'
+	        },
+	        title: {
+	            text: ''
+	        },
+	        subtitle: {
+	            text: '概率分布'
+	        },
+	        xAxis: {
+	            min: 0,
+	            title: {
+	                text: '序列长度'
+	            },
+	            categories: [
+	                '0',
+	                '10',
+	                '20',
+	                '30',
+	                '40',
+	                '50',
+	                '60',
+	                '70',
+	                '80',
+	                '90',
+	                '100',
+	                '110',
+	                '120',
+	                '130',
+	                '140',
+	                '150'
+	            ],
+	            crosshair: true
+	        },
+	        yAxis: {
+	            min: 0,
+	            max:0.12,
+	            title: {
+	                text: 'Dentisity'
+	            }
+	        },
+	        plotOptions: {
+	            column: {
+	                borderWidth: 0
+	            }
+	        },
+	        series: [{
+	            name: ' ',
+	            pointPadding: -0.2,
+	            pointPlacement: 0.2,
+	            data: [0.11, 0.036, 0.018, 0.008, 0.004, 0.004, 0.0021, 0.0021, 0.0018, 0.001, 0.001, 0.0007,0.0004,0.0001,0.0001,0.0000]
+	        }]
+	    });	
+    })
+    
 </script>

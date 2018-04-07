@@ -9,7 +9,8 @@
   	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
   	<script src="../plugin/bootstrap/js/bootstrap.min.js"></script>
 	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-
+	<script src="../plugin/Highcharts-6.0.7/code/highcharts.js"></script>
+	<script src="../plugin/Highcharts-6.0.7/code/highcharts-3d.js"></script>
 	<link rel="stylesheet" href="../css/themStyle.css">
 </head>
 <body>
@@ -24,7 +25,7 @@
 						    		<label style="line-height: 50px;">LogSystem Analysis</label>
 						    	</div>
 						    	<div class="col-md-3  col-md-offset-4">
-						    		<div class="input-group" style="margin-top: 10px;">
+						    		<div class="input-group" style="margin-top: 10px;display: none;">
 									    <input type="text" class="form-control" placeholder="Search for...">
 								      	<span class="input-group-btn">
 								       		<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
@@ -42,8 +43,8 @@
 	  	</div>
 	  	<div class="row">
 	    	<div class="col-md-2" id="menu">
-	    		<ul class="list-group" style="cursor: pointer;">
-					<a href="../index.html#main">
+	    		<!-- <ul class="list-group" style="cursor: pointer;">
+					<a href="index.html#main">
 						<li class="list-group-item">
 							<span class="glyphicon glyphicon-home" aria-hidden="true" style="margin-right: 20px;"></span>主页
 						</li>
@@ -77,7 +78,50 @@
 					  		告警管理
 					  	</li>
 					</a>
-				</ul>
+				</ul> -->
+				<ul class="list-group" style="cursor: pointer;">
+                    <a href="index.html#main">
+                        <li class="list-group-item">
+                            <span class="glyphicon glyphicon-home" aria-hidden="true" style="margin-right: 20px;"></span>主页
+                        </li>
+                    </a>
+                    <a href="node.html#node">
+                        <li class="list-group-item">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true" style="margin-right: 20px;"></span>数据源管理
+                        </li>
+                    </a>
+                    <a href="search.html#search">
+                        <li class="list-group-item">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true" style="margin-right: 20px;"></span>搜索统计
+                        </li>
+                    </a>
+                    <a>
+                        <div class="has-feedback">
+                            <li class="list-group-item active" data-toggle="collapse" data-target="#list-secend" id="menu-collapse" aria-expanded="true">
+                                <span class="glyphicon glyphicon-check" aria-hidden="true" style="margin-right: 20px;"></span>数据分析
+                            </li>
+                        </div>
+                    </a>
+                    <div id="list-secend" class="collapse">
+                        <div class="has-feedback">
+                            <a href="input.html#input">
+                                <li class="list-group-item menu11">日志采集</li>
+                            </a>
+                            <a href="logAnalysis.html#logAnalysis">
+                                <li class="list-group-item menu11 on">日志分析</li>
+                            </a>
+                            <a href="failure.html#failure">
+                                <li class="list-group-item menu11">故障聚类</li>
+                            </a>
+                        </div>
+                    </div>
+                    <a href="warming.html#warming">
+                        <li class="list-group-item">
+                            <span class="glyphicon glyphicon-warning-sign" aria-hidden="true" style="margin-right: 20px;"></span>
+                            告警管理
+                        </li>
+                    </a>
+                </ul>
 	    	</div>
 	    	<div class="col-md-10" id="content">
 	    		<!-- content -->
@@ -86,8 +130,28 @@
 				    	<h3 class="panel-title">日志分析</h3>
 				  	</div>
 				  	<div class="panel-body">
-				    	<div id="chartContainer" style="width: 100%;height: 300px;margin-bottom:30px;"></div>
-				    	<div id="chartContainer1" style="width: 100%;height: 300px;"></div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#filter" aria-controls="filter" role="tab" data-toggle="tab">过滤阈值分析</a></li>
+                            <li role="presentation" id="filter-tab"><a href="#filter-DCR" aria-controls="filter-DCR" role="tab" data-toggle="tab">过滤量与压缩率</a></li>
+                            <li role="presentation" id="level-tab"><a href="#log-level" aria-controls="log-level" role="tab" data-toggle="tab">日志等级分析</a></li>
+                            
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade in active" id="filter">
+                                    <div id="time-window" style="width: 50%;height:300px;float: left;"></div>
+                                    <div id="samlier" style="width: 50%;height:300px;float: left;"></div>   
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="filter-DCR">
+                                <div id="chartContainer" style="width: 600px;height: 300px;margin:30px auto;"></div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="log-level">
+                                <div id="chartContainer1" style="width: 600px;height: 300px;margin:30px auto;"></div>
+                            </div>
+                        </div>
+
+				  		
+				    	
+				    	
 				  	</div>
 				</div>
 	    	</div>
@@ -98,136 +162,235 @@
 <script type="text/javascript">
 	$('#element').tooltip('toggle');
 	$('#element').tooltip('hide');
+    $('#filter').tab('show');
+	$("#menu-collapse").click(function(){
+		$(".list-group-item").removeClass("active");
+		$(this).addClass("active");
+	});
+	$("#menu-collapse").click();
 </script>
 <script type="text/javascript">
-//近9个月产生的故障日志分布
-	var chart = new CanvasJS.Chart("chartContainer",{
-		theme:"light2",
-		animationEnabled: true,
-		title:{
-			text: "近9个月产生的故障日志分布"
-		},
-		axisY :{
-			includeZero: false,
-			title: "Log Data Count(万条)",
-			suffix: ""
-		},
-		toolTip: {
-			shared: "true"
-		},
-		legend:{
-			cursor:"pointer",
-			itemclick : toggleDataSeries
-		},
-		data: [{
-			type: "spline", 
-			showInLegend: true,
-			yValueFormatString: "##.00",
-			name: "严重故障",
-			dataPoints: [
-				{ label: "2017 May", y: 2.04 },
-				{ label: "2017 Jun", y: 2.40 },
-				{ label: "2017 Jul", y: 2.72 },
-				{ label: "2017 Aug", y: 2.77 },
-				{ label: "2017 Sept", y: 3.04 },
-				{ label: "2017 Oct", y: 2.77 },
-				{ label: "2017 Nov", y:3.45},
-				{ label: "2017 Dec", y:7.28},
-				{ label: "2018 Jan", y: 3.04 }
-			]
-		},
-		{
-			type: "spline", 
-			showInLegend: true,
-			yValueFormatString: "##.00",
-			name: "关键故障",
-			dataPoints: [
-				{ label: "2017 May", y: 3.44 },
-				{ label: "2017 Jun", y: 21.40 },
-				{ label: "2017 Jul", y: 3.72 },
-				{ label: "2017 Aug", y: 2.87 },
-				{ label: "2017 Sept", y: 13.04 },
-				{ label: "2017 Oct", y: 21.77 },
-				{ label: "2017 Nov", y: 3.45},
-				{ label: "2017 Dec", y:7.28},
-				{ label: "2018 Jan", y: 13.04 }
-			]
-		},
-		{
-			type: "spline", 
-			showInLegend: true,
-			yValueFormatString: "##.00",
-			name: "错误日志",
-			dataPoints: [
-				{ label: "2017 May", y: 1.44 },
-				{ label: "2017 Jun", y: 3.40 },
-				{ label: "2017 Jul", y: 4.72 },
-				{ label: "2017 Aug", y: 7.77 },
-				{ label: "2017 Sept", y: 2.04 },
-				{ label: "2017 Oct", y: 9.77 },
-				{ label: "2017 Nov", y: 3.45},
-				{ label: "2017 Dec", y:7.28},
-				{ label: "2018 Jan", y: 1.04 }
-			]
-		},
-		{
-			type: "spline", 
-			showInLegend: true,
-			yValueFormatString: "##.00",
-			name: "警告日志",
-			dataPoints: [
-				{ label: "2017 May", y: 11.44 },
-				{ label: "2017 Jun", y: 23.40 },
-				{ label: "2017 Jul", y: 2.72 },
-				{ label: "2017 Aug", y: 4.77 },
-				{ label: "2017 Sept", y: 12.04 },
-				{ label: "2017 Oct", y: 2.77 },
-				{ label: "2017 Nov", y: 3.45},
-				{ label: "2017 Dec", y:7.28},
-				{ label: "2018 Jan", y: 11.04 }
-			]
-		}]
-	});
-	chart.render();
+var chart = Highcharts.chart('time-window', {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: '数据过滤'
+    },
+    subtitle: {
+        text: '时间窗口∇t'
+    },
+    xAxis: {
+        title: {
+            text: '时间（ms）'
+        },
+        categories: ['0', '10', '20', '30', '40', '50', '60', '70', '80', '90', '100', '110',"120","130"]
+    },
+    yAxis: {
+        title: {
+            text: 'after(条)'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: false          // 开启数据标签
+            },
+            enableMouseTracking: true // 关闭鼠标跟踪，对应的提示框、点击事件会失效
+        }
+    },
+    series: [{
+        name: '日志数量',
+        data: [60000,51030,44103,40425,38126,33283,27745,27350,26509,26319,25082,24512,24376,24428]
+    }]
+});
+var chart = Highcharts.chart('samlier', {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: '过数据滤'
+    },
+    subtitle: {
+        text: '空间窗口ε'
+    },
+    xAxis: {
+        title: {
+            text: '相似度'
+        },
+        categories: ['0', '0.1', '0.2', '0.3', '0.4', '0.5', '0.6', '0.7', '0.8', '0.9', '1.0']
+    },
+    yAxis: {
+        title: {
+            text: 'after(条)'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: false          // 开启数据标签
+            },
+            enableMouseTracking: true // 关闭鼠标跟踪，对应的提示框、点击事件会失效
+        }
+    },
+    series: [{
+        name: '日志数量',
+        data: [60000,52030,39403,30125,28126,28683,28045,27910,26842,26461,26183]
+    }]
+});
 
+$("#filter-tab").click(function(){
+    $('#chartContainer').highcharts({
+        chart: {
+            zoomType: 'column'
+        },
+        title: {
+            text: '过滤与压缩率'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: [{
+            categories: [
+                "2017 May",
+                "2017 Jun",
+                "2017 Jul",
+                "2017 Aug",
+                "2017 Sept",
+                "2017 Oct",
+                "2017 Nov",
+                "2017 Dec",
+                "2018 Jan"
+            ],
+            crosshair: true
+        }],
+        yAxis: [{ // Primary yAxis
+            labels: {
+                format: '{value}%',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            },
+            title: {
+                text: 'DCR',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            }
+        }, { // Secondary yAxis
+            title: {
+                text: '数据量',
+                style: {
+                    color: Highcharts.getOptions().colors[2]
+                }
+            },
+            labels: {
+                format: '{value}万条',
+                style: {
+                    color: Highcharts.getOptions().colors[2]
+                }
+            },
+            opposite: true
+        }],
+        tooltip: {
+            shared: true
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'left',
+            x: 120,
+            verticalAlign: 'top',
+            y: 100,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+        },
+        series: [{
+            name: '过滤前',
+            type: 'column',
+            yAxis: 1,
+            data: [49.9, 71.5, 106.4, 129.2, 144.2, 76.5, 45.6, 48.5, 62.4],
+            color: 'rgba(165,170,217,1)',
+            pointPadding: -0.4,
+            pointPlacement: 0.2,
+            tooltip: {
+                valueSuffix: ' 万条'
+            }
+        }, {
+            name: '过滤后',
+            type: 'column',
+            yAxis:1,
+            data: [14.47, 12.11, 30.32, 34.36, 41.53, 21.34, 14.1, 14.4, 17.97],
+            color: 'rgba(126,86,134,.9)',
+            pointPadding: 0,
+            pointPlacement: -0.1,
+            tooltip: {
+                valueSuffix: '万条'
+            }
+        }, {
+            name: 'DCR',
+            type: 'spline',
+            data: [70.6, 68.8, 71.5, 73.4, 71.2, 72.1, 69.1, 70.3, 71.2],
+            color: Highcharts.getOptions().colors[0],
+            tooltip: {
+                valueSuffix: '%'
+            }
+        }]
+    });
+})
 //不同级别日志数据分布
-	var chart1 = new CanvasJS.Chart("chartContainer1", {
-		animationEnabled: true,
-		theme: "light2", // "light1", "light2", "dark1", "dark2"
-		title:{
-			text: "不同级别日志数据分布"
-		},
-		axisY: {
-			title: "",
-			suffix: "条"
-		},
-		data: [{        
-			type: "column",  
-			name:" ",
-			showInLegend: true, 
-			yValueFormatString: "##条",
-			legendMarkerColor: "grey",
-			legendText: "",
-			dataPoints: [      
-				{ y: 300878, label: "Audit" },
-				{ y: 277455,  label: "Critical" },
-				{ y: 179709,  label: "Debug" },
-				{ y: 158400,  label: "Info" },
-				{ y: 142503,  label: "Trace" },
-				{ y: 101500, label: "Warning" },
-				{ y: 97800,  label: "Error" }
-			]
-		}]
-	});
-	chart1.render();
+$("#level-tab").click(function(){
 
-//日志过滤：时间窗口设置+相似度设置
-function toggleDataSeries(e) {
-	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
-		e.dataSeries.visible = false;
-	} else {
-		e.dataSeries.visible = true;
-	}
-	chart.render();
-}
+    var chart = {      
+      type: 'pie',     
+      options3d: {
+         enabled: true,
+         alpha: 45,
+         beta: 0
+      }
+   };
+   var title = {
+      text: '日志级别分布'   
+   };   
+   var tooltip = {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+   };
+
+   var plotOptions = {
+      pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          depth: 50,
+          dataLabels: {
+             enabled: true,
+             format: '{point.name}'
+          }
+      }
+   };   
+   var series= [{
+         type: 'pie',
+            name: '日志来源分布比例',
+            data: [
+                ['Audit',300878],
+                ['Critical',   277455],
+                ['Debug',   179709],
+                ['Info', 158400],
+                {
+                    name: 'Error',
+                    y: 97800,
+                    sliced: true,
+                    selected: true
+                },
+                ['Trace',     142503],
+                ['Warning',101500]
+            ]
+   }];     
+      
+   var json = {};   
+   json.chart = chart; 
+   json.title = title;       
+   json.tooltip = tooltip; 
+   json.plotOptions = plotOptions; 
+   json.series = series;   
+   $('#chartContainer1').highcharts(json);
+})
 </script>
